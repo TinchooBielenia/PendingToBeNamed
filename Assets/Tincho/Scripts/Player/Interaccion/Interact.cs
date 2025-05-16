@@ -33,7 +33,7 @@ public class Interact : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, interactDistance, _enemyLayer))
+            if (Physics.Raycast(ray, out hit, interactDistance, _interactLayer))
             {
                 _interactSFX.Play();
                 IInteraction interactable = hit.collider.GetComponentInParent<IInteraction>();
