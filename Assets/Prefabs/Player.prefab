@@ -222,7 +222,7 @@ MonoBehaviour:
   bobAmountWalkSprint: 0.05
   bobAmountIdle: 0.05
   bobSpeedIdle: 3
-  player: {fileID: 1000270802673919546}
+  player: {fileID: 0}
 --- !u!1 &5085846627012005559
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,12 +490,10 @@ GameObject:
   - component: {fileID: 352319026420430728}
   - component: {fileID: 8845068622680014814}
   - component: {fileID: 8830591888380246563}
-  - component: {fileID: 1000270802673919546}
   - component: {fileID: 5612163692760457605}
   - component: {fileID: 8980524628313724644}
   - component: {fileID: 11611146777217055}
   - component: {fileID: 6658387245088763805}
-  - component: {fileID: 2401358200092786155}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -578,27 +576,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &1000270802673919546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7002620518952003983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa0e063347d12e243aa22a42e063922f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ogSpeed: 3
-  _speed: 0
-  _sprintMultiplier: 1.5
-  zAxisDirection: 1
-  canMove: 0
-  isSprinting: 0
-  footstepsSFX: {fileID: 3802821575374858220}
-  footstepsSprintFX: {fileID: 4661512450901799807}
-  heavyBreathingFX: {fileID: 4568377705595210185}
 --- !u!114 &5612163692760457605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +598,6 @@ MonoBehaviour:
   _timerEarlyRecover: 0
   staminaIsBeingConsumed: 0
   canSprint: 1
-  staminaBar: {fileID: 0}
 --- !u!114 &8980524628313724644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,22 +648,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2401358200092786155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7002620518952003983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecbd9e87327f19440b4094ddcca86fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactDistance: 3
-  _interactLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &7727593024259599848
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,8 +16,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _timerEarlyRecoverBase = 3;
     [SerializeField] private float _timerEarlyRecover;
     [SerializeField] public bool staminaIsBeingConsumed;
+    [SerializeField] public int enemyDamage;
     public bool canSprint = true;
-    //[SerializeField] private Image staminaBar;
+    [SerializeField] private Image staminaBar;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class PlayerStats : MonoBehaviour
         _timerDelay = _timerBase;
 
         staminaIsBeingConsumed = false;
+        enemyDamage = 10;
     }
 
     private void Update()

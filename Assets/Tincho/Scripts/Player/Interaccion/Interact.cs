@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Interact : MonoBehaviour
@@ -6,12 +7,20 @@ public class Interact : MonoBehaviour
 
     [Header("Raycast Settings")]
     [SerializeField] private float interactDistance = 3f;
-    [SerializeField] private LayerMask interactLayer;
+    [SerializeField] private LayerMask _interactLayer;
+    [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private AudioSource _interactSFX;
+    private PlayerStats _player;
+
+    private void Start()
+    {
+        _player = GetComponentInParent<PlayerStats>();
+    }
 
     private void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactDistance, Color.green);
+        //Ray debugRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        //Debug.DrawRay(debugRay.origin, debugRay.direction * interactDistance, Color.green);
         PlayerInteract();
     }
 
@@ -21,10 +30,10 @@ public class Interact : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
 
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, interactDistance, interactLayer))
+            if (Physics.Raycast(ray, out hit, interactDistance, _enemyLayer))
             {
                 _interactSFX.Play();
                 IInteraction interactable = hit.collider.GetComponentInParent<IInteraction>();
@@ -34,6 +43,21 @@ public class Interact : MonoBehaviour
                     interactable.TriggerInteraction();
                 }
             }
+
+            if (Physics.Raycast(ray, out hit, interactDistance, _enemyLayer))
+            {
+                int damage = _player.enemyDamage;
+                _interactSFX.Play();
+
+                IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
+                if (enemy != null)
+                {
+                    Debug.Log("Player is damaging " + hit.collider.name);
+                    enemy.TakeHit(damage);
+                }
+            }
         }
+
+
     }
 }

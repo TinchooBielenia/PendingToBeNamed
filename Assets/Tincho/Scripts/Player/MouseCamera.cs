@@ -8,7 +8,7 @@ public class MouseCamera : MonoBehaviour
     private Vector2 currentMouseSpeed;
 
     public float mouseSensitivity = 100f;
-    public float smoothTime = 0.05f; // Movement smoothness.
+    //public float smoothTime = 0.05f; // Movement smoothness.
     public Rigidbody playerRigidbody;
 
     void Start()
@@ -23,21 +23,16 @@ public class MouseCamera : MonoBehaviour
     void LateUpdate()
     {
         // Base mouse movement.
-        float rawMouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float rawMouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-        Vector2 rawMouseDelta = new Vector2(rawMouseX, rawMouseY);
-
-        // Movement smoothness. It gives "weigth" to the movement.
-        currentMouse = Vector2.SmoothDamp(currentMouse, rawMouseDelta, ref currentMouseSpeed, smoothTime);
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         // Vertical rotation.
-        xRotation -= currentMouse.y;
+        xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 60f);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         // Horizontal player rotation.
-        Quaternion deltaRotation = Quaternion.Euler(0f, currentMouse.x, 0f);
+        Quaternion deltaRotation = Quaternion.Euler(0f, mouseX, 0f);
         playerRigidbody.MoveRotation(playerRigidbody.rotation * deltaRotation);
     }
 }
