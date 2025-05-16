@@ -22,7 +22,7 @@ public class CrosshairController : MonoBehaviour
 
     void Update()
     {
-        Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, checkDistance, interactLayer))

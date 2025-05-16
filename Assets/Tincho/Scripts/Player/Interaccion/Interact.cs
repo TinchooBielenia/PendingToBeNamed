@@ -19,8 +19,8 @@ public class Interact : MonoBehaviour
 
     private void Update()
     {
-        //Ray debugRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        //Debug.DrawRay(debugRay.origin, debugRay.direction * interactDistance, Color.green);
+        Ray debugRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        Debug.DrawRay(debugRay.origin, debugRay.direction * interactDistance, Color.green);
         PlayerInteract();
     }
 
