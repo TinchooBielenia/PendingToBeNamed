@@ -33,7 +33,7 @@ public class PlayerStats : MonoBehaviour
     {
         StaminaDelay();
         RestartDelay();
-        //ManageStaminaBar();
+        ManageStaminaBar();
         EarlyDelay();
     }
 
@@ -99,8 +99,8 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    //public void ManageStaminaBar()
-    //{
-    //    staminaBar.fillAmount = _currentStamina / _maxStamina;
-    //}
+    public void ManageStaminaBar()
+    {
+        staminaBar.fillAmount = _currentStamina / _maxStamina;
+    }
 }
