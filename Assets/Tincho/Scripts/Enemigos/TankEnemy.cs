@@ -40,8 +40,15 @@ public class TankEnemy : Enemy, IDamageEnemy
             if (_animator != null)
             {
                 _animator.SetBool("isDead", true);
+                _animator.SetBool("isAttacking", false);
                 _inRange = false;
-                _enemyRb.isKinematic = true;
+                // _enemyRb.isKinematic = true;
+                Collider[] colliders = GetComponentsInChildren<Collider>();
+                foreach (Collider col in colliders)
+                {
+                    col.enabled = false;
+                }
+                _enemyRb.constraints = RigidbodyConstraints.FreezeAll;
             }
         }
     }
@@ -104,6 +111,7 @@ public class TankEnemy : Enemy, IDamageEnemy
         }
         else if (playerInDetectionRange && playerInAttackRange)
         {
+            //_animator.SetBool("isRunning", false);
             _animator.SetBool("isAttacking", true);
         }
         else if (!playerInDetectionRange && !playerInAttackRange)
