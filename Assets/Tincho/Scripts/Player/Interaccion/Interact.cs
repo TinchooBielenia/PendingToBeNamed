@@ -1,4 +1,3 @@
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Interact : MonoBehaviour
@@ -44,18 +43,18 @@ public class Interact : MonoBehaviour
                 }
             }
 
-            if (Physics.Raycast(ray, out hit, interactDistance, _enemyLayer))
-            {
-                int damage = _player.enemyDamage;
-                _interactSFX.Play();
+            //if (Physics.Raycast(ray, out hit, interactDistance, _enemyLayer))
+            //{
+            //    int damage = _player.enemyDamage;
+            //    _interactSFX.Play();
 
-                IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
-                if (enemy != null)
-                {
-                    Debug.Log("Player is damaging " + hit.collider.name);
-                    enemy.TakeHit(damage);
-                }
-            }
+            //    IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
+            //    if (enemy != null)
+            //    {
+            //        Debug.Log("Player is damaging " + hit.collider.name);
+            //        enemy.TakeHit(damage);
+            //    }
+            //}
         }
 
 
