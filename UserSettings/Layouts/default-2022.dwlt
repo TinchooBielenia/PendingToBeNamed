@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -417,15 +417,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-<<<<<<< HEAD
       m_SelectedIDs: b0d4ffff
       m_LastClickedID: -11088
       m_ExpandedIDs: 6ab4ffffe0d4ffff12fbffffccaa0000
-=======
-      m_SelectedIDs: 9881ffff
-      m_LastClickedID: -32360
-      m_ExpandedIDs: 9881ffff12fbffff
->>>>>>> Tincho_Branch
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -909,15 +903,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-<<<<<<< HEAD
     m_Target: {x: 44.835598, y: 5.9129715, z: 69.235825}
     speed: 2
     m_Value: {x: 44.835598, y: 5.9129715, z: 69.235825}
-=======
-    m_Target: {x: 136.3942, y: 7.058691, z: 60.656418}
-    speed: 2
-    m_Value: {x: 136.3942, y: 7.058691, z: 60.656418}
->>>>>>> Tincho_Branch
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -963,7 +951,6 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.518
   m_Rotation:
-<<<<<<< HEAD
     m_Target: {x: -0.087272234, y: 0.9040567, z: -0.22267216, w: -0.35428187}
     speed: 2
     m_Value: {x: -0.08727077, y: 0.9040415, z: -0.22266842, w: -0.3542759}
@@ -971,15 +958,6 @@ MonoBehaviour:
     m_Target: 1.6493262
     speed: 2
     m_Value: 1.6493262
-=======
-    m_Target: {x: -0.061150912, y: -0.69072336, z: 0.05874851, w: -0.7181842}
-    speed: 2
-    m_Value: {x: -0.06123658, y: -0.6896184, z: 0.05865443, w: -0.71919143}
-  m_Size:
-    m_Target: 12.835382
-    speed: 2
-    m_Value: 12.282662
->>>>>>> Tincho_Branch
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1170,11 +1148,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-<<<<<<< HEAD
     - Assets/Tincho/Scripts/Objetos
-=======
-    - Assets/Tincho/Assets/World/Structures/Metal Fence
->>>>>>> Tincho_Branch
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1182,27 +1156,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-<<<<<<< HEAD
   - Assets/Tincho/Scripts/Objetos
-=======
-  - Assets/Tincho/Assets/World/Structures/Metal Fence
->>>>>>> Tincho_Branch
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\Usuario\Documents\GitHub\PendingToBeNamed
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-<<<<<<< HEAD
     scrollPos: {x: 0, y: 389}
     m_SelectedIDs: 38e00000
     m_LastClickedID: 57400
     m_ExpandedIDs: 000000006ade00006cde00006ede000070de000072de000074de000076de000078de00007ade00007cde00007ede000080de000082de000084de000086de000088de00008ade00008cde00008ede000012e000002ce0000040e00000b0e0000000ca9a3b
-=======
-    scrollPos: {x: 0, y: 254}
-    m_SelectedIDs: 4ae20000
-    m_LastClickedID: 57930
-    m_ExpandedIDs: 0000000060de000062de000064de000066de000068de000034e0000038e000003ee0000080e0000000ca9a3b
->>>>>>> Tincho_Branch
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1230,11 +1193,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 60.80002}
     m_SelectedIDs: 14df0000
     m_LastClickedID: 57108
-<<<<<<< HEAD
     m_ExpandedIDs: 000000006ade00006cde00006ede000070de000072de000074de000076de000078de00007ade00007cde00007ede000080de000082de000084de000086de000088de00008ade00008cde00008ede0000
-=======
-    m_ExpandedIDs: 0000000060de000062de000064de000066de000068de0000
->>>>>>> Tincho_Branch
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1278,7 +1237,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
