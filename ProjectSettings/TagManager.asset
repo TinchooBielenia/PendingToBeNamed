@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - DetectionCollider
   - AttackCollider
+  - Ammo
+  - HealingWater
   layers:
   - Default
   - TransparentFX
