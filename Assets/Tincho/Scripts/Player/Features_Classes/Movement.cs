@@ -42,30 +42,28 @@ public class Movement
 
     public void MoveAndSprint(float x, float z)
     {
-        //Basic movement
+        // 1. Chequear si hay input de movimiento ANTES de todo
+        bool hasInput = x != 0 || z != 0;
+
+        // 2. Calcular dirección y mover
         Vector3 dir = (_transform.right * x + _transform.forward * z).normalized;
 
-        Vector3 currentVelocity = _rb.velocity;
-        _rb.velocity = new Vector3(dir.x * _speed, currentVelocity.y, dir.z * _speed);
-
-        _animator.SetFloat("xMov", x);
-        _animator.SetFloat("zMov", z);
-        //_rb.velocity = dir * _speed;
-
-        if (dir.magnitude == 0)
+        if (hasInput)
         {
-            // Solo frenamos el movimiento horizontal, no la gravedad.
-            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
-            IsMoving = false;
+            Vector3 currentVelocity = _rb.velocity;
+            _rb.velocity = new Vector3(dir.x * _speed, currentVelocity.y, dir.z * _speed);
         }
         else
         {
-            IsMoving = true;
+            // Si no hay input, detené el movimiento horizontal
+            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
         }
 
+        _animator.SetFloat("xMov", x);
+        _animator.SetFloat("zMov", z);
 
-        //Sprint
-        bool isSprinting = Input.GetKey(KeyCode.LeftShift) && _playerStats.canSprint && IsMoving;
+        // 3. Sprint solo si hay input
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift) && _playerStats.canSprint && hasInput;
 
         if (isSprinting)
         {
@@ -83,9 +81,7 @@ public class Movement
             _playerStats.staminaIsBeingConsumed = false;
         }
 
-        //SFX
-
-        //Exhausted
+        // 4. Sonido de fatiga
         if (!_playerStats.canSprint && !_heavyBreathingFX.isPlaying)
         {
             _heavyBreathingFX.enabled = true;
@@ -95,37 +91,31 @@ public class Movement
             _heavyBreathingFX.enabled = false;
         }
 
-
-        //Walking and sprinting SFX
-        if (isSprinting && IsMoving)
+        // 5. Sonidos de pasos y animaciones
+        if (isSprinting)
         {
+            _animator.SetBool("isMoving", true);
             if (!_footstepsSprintFX.isPlaying)
                 _footstepsSprintFX.Play();
-
             if (_footstepsSFX.isPlaying)
                 _footstepsSFX.Stop();
         }
-        else if (!isSprinting)
+        else if (hasInput)
         {
-            if (IsMoving)
-            {
-                _animator.SetBool("isMoving", true);
-                if (!_footstepsSFX.isPlaying)
-                    _footstepsSFX.Play();
-                if (_footstepsSprintFX.isPlaying)
-                    _footstepsSprintFX.Stop();
-            }
-            else
-            {
-                _animator.SetBool("isMoving", false);
-                if (_footstepsSFX.isPlaying)
-                    _footstepsSFX.Stop();
-            }
+            _animator.SetBool("isMoving", true);
+            if (!_footstepsSFX.isPlaying)
+                _footstepsSFX.Play();
+            if (_footstepsSprintFX.isPlaying)
+                _footstepsSprintFX.Stop();
         }
         else
         {
+            _animator.SetBool("isMoving", false);
+            if (_footstepsSFX.isPlaying)
+                _footstepsSFX.Stop();
             if (_footstepsSprintFX.isPlaying)
                 _footstepsSprintFX.Stop();
         }
     }
+
 }

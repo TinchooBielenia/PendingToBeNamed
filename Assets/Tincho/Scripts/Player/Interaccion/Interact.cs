@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Interact : MonoBehaviour
@@ -26,7 +27,7 @@ public class Interact : MonoBehaviour
     // Player interacts with objects using Mouse 0.
     private void PlayerInteract()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.F))
         {
 
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
@@ -43,18 +44,7 @@ public class Interact : MonoBehaviour
                 }
             }
 
-            //if (Physics.Raycast(ray, out hit, interactDistance, _enemyLayer))
-            //{
-            //    int damage = _player.enemyDamage;
-            //    _interactSFX.Play();
-
-            //    IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
-            //    if (enemy != null)
-            //    {
-            //        Debug.Log("Player is damaging " + hit.collider.name);
-            //        enemy.TakeHit(damage);
-            //    }
-            //}
+          
         }
 
 

@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class TankEnemy : Enemy, IDamageEnemy   
 {
-    private bool _inRange;
+    public bool _inRange;
     [SerializeField] private Transform _player;
     [SerializeField] private int _speed;
     [SerializeField] private int _maxSpeed;
-    [SerializeField] private Rigidbody _enemyRb;
+    [SerializeField] public Rigidbody _enemyRb;
+    [SerializeField] private AudioSource _getDamagedSFX;
     private Animator _animator;
-    private bool _isMoving;
+    public bool _playerInAttackRange = false;
 
     private void Start()
     {
@@ -17,22 +18,37 @@ public class TankEnemy : Enemy, IDamageEnemy
         _inRange = false;
         _speed = _maxSpeed;
         _animator = GetComponentInChildren<Animator>();
+        _enemyRb.isKinematic = false;
     }
 
     private void Update()
     {
-        if (_inRange && _player != null)
+        if (_inRange && _player != null && !_playerInAttackRange)
         {
             DashAndStop(_player, _speed);
         }
 
-        if(_isDead)
+        if (_player != null && _playerInAttackRange)
+        {
+            PlayerInAttackRange();
+        }
+
+        AnimationsManager(_inRange,_playerInAttackRange);
+
+        if (_isDead)
         {
             if (_animator != null)
             {
                 _animator.SetBool("isDead", true);
+                _animator.SetBool("isAttacking", false);
                 _inRange = false;
-                _enemyRb.isKinematic = true;
+                // _enemyRb.isKinematic = true;
+                Collider[] colliders = GetComponentsInChildren<Collider>();
+                foreach (Collider col in colliders)
+                {
+                    col.enabled = false;
+                }
+                _enemyRb.constraints = RigidbodyConstraints.FreezeAll;
             }
         }
     }
@@ -40,17 +56,17 @@ public class TankEnemy : Enemy, IDamageEnemy
     public void TakeHit(int damage)
     {
         GetDamage(damage);
+        _getDamagedSFX.Play();
         Death();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
             Debug.Log("El jugador entró en la zona del enemigo.");
             _inRange = true;
-            _animator.SetBool("isRunning", true);
         }
     }
 
@@ -61,7 +77,6 @@ public class TankEnemy : Enemy, IDamageEnemy
         {
             Debug.Log("El jugador salió en la zona del enemigo.");
             _inRange = false;
-            _animator.SetBool("isRunning", false);
         }
     }
 
@@ -79,22 +94,31 @@ public class TankEnemy : Enemy, IDamageEnemy
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
-        _isMoving = dir.magnitude != 0;
 
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    Player player = collision.gameObject.GetComponent<Player>();
-    //    if (player != null)
-    //    {
-    //        Debug.Log("El enemigo chocó físicamente al jugador.");
-    //        //OnTouchPlayer(player);
-    //    }
-    //}
+    public void PlayerInAttackRange()
+    {
+        _enemyRb.velocity = Vector3.zero;
+    }
 
-    //private void OnTouchPlayer(Player player)
-    //{
+    private void AnimationsManager(bool playerInDetectionRange, bool playerInAttackRange)
+    {
+        if (playerInDetectionRange && !playerInAttackRange)
+        {
+            _animator.SetBool("isRunning", true);
+            _animator.SetBool("isAttacking", false);
+        }
+        else if (playerInDetectionRange && playerInAttackRange)
+        {
+            //_animator.SetBool("isRunning", false);
+            _animator.SetBool("isAttacking", true);
+        }
+        else if (!playerInDetectionRange && !playerInAttackRange)
+        {
+            _animator.SetBool("isRunning", false);
+            _animator.SetBool("isAttacking", false);
+        }
 
-    //}
+    }
 }

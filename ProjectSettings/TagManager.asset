@@ -5,9 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Grabbable
-  - Entrada
-  - Salida
+  - DetectionCollider
+  - AttackCollider
   layers:
   - Default
   - TransparentFX
@@ -19,7 +18,7 @@ TagManager:
   - Trees
   - Interactable
   - Enemies
-  - EnemyDetection
+  - Ground
   - 
   - 
   - 
