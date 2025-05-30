@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5ef75d14dfa05fd4b8567fabf795d5a2
+guid: 45012c7ce35c0ee4c83c2b72fe344351
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,18 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 01
-    second: {fileID: 2100000, guid: 69582329befd7524080ff78ba8230893, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 02
-    second: {fileID: 2100000, guid: bfe655361020b2742be56048ed265838, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 03
-    second: {fileID: 2100000, guid: 09f52c677a1981943a492e240fc3eac4, type: 2}
+      name: TD_Checker.001
+    second: {fileID: 2100000, guid: 4f820ca5a11d7f848b56e1352e8f4c2c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
