@@ -4,11 +4,8 @@ public class MouseCamera : MonoBehaviour
 {
     //This class handles how mouse will move the first person camera.
     private float xRotation = 0f;
-    private Vector2 currentMouse;
-    private Vector2 currentMouseSpeed;
 
     public float mouseSensitivity = 100f;
-    //public float smoothTime = 0.05f; // Movement smoothness.
     public Rigidbody playerRigidbody;
 
     void Start()
