@@ -62,7 +62,7 @@ public class Movement
         _animator.SetFloat("zMov", z);
 
         // Sprint
-        bool isSprinting = Input.GetKey(KeyCode.LeftShift) && _playerStats.canSprint && hasInput;
+        bool isSprinting = isSprinting = InputController.Instance.IsSprinting && _playerStats.canSprint && hasInput;
 
         if (isSprinting)
         {

@@ -27,7 +27,7 @@ public class Interact : MonoBehaviour
     // Player interacts with objects using Mouse 0.
     private void PlayerInteract()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (InputController.Instance.InteractPressed)
         {
 
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));

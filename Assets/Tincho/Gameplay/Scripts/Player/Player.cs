@@ -68,10 +68,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Inputs.
-        _xAxis = Input.GetAxisRaw("Horizontal");
-        _zAxis = Input.GetAxisRaw("Vertical") * zAxisDirection; //Se multiplica al eje vertical por la direccion del zAxis para tener control sobre ese eje de manera independiente.
+        Vector2 input = InputController.Instance.MoveInput;
+        _xAxis = input.x;
+        _zAxis = input.y * zAxisDirection;
 
-        //if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        //if (InputController.Instance.JumpPressed) && _isGrounded)
         //{
         //    _rb.velocity = new Vector3(_rb.velocity.x, jumpForce, _rb.velocity.z);
         //}

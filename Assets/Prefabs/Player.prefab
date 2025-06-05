@@ -863,6 +863,7 @@ GameObject:
   - component: {fileID: 4126965735863660723}
   - component: {fileID: 428687553737489282}
   - component: {fileID: 8175109417629320158}
+  - component: {fileID: 7911137612974401426}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1027,6 +1028,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _interactSFX: {fileID: 6510441997172012565}
+  _interactKey: 0
 --- !u!95 &6658387245088763805
 Animator:
   serializedVersion: 5
@@ -1062,10 +1064,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 3388263438379354453}
   _shootDistance: 10
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  _enemyLayer: 0
   _shootSFX: {fileID: 3909046310959811703}
+  _shootCooldown: 0.5
+  _tracerPrefab: {fileID: 0}
+  _muzzlePoint: {fileID: 0}
 --- !u!114 &4126965735863660723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,6 +1118,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 352319026420430728}
+--- !u!114 &7911137612974401426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7002620518952003983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d76738a061433240ae0abf029879c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7727593024259599848
 GameObject:
   m_ObjectHideFlags: 0
