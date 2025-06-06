@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public int zAxisDirection = 1;
     public bool isMoving => _isMoving;
     public bool isSprinting;
+    public PlayerHealing playerHealing;
 
     //[SerializeField] private int jumpForce;
     //private bool _isGrounded;
@@ -44,7 +45,9 @@ public class Player : MonoBehaviour
 
         isSprinting = false;
 
-        _animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>(); 
+
+        playerHealing = GetComponent<PlayerHealing>();
 
         heavyBreathingFX.enabled = false;
 
@@ -100,4 +103,26 @@ public class Player : MonoBehaviour
             zAxisDirection *= -1;
         }
     }
+    public void Die()
+    {
+        _animator.applyRootMotion = true;
+
+        _animator.SetTrigger("Death");
+
+        enabled = false; 
+        _movementHandler.DisableMovement(); 
+
+        footstepsSFX.Stop();
+        footstepsSprintFX.Stop();
+        heavyBreathingFX.Stop();
+
+        _rb.velocity = Vector3.zero;
+        _rb.isKinematic = true;
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+        {
+            col.enabled = false;
+        }
+    }
+
 }

@@ -14,6 +14,8 @@ public class Movement
     private float _speed;
     private Transform _transform;
     private PlayerStats _playerStats;
+    private bool _canMove = true;
+
 
     public bool IsMoving { get; private set; }
 
@@ -42,6 +44,8 @@ public class Movement
 
     public void MoveAndSprint(float x, float z)
     {
+        if (!_canMove) return;
+
         // Verifica si hay input de movimiento ANTES de todo.
         bool hasInput = x != 0 || z != 0;
 
@@ -116,5 +120,8 @@ public class Movement
                 _footstepsSprintFX.Stop();
         }
     }
-
+    public void DisableMovement()
+    {
+        _canMove = false;
+    }
 }

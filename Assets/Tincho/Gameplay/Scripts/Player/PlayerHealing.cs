@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,10 +12,18 @@ public class PlayerHealing : MonoBehaviour
     [SerializeField] private bool _isHealing = false;
     [SerializeField] private AudioSource _healingAudioSFX;
     [SerializeField] private Image _lifeBar;
+    private Animator _animator;
+
+    public float GetPlayerLife()
+    {
+        return _playerLife;
+    }
+
 
     void Start()
     {
         _playerLife = 80;
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -67,7 +76,9 @@ public class PlayerHealing : MonoBehaviour
         _playerLife -= amount;
         _playerLife = Mathf.Clamp(_playerLife, 0, _maxPlayerLife);
         Debug.Log("Jugador recibió daño. Vida actual: " + _playerLife);
+        if (_playerLife <= 0) {
+            GetComponent<Player>().Die();
+        }
     }
-
 
 }
