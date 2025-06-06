@@ -62,6 +62,12 @@ public class PlayerHealing : MonoBehaviour
     {
         _lifeBar.fillAmount = _playerLife / _maxPlayerLife;
     }
+    public void TakeDamage(float amount)
+    {
+        _playerLife -= amount;
+        _playerLife = Mathf.Clamp(_playerLife, 0, _maxPlayerLife);
+        Debug.Log("Jugador recibió daño. Vida actual: " + _playerLife);
+    }
 
 
 }

@@ -1,12 +1,10 @@
-using System.Net;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private Transform _camera;
     [SerializeField] private float _shootDistance = 10f;
-    
+
     //Variable used to make a reference to the "enemy" layer mask.
     [SerializeField] private int _enemyLayer;
     [SerializeField] private AudioSource _shootSFX;
@@ -19,8 +17,6 @@ public class PlayerShoot : MonoBehaviour
 
     private PlayerShootStats _player;
 
-    private bool _isShooting = false;
-
     private bool _hasWeapon = false;
     public bool GetHasWeapon => _hasWeapon;
 
@@ -29,9 +25,9 @@ public class PlayerShoot : MonoBehaviour
         _hasWeapon = value;
     }
     public void SetMuzzlePoint(Transform muzzle)
-{
-    _muzzlePoint = muzzle;
-}
+    {
+        _muzzlePoint = muzzle;
+    }
 
 
     private void Start()
@@ -54,6 +50,9 @@ public class PlayerShoot : MonoBehaviour
 
     public void Shoot()
     {
+        if (_player.magazineSize <= 0)
+            return;
+
         _shootSFX.Play();
         _player.magazineSize--;
 

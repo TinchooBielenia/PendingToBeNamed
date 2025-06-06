@@ -11,6 +11,8 @@ public class TankEnemy : Enemy, IDamageEnemy
     [SerializeField] private AudioSource _getDamagedSFX;
     private Animator _animator;
     public bool _playerInAttackRange = false;
+    [SerializeField] private GameObject damageArea;
+
 
     private void Start()
     {
@@ -39,6 +41,7 @@ public class TankEnemy : Enemy, IDamageEnemy
         {
             if (_animator != null)
             {
+                _animator.applyRootMotion = _isDead;
                 _animator.SetBool("isDead", true);
                 _animator.SetBool("isAttacking", false);
                 _inRange = false;
@@ -47,7 +50,8 @@ public class TankEnemy : Enemy, IDamageEnemy
                 {
                     col.enabled = false;
                 }
-                _enemyRb.constraints = RigidbodyConstraints.FreezeAll;
+                //_enemyRb.constraints = RigidbodyConstraints.FreezeAll;
+                _enemyRb.isKinematic = true;
             }
         }
     }
@@ -98,7 +102,10 @@ public class TankEnemy : Enemy, IDamageEnemy
 
     public void PlayerInAttackRange()
     {
-        _enemyRb.velocity = Vector3.zero;
+        if (!_isDead)
+        {
+            _enemyRb.velocity = Vector3.zero;
+        }
     }
 
     private void AnimationsManager(bool playerInDetectionRange, bool playerInAttackRange)
@@ -121,5 +128,14 @@ public class TankEnemy : Enemy, IDamageEnemy
             _animator.SetBool("isAttacking", false);
         }
 
+    }
+    public void EnableDamageCollider()
+    {
+        damageArea.SetActive(true);
+    }
+
+    public void DisableDamageCollider()
+    {
+        damageArea.SetActive(false);
     }
 }
