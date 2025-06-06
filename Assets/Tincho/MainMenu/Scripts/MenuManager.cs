@@ -54,7 +54,6 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         Debug.Log("Iniciando juego...");
-        // Cambiar por el nombre real de tu primera escena jugable
         SceneManager.LoadScene(_gameplaySceneName);
     }
 

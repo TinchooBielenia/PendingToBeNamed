@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractableWirePuzzle : MonoBehaviour, IInteraction
 {
     private bool _isInteracting = false;
-    [SerializeField] private GameObject _wirePuzzleCanvas;
+    [SerializeField] private GameObject _wirePuzzlePrefab;
+    private GameObject _wirePuzzleInstance;
     [SerializeField] private WirePuzzleController _wirePuzzleClass;
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _hud;
     private bool _startVictoryTimer = false;
     [SerializeField] private float _victoryTimer;
     [SerializeField] private AudioSource _electricGeneratorSFX;
+    private bool _puzzleFailed;
+    //[SerializeField] GameObject _camera;
+
 
     private void Update()
     {
@@ -21,8 +26,17 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
 
             if (_victoryTimer <= 0f)
             {
-                ClosePuzzle();
+                ClosePuzzleVictory();
             }
+        }
+        else if (_puzzleFailed)
+        {
+            ClosePuzzleFailed();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Victory();
         }
     }
 
@@ -36,16 +50,19 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     {
         if (_isInteracting)
         {
-            _wirePuzzleCanvas.SetActive(true);
+            _wirePuzzleInstance = Instantiate(_wirePuzzlePrefab, transform.position, Quaternion.identity);
+
             _player.SetActive(false);
             _hud.SetActive(false);
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            _puzzleFailed = false;
 
-            _wirePuzzleClass = _wirePuzzleClass.GetComponentInChildren<WirePuzzleController>();
+            _wirePuzzleClass = _wirePuzzleInstance.GetComponentInChildren<WirePuzzleController>();
             if (_wirePuzzleClass != null)
             {
                 _wirePuzzleClass.OnPuzzleCompleted += Victory;
+                _wirePuzzleClass.OnPuzzleFailed += PuzzleFailed;
             }
         }
     }
@@ -56,9 +73,18 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         _electricGeneratorSFX.Play();
     }
 
-    private void ClosePuzzle()
+    private void PuzzleFailed()
     {
-        _wirePuzzleCanvas.SetActive(false);
+        _puzzleFailed = true;
+    }
+
+    private void ClosePuzzleVictory()
+    {
+        if (_wirePuzzleInstance != null)
+        {
+            Destroy(_wirePuzzleInstance);
+            _wirePuzzleInstance = null;
+        }
         _player.SetActive(true);
         _hud.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
@@ -69,6 +95,23 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         if (_wirePuzzleClass != null)
         {
             _wirePuzzleClass.OnPuzzleCompleted -= Victory;
+            _wirePuzzleClass.OnPuzzleFailed -= PuzzleFailed;
+            _wirePuzzleClass = null;
         }
+        //_camera.SetActive(true);
+    }
+
+    private void ClosePuzzleFailed()
+    {
+        if (_wirePuzzleInstance != null)
+        {
+            Destroy(_wirePuzzleInstance);
+            _wirePuzzleInstance = null;
+        }
+
+        _player.SetActive(true);
+        _hud.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

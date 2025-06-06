@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
 public class Cable : MonoBehaviour
@@ -11,6 +12,7 @@ public class Cable : MonoBehaviour
     private WirePuzzleController _puzzleController;
     private Quaternion _ogRotation;
     public int cableIndex;
+    private bool _wasCorrect;
 
     void Start()
     {
@@ -25,14 +27,17 @@ public class Cable : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Reset();
+            CheckConnection();
+            if(!_wasCorrect)
+            {
+                Reset();
+            }
         }
     }
 
     private void OnMouseDrag()
     {
         UpdatePosition();
-        CheckConnection();
         UpdateRotation();
         UpdateSize();
     }
@@ -92,11 +97,15 @@ public class Cable : MonoBehaviour
                     _puzzleController.connectionSFX.Play();
                     _puzzleController.currentConnections++;
                     _puzzleController.VerifyVictory();
+                    _wasCorrect = true;
                 }
                 else
                 {
                     Debug.Log("Conexión incorrecta");
-                    _puzzleController.wrongSFX.Play();  
+                    _puzzleController.wrongSFX.Play();
+                    _puzzleController.wrongTries++;
+                    _puzzleController.VerifyLose();
+                    _wasCorrect = false;
                 }
             }
         }

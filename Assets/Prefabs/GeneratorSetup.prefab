@@ -416,10 +416,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FuseBox
       objectReference: {fileID: 0}
+    - target: {fileID: 3736438441392204473, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7895136018894818723, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
       propertyPath: _victoryTimer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7895136018894818723, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
+      propertyPath: _wirePuzzlePrefab
+      value: 
+      objectReference: {fileID: 1206269563261678951, guid: ca3c808b2a7bc54479f5ab682eefcf40, type: 3}
     - target: {fileID: 7895136018894818723, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
       propertyPath: _electricGeneratorSFX
       value: 
@@ -475,6 +483,10 @@ PrefabInstance:
     - target: {fileID: 8129794673523911269, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308776148803191019, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
