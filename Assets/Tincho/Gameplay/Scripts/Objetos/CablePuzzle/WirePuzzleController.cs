@@ -12,6 +12,11 @@ public class WirePuzzleController : MonoBehaviour
     public List<GameObject> Holes;
     public List<int> correctOrder;
 
+    //public void VerifyLose()
+    //{
+
+    //}
+
     public event Action OnPuzzleCompleted;
 
     public void VerifyVictory()

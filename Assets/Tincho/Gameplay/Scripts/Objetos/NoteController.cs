@@ -19,7 +19,7 @@ public class NoteController : MonoBehaviour, IInteraction
         if (_isInteracting && !_isCanvasVisible)
         {
             ShowNote();
-            TextContainer.TextSwitch(_noteID);
+            
         }
 
         if (_isCanvasVisible && InputController.Instance.EscapeKey)
@@ -38,7 +38,8 @@ public class NoteController : MonoBehaviour, IInteraction
         _isCanvasVisible = true;
         canvas.SetActive(true);
         Time.timeScale = 0f;
-        _isInteracting = false; 
+        _isInteracting = false;
+        _noteValue.text = TextContainer.TextSwitch(_noteID);
     }
 
     private void HideNote()
