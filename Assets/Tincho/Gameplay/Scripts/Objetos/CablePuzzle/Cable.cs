@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Serialization;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Cable : MonoBehaviour
 {

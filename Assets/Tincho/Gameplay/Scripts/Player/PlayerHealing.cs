@@ -12,6 +12,7 @@ public class PlayerHealing : MonoBehaviour
     [SerializeField] private bool _isHealing = false;
     [SerializeField] private AudioSource _healingAudioSFX;
     [SerializeField] private Image _lifeBar;
+    [SerializeField] private AudioSource _getDamagedSFX;
     private Animator _animator;
 
     public float GetPlayerLife()
@@ -73,6 +74,7 @@ public class PlayerHealing : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
+        _getDamagedSFX.Play();
         _playerLife -= amount;
         _playerLife = Mathf.Clamp(_playerLife, 0, _maxPlayerLife);
         Debug.Log("Jugador recibió daño. Vida actual: " + _playerLife);

@@ -50,7 +50,6 @@ public class TankEnemy : Enemy, IDamageEnemy
                 {
                     col.enabled = false;
                 }
-                //_enemyRb.constraints = RigidbodyConstraints.FreezeAll;
                 _enemyRb.isKinematic = true;
             }
         }

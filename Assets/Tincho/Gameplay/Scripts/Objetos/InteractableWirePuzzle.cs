@@ -34,10 +34,10 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
             ClosePuzzleFailed();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+      /*  if (Input.GetKeyDown(KeyCode.F))
         {
             Victory();
-        }
+        }*/
     }
 
     public void TriggerInteraction()
