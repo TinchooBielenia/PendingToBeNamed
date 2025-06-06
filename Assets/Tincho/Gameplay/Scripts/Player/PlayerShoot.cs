@@ -46,23 +46,13 @@ public class PlayerShoot : MonoBehaviour
         {
             if (Time.time - _lastShootTime >= _shootCooldown)
             {
-                _isShooting = true;
+                _animator.SetTrigger("Shoot");
                 _lastShootTime = Time.time;
             }
         }
-
-        if (_isShooting)
-        {
-            Shoot();
-            _animator.SetBool("isShooting", true);
-        }
-        else
-        {
-            _animator.SetBool("isShooting", false);
-        }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         _shootSFX.Play();
         _player.magazineSize--;
@@ -84,13 +74,7 @@ public class PlayerShoot : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(SpawnTracerDelayed(endPoint, 0.3f));
-        _isShooting = false;
-    }
-    private System.Collections.IEnumerator SpawnTracerDelayed(Vector3 hitPoint, float delay)
-{
-        yield return new WaitForSeconds(delay);
-        SpawnTracer(hitPoint);
+        SpawnTracer(endPoint);
     }
     private void SpawnTracer(Vector3 hitPoint)
     {
@@ -98,7 +82,7 @@ public class PlayerShoot : MonoBehaviour
         LineRenderer line = tracer.GetComponent<LineRenderer>();
         line.SetPosition(0, _muzzlePoint.position);
         line.SetPosition(1, hitPoint);
-        Destroy(tracer, 0.05f); // Dura poquito
+        Destroy(tracer, 0.05f);
     }
 
 }
