@@ -17,8 +17,8 @@ public class PauseMenuManager : MonoBehaviour
     [Header("Escenas")]
     [SerializeField] private string _SceneName; // Asignás esto desde el Inspector
 
-    //[Header("Imagenes")]
-    //[SerializeField] private RawImage _ControlsImage;
+    [Header("Imagenes")]
+    [SerializeField] private RawImage _ControlsImage;
 
 
     private void Awake()
@@ -38,17 +38,16 @@ public class PauseMenuManager : MonoBehaviour
     {
         _canvas.gameObject.SetActive(false);
 
-        // Asignar listeners a los botones
-        if (_resumeButton != null)
-            _resumeButton.onClick.AddListener(ResumeGame);
-
         if (_optionsButton != null)
             _optionsButton.onClick.AddListener(OpenOptions);
 
         if (_mainMenuButton != null)
             _mainMenuButton.onClick.AddListener(MainMenu);
 
-        //_ControlsImage.gameObject.SetActive(false);
+        if (_xButton != null)
+            _xButton.onClick.AddListener(BackButton);
+
+        _ControlsImage.gameObject.SetActive(false);
         _xButton.gameObject.SetActive(false);
     }
 
@@ -60,23 +59,24 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
-    public void ResumeGame()
-    {
-        Time.timeScale = 1.0f;
-        _canvas.gameObject.SetActive(false);
-    }
-
     public void OpenOptions()
     {
         Debug.Log("Abriendo creditos...");
-        //_ControlsImage.gameObject.SetActive(true);
+        _ControlsImage.gameObject.SetActive(true);
         _xButton.gameObject.SetActive(true);
+    }
+
+    public void BackButton()
+    {
+        _ControlsImage.gameObject.SetActive(false);
+        _xButton.gameObject.SetActive(false);
     }
 
     public void MainMenu()
     {
         Debug.Log("Saliendo del juego...");
         SceneManager.LoadScene(_SceneName);
+        Destroy(gameObject);
     }
 
     public void TogglePause()
@@ -84,6 +84,9 @@ public class PauseMenuManager : MonoBehaviour
         _isPaused = !_isPaused;
         _canvas.gameObject.SetActive(_isPaused);
         Time.timeScale = _isPaused ? 0f : 1f;
+        Cursor.lockState = _isPaused ? CursorLockMode.Confined : CursorLockMode.Locked;
+        Cursor.visible = _isPaused;
     }
+
 }
 

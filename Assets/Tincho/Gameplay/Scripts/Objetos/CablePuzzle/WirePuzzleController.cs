@@ -11,11 +11,24 @@ public class WirePuzzleController : MonoBehaviour
     public AudioSource wrongSFX;
     public List<GameObject> Holes;
     public List<int> correctOrder;
+    public int wrongTries;
 
-    //public void VerifyLose()
-    //{
+    private void Start()
+    {
+        wrongTries = 0;
+    }
 
-    //}
+    public event Action OnPuzzleFailed;
+
+    public void VerifyLose()
+    {
+        if (wrongTries >= 3)
+        {
+            Debug.Log("You lose!");
+            OnPuzzleFailed?.Invoke();
+            wrongTries = 0;
+        }
+    }
 
     public event Action OnPuzzleCompleted;
 
@@ -23,15 +36,12 @@ public class WirePuzzleController : MonoBehaviour
     {
         if (currentConnections == 4)
         {
-            //Destroy(this.gameObject, 1f);
             Debug.Log("You win!");
             winningLight.SetActive(true);
             Destroy(this);
 
-            // 🔥 Disparamos el evento
             OnPuzzleCompleted?.Invoke();
 
-            // Destruimos el script después (después de notificar)
             Destroy(this, 1f);
         }
     }
