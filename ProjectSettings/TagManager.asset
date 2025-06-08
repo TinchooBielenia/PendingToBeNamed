@@ -9,6 +9,7 @@ TagManager:
   - AttackCollider
   - Ammo
   - HealingWater
+  - Gun
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TankEnemy : Enemy, IDamageEnemy   
@@ -12,6 +14,7 @@ public class TankEnemy : Enemy, IDamageEnemy
     private Animator _animator;
     public bool _playerInAttackRange = false;
     [SerializeField] private GameObject damageArea;
+    [SerializeField] List<GameObject> _lootList;
 
 
     private void Start()
@@ -51,6 +54,8 @@ public class TankEnemy : Enemy, IDamageEnemy
                     col.enabled = false;
                 }
                 _enemyRb.isKinematic = true;
+
+                LootOnDeath(_lootList);
             }
         }
     }

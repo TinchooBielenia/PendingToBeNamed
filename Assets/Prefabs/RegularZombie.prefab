@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928283103767135088}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000017881392}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 98.411, y: 4.941, z: 88.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyLife: 0
-  _maxEnemyLife: 100
+  _maxEnemyLife: 50
   _inRange: 0
   _player: {fileID: 0}
   _speed: 0
@@ -93,6 +93,8 @@ MonoBehaviour:
   _getDamagedSFX: {fileID: 1697317885035457369}
   _playerInAttackRange: 0
   damageArea: {fileID: 3117755977371862626}
+  _lootList:
+  - {fileID: 6641715986346531347, guid: aa38fb3a7025cb24a96b105476b5f1c6, type: 3}
 --- !u!95 &7653059217454973648
 Animator:
   serializedVersion: 5

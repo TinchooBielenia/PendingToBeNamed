@@ -1,22 +1,17 @@
 using UnityEngine;
 
-public class WeaponPickup : MonoBehaviour, IInteraction
+public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] private Transform handBone;
     [SerializeField] private Transform gunSocket;
     [SerializeField] private GameObject weaponPrefab;
-    private bool _isInteracting = false;
-    public void TriggerInteraction()
-    {
-        _isInteracting = true;
-    }
+    [SerializeField] private AudioSource pickUpSFX;
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (_isInteracting)
+        if (other.CompareTag("Player") && pickUpSFX != null)
         {
-            _isInteracting = false;
-
+            pickUpSFX.Play();
             GameObject newWeapon = Instantiate(weaponPrefab, handBone);
             newWeapon.transform.SetParent(gunSocket);
             newWeapon.transform.localPosition = Vector3.zero;
@@ -33,6 +28,7 @@ public class WeaponPickup : MonoBehaviour, IInteraction
             }
             Destroy(gameObject);
         }
+
     }
 }
 

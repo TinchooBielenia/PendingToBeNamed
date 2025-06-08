@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -5,9 +6,9 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected int _enemyLife;
     [SerializeField] protected int _maxEnemyLife = 100;
-    //[SerializeField] protected Animator _enemyWalkingAnim;
     protected Transform _transform;
     protected bool _isDead;
+    protected bool _hasDroppedLoot;
 
     protected virtual void Awake()
     {
@@ -29,5 +30,23 @@ public class Enemy : MonoBehaviour
 
         }
     }
+
+    protected void LootOnDeath(List<GameObject> lootList)
+    {
+        if (_hasDroppedLoot) return;
+
+        if (lootList == null || lootList.Count == 0) return;
+
+        foreach (GameObject loot in lootList)
+        {
+            if (loot != null)
+            {
+                Instantiate(loot, _transform.position, Quaternion.identity);
+            }
+        }
+
+        _hasDroppedLoot = true;
+    }
+
 
 }
