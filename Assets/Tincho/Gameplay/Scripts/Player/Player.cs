@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     public int zAxisDirection = 1;
     public bool isMoving => _isMoving;
     public bool isSprinting;
-    public PlayerHealing playerHealing;
 
     //[SerializeField] private int jumpForce;
     //private bool _isGrounded;
@@ -32,6 +31,7 @@ public class Player : MonoBehaviour
     public AudioSource footstepsSFX;
     public AudioSource footstepsSprintFX;
     public AudioSource heavyBreathingFX;
+    public AudioSource deathSFX;
 
 
 
@@ -46,8 +46,6 @@ public class Player : MonoBehaviour
         isSprinting = false;
 
         _animator = GetComponentInChildren<Animator>(); 
-
-        playerHealing = GetComponent<PlayerHealing>();
 
         heavyBreathingFX.enabled = false;
 
@@ -115,6 +113,7 @@ public class Player : MonoBehaviour
         footstepsSFX.Stop();
         footstepsSprintFX.Stop();
         heavyBreathingFX.Stop();
+        deathSFX.Play();
 
         _rb.velocity = Vector3.zero;
         _rb.isKinematic = true;
