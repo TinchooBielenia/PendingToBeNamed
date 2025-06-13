@@ -15,7 +15,7 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private float _victoryTimer;
     [SerializeField] private AudioSource _electricGeneratorSFX;
     private bool _puzzleFailed;
-    //[SerializeField] GameObject _camera;
+    [SerializeField] MiniCameraDisplay _camera;
 
 
     private void Update()
@@ -71,6 +71,12 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     {
         _startVictoryTimer = true;
         _electricGeneratorSFX.Play();
+        Invoke(nameof(ShowCamera),4f);
+    }
+
+    private void ShowCamera()
+    {
+        _camera.ShowVictoryCamera();
     }
 
     private void PuzzleFailed()
