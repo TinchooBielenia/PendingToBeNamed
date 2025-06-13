@@ -71,7 +71,7 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     {
         _startVictoryTimer = true;
         _electricGeneratorSFX.Play();
-        Invoke(nameof(ShowCamera),4f);
+        Invoke(nameof(ShowCamera),2f);
     }
 
     private void ShowCamera()
