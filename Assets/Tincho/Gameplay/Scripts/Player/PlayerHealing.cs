@@ -74,10 +74,12 @@ public class PlayerHealing : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
+        _animator.SetBool("isGettingDamage", true);
         _getDamagedSFX.Play();
         _playerLife -= amount;
         _playerLife = Mathf.Clamp(_playerLife, 0, _maxPlayerLife);
         Debug.Log("Jugador recibió daño. Vida actual: " + _playerLife);
+
         if (_playerLife <= 0) {
             Destroy(_getDamagedSFX);
             GetComponent<Player>().Die();
