@@ -11,7 +11,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button _creditsButton;
     [SerializeField] private Button _quitButton;
     [SerializeField] private Button _backButton;
-    
+
+    [Header("Sonido botones")]
+    [SerializeField] private AudioSource _playButtonSFX;
+
     [Header("Escenas")]
     [SerializeField] private string _gameplaySceneName = "02_Gameplay"; // Asignás esto desde el Inspector
 
