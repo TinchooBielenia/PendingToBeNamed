@@ -11,7 +11,9 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private float _shootCooldown = 0.5f;
     [SerializeField] private GameObject _tracerPrefab;
     [SerializeField] private Transform _muzzlePoint;
+    [SerializeField] private PlayerHealing _playerHealing;
     private float _lastShootTime = -Mathf.Infinity;
+   
 
     private Animator _animator;
 
@@ -38,6 +40,7 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
+        if (_playerHealing.GetPlayerLife() <= 0) return;
         if (_hasWeapon && _player.magazineSize > 0 && Input.GetMouseButtonDown(0))
         {
             if (Time.time - _lastShootTime >= _shootCooldown)

@@ -64,6 +64,10 @@ public class TankEnemy : Enemy, IDamageEnemy
     {
         GetDamage(damage);
         _getDamagedSFX.Play();
+        if (!_isDead && _animator != null)
+        {
+            _animator.SetTrigger("Hit"); 
+        }
         Death();
     }
 
