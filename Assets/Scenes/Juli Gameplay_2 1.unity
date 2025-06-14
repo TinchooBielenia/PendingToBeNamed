@@ -5209,6 +5209,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4746218395150665944, guid: e2b3941a322fc004a97cd504405284d9, type: 3}
+    - {fileID: 4765864635028630482, guid: e2b3941a322fc004a97cd504405284d9, type: 3}
+    - {fileID: -5240594581146505185, guid: e2b3941a322fc004a97cd504405284d9, type: 3}
+    - {fileID: -9116993113163454925, guid: e2b3941a322fc004a97cd504405284d9, type: 3}
+    - {fileID: -2820140796025397620, guid: e2b3941a322fc004a97cd504405284d9, type: 3}
+    - {fileID: 5240047391324654945, guid: e2b3941a322fc004a97cd504405284d9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b3941a322fc004a97cd504405284d9, type: 3}
@@ -18921,7 +18926,7 @@ PrefabInstance:
       objectReference: {fileID: 1476118061}
     - target: {fileID: 428687553737489282, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
       propertyPath: _maxPlayerLife
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 559465472125172616, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
       propertyPath: _muzzlePoint

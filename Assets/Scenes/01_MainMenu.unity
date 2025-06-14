@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45116305, g: 0.50093216, b: 0.5738298, a: 1}
+  m_IndirectSpecularColor: {r: 0.45116287, g: 0.50093186, b: 0.5738287, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7019,7 +7019,7 @@ MonoBehaviour:
   _quitButton: {fileID: 1883984934}
   _backButton: {fileID: 1804402717}
   _playButtonSFX: {fileID: 0}
-  _gameplaySceneName: 02_Gameplay
+  _gameplaySceneName: Juli Gameplay_2
   _creditsImage: {fileID: 861121834}
 --- !u!4 &1798074171
 Transform:
