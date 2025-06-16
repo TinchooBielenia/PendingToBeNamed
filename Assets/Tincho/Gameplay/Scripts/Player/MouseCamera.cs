@@ -5,8 +5,9 @@ public class MouseCamera : MonoBehaviour
     //This class handles how mouse will move the first person camera.
     private float xRotation = 0f;
 
-    public float mouseSensitivity = 100f;
-    public Rigidbody playerRigidbody;
+    private float mouseSensitivity;
+    [SerializeField] private float _startMouseSensitivity;
+    [SerializeField] private Rigidbody _playerRigidbody;
 
     void Start()
     {
@@ -19,7 +20,18 @@ public class MouseCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Time.timeScale == 0f) return;
+        if (Time.timeScale == 0f)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            mouseSensitivity = 0f;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            mouseSensitivity = _startMouseSensitivity;
+        }
 
         // Base mouse movement.
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -32,7 +44,7 @@ public class MouseCamera : MonoBehaviour
 
         // Horizontal player rotation.
         Quaternion deltaRotation = Quaternion.Euler(0f, mouseX, 0f);
-        playerRigidbody.MoveRotation(playerRigidbody.rotation * deltaRotation);
+        _playerRigidbody.MoveRotation(_playerRigidbody.rotation * deltaRotation);
     }
 }
 
