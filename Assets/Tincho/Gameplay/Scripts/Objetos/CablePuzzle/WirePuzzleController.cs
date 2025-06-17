@@ -6,7 +6,6 @@ public class WirePuzzleController : MonoBehaviour
 {
     public int currentConnections;
     public GameObject winningLight;
-    public GameObject errorLight;
     public AudioSource connectionSFX;
     public AudioSource wrongSFX;
     public List<GameObject> Holes;

@@ -11,6 +11,8 @@ public class WeaponPickup : MonoBehaviour
     {
         if (other.CompareTag("Player") && pickUpSFX != null)
         {
+            Player _player = other.GetComponent<Player>();
+
             pickUpSFX.Play();
             GameObject newWeapon = Instantiate(weaponPrefab, handBone);
             newWeapon.transform.SetParent(gunSocket);
@@ -19,12 +21,11 @@ public class WeaponPickup : MonoBehaviour
 
             Transform muzzlePoint = newWeapon.transform.Find("muzzlePoint");
 
-
-            PlayerShoot playerShoot = FindObjectOfType<PlayerShoot>();
-            playerShoot.SetHasWeapon(true);
-            if (playerShoot != null && muzzlePoint != null)
+            PlayerShoot _playerShoot = _player.gameObject.GetComponent<PlayerShoot>();
+            _playerShoot.SetHasWeapon(true);
+            if (_playerShoot != null && muzzlePoint != null)
             {
-                playerShoot.SetMuzzlePoint(muzzlePoint);
+                _playerShoot.SetMuzzlePoint(muzzlePoint);
             }
             Destroy(gameObject);
         }
