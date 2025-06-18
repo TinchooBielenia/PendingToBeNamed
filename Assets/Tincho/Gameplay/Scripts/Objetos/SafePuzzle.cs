@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +15,14 @@ public class SafePuzzle : MonoBehaviour, IInteraction
 
     [SerializeField] private TextMeshProUGUI _displayText;
 
+    [SerializeField] private AudioSource _buttonBeepSFX;
+    [SerializeField] private AudioSource _openedSafeSFX;
+    [SerializeField] private AudioSource _puzzleSolvedSFX;
+
+    private float _delayCount;
+
+    private Animator _animator;
+
     private string _currentInput = "";
 
     private int _maxCharacters = 3;
@@ -24,6 +34,8 @@ public class SafePuzzle : MonoBehaviour, IInteraction
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
+        _delayCount = 0.55f;
         HideKeypad();
     }
 
@@ -62,6 +74,7 @@ public class SafePuzzle : MonoBehaviour, IInteraction
 
         _currentInput += digit;
         _displayText.text = _currentInput;
+        _buttonBeepSFX.Play();
     }
 
     private void ClearInput()
@@ -78,6 +91,9 @@ public class SafePuzzle : MonoBehaviour, IInteraction
             HideKeypad();
             ClearInput();
             gameObject.layer = 0;
+            _animator.SetTrigger("puzzleSaved");
+            _puzzleSolvedSFX.Play();
+            StartCoroutine(OpenSafeSFX());
         }
         else
         {
@@ -85,4 +101,12 @@ public class SafePuzzle : MonoBehaviour, IInteraction
             ClearInput();
         }
     }
+
+    private IEnumerator OpenSafeSFX()
+    {
+        yield return new WaitForSeconds(_delayCount);
+
+        _openedSafeSFX.Play();
+    }
+
 }
