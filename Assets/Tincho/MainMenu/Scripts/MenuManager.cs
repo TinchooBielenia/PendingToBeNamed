@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private AudioSource _playButtonSFX;
 
     [Header("Escenas")]
-    [SerializeField] private string _gameplaySceneName = "02_Gameplay"; // Asignás esto desde el Inspector
+    [SerializeField] private string _gameplaySceneName = "02_Gameplay"; 
 
     [Header("Imagenes")]
     [SerializeField] private RawImage _creditsImage;
@@ -54,26 +54,26 @@ public class MenuManager : MonoBehaviour
         _backButton.gameObject.SetActive(false);
     }
 
-    public void PlayGame()
+    private void PlayGame()
     {
         Debug.Log("Iniciando juego...");
         SceneManager.LoadScene(_gameplaySceneName);
     }
 
-    public void OpenCredits()
+    private void OpenCredits()
     {
         Debug.Log("Abriendo creditos...");
         _creditsImage.gameObject.SetActive(true);
         _backButton.gameObject.SetActive(true);
     }
 
-    public void BackButton()
+    private void BackButton()
     {
         _creditsImage.gameObject.SetActive(false);
         _backButton.gameObject.SetActive(false);
     }
 
-    public void QuitGame()
+    private void QuitGame()
     {
         Debug.Log("Saliendo del juego...");
 #if UNITY_EDITOR

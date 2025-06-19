@@ -4,28 +4,48 @@ using UnityEngine;
 
 public class WirePuzzleController : MonoBehaviour
 {
-    public int currentConnections;
-    public GameObject winningLight;
-    public AudioSource connectionSFX;
-    public AudioSource wrongSFX;
-    public List<GameObject> Holes;
+    [SerializeField] int _currentConnections;
+    [SerializeField] private GameObject _winningLight;
+    [SerializeField] private AudioSource _connectionSFX;
+    [SerializeField] private AudioSource _wrongSFX;
+    public List<GameObject> holes;
     public List<int> correctOrder;
-    public int wrongTries;
+    [SerializeField] private int _wrongTries;
 
+    public int WrongTries
+    {
+        get { return _wrongTries; }
+        set { _wrongTries = value; }
+    }
+    public int CurrentConnections
+    {
+        get { return _currentConnections; }
+        set { _currentConnections = value; }
+    }
+    public AudioSource ConnectionSFX
+    {
+        get { return _connectionSFX; }
+        set { _connectionSFX = value; }
+    }
+    public AudioSource WrongSFX
+    {
+        get { return _wrongSFX; }
+        set { _wrongSFX = value; }
+    }
     private void Start()
     {
-        wrongTries = 0;
+        _wrongTries = 0;
     }
 
     public event Action OnPuzzleFailed;
 
     public void VerifyLose()
     {
-        if (wrongTries >= 3)
+        if (_wrongTries >= 3)
         {
             Debug.Log("You lose!");
             OnPuzzleFailed?.Invoke();
-            wrongTries = 0;
+            _wrongTries = 0;
         }
     }
 
@@ -33,10 +53,10 @@ public class WirePuzzleController : MonoBehaviour
 
     public void VerifyVictory()
     {
-        if (currentConnections == 4)
+        if (_currentConnections == 4)
         {
             Debug.Log("You win!");
-            winningLight.SetActive(true);
+            _winningLight.SetActive(true);
             Destroy(this);
 
             OnPuzzleCompleted?.Invoke();

@@ -3,38 +3,38 @@ using UnityEngine.UI;
 
 public class CrosshairController : MonoBehaviour
 {
-    public Image crosshairImage;
-    public float checkDistance = 3f;
-    public LayerMask interactLayer;
+    [SerializeField] private Image _crosshairImage;
+    [SerializeField] private float _checkDistance = 3f;
+    [SerializeField] private LayerMask _interactLayer;
 
     [Header("Sizes:")]
-    public Vector3 normalScale = Vector3.one;
-    public Vector3 hoverScale = new Vector3(1.5f, 1.5f, 1f);
+    [SerializeField] private Vector3 _normalScale = Vector3.one;
+    [SerializeField] private Vector3 _hoverScale = new Vector3(1.5f, 1.5f, 1f);
 
 
-    private Camera mainCamera;
+    private Camera _mainCamera;
     void Start()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
     }
 
     void Update()
     {
         //casts a ray from the camera to check the distance 
-        Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
+        Ray ray = new Ray(_mainCamera.transform.position, _mainCamera.transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, checkDistance, interactLayer))
+        if (Physics.Raycast(ray, out hit, _checkDistance, _interactLayer))
         {
             //if the object is interactable then it wil
             if (hit.collider.GetComponent<IInteraction>() != null)
             {
-                crosshairImage.transform.localScale = hoverScale;
+                _crosshairImage.transform.localScale = _hoverScale;
                 return;
             }
         }
         //if the object is not interactable reset the size 
-        crosshairImage.transform.localScale = normalScale; 
+        _crosshairImage.transform.localScale = _normalScale; 
 
     }
 }

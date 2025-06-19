@@ -3,9 +3,9 @@ using UnityEngine;
 public class MouseCamera : MonoBehaviour
 {
     //This class handles how mouse will move the first person camera.
-    private float xRotation = 0f;
+    private float _xRotation = 0f;
 
-    private float mouseSensitivity;
+    private float _mouseSensitivity;
     [SerializeField] private float _startMouseSensitivity;
     [SerializeField] private Rigidbody _playerRigidbody;
 
@@ -14,8 +14,8 @@ public class MouseCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        xRotation = transform.localEulerAngles.x;
-        if (xRotation > 180) xRotation -= 360;
+        _xRotation = transform.localEulerAngles.x;
+        if (_xRotation > 180) _xRotation -= 360;
     }
 
     void LateUpdate()
@@ -24,23 +24,23 @@ public class MouseCamera : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-            mouseSensitivity = 0f;
+            _mouseSensitivity = 0f;
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            mouseSensitivity = _startMouseSensitivity;
+            _mouseSensitivity = _startMouseSensitivity;
         }
 
         // Base mouse movement.
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
 
         // Vertical rotation.
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -80f, 60f);
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        _xRotation -= mouseY;
+        _xRotation = Mathf.Clamp(_xRotation, -80f, 60f);
+        transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
 
         // Horizontal player rotation.
         Quaternion deltaRotation = Quaternion.Euler(0f, mouseX, 0f);

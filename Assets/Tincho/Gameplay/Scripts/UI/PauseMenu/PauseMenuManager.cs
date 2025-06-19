@@ -12,10 +12,10 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _xButton;
     [SerializeField] private bool _isPaused;
-    [SerializeField] GameObject _canvas;
+    [SerializeField] private GameObject _canvas;
     
     [Header("Escenas")]
-    [SerializeField] private string _SceneName; // Asignás esto desde el Inspector
+    [SerializeField] private string _sceneName; 
 
     [Header("Imagenes")]
     [SerializeField] private RawImage _ControlsImage;
@@ -59,27 +59,27 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
-    public void OpenOptions()
+    private void OpenOptions()
     {
         Debug.Log("Abriendo creditos...");
         _ControlsImage.gameObject.SetActive(true);
         _xButton.gameObject.SetActive(true);
     }
 
-    public void BackButton()
+    private void BackButton()
     {
         _ControlsImage.gameObject.SetActive(false);
         _xButton.gameObject.SetActive(false);
     }
 
-    public void MainMenu()
+    private void MainMenu()
     {
         Debug.Log("Saliendo del juego...");
-        SceneManager.LoadScene(_SceneName);
+        SceneManager.LoadScene(_sceneName);
         Destroy(gameObject);
     }
 
-    public void TogglePause()
+    private void TogglePause()
     {
         _isPaused = !_isPaused;
         _canvas.gameObject.SetActive(_isPaused);

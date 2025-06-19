@@ -1,26 +1,31 @@
 ﻿
-using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TankEnemy : Enemy, IDamageEnemy   
 {
-    public bool _inRange;
+    public bool inRange;
     [SerializeField] private Transform _player;
     [SerializeField] private int _speed;
     [SerializeField] private int _maxSpeed;
-    [SerializeField] public Rigidbody _enemyRb;
+    [SerializeField] private Rigidbody _enemyRb;
     [SerializeField] private AudioSource _getDamagedSFX;
     private Animator _animator;
-    public bool _playerInAttackRange = false;
-    [SerializeField] private GameObject damageArea;
-    [SerializeField] List<GameObject> _lootList;
+    private bool _playerInAttackRange = false;
+    [SerializeField] private GameObject _damageArea;
+    [SerializeField] private List<GameObject> _lootList;
 
+    public bool PlayerInAttackRange
+    {
+        get { return _playerInAttackRange; }
+        set { _playerInAttackRange = value; }
+    }
 
     private void Start()
     {
         _enemyLife = _maxEnemyLife;
-        _inRange = false;
+        inRange = false;
         _speed = _maxSpeed;
         _animator = GetComponentInChildren<Animator>();
         _enemyRb.isKinematic = false;
@@ -28,17 +33,17 @@ public class TankEnemy : Enemy, IDamageEnemy
 
     private void Update()
     {
-        if (_inRange && _player != null && !_playerInAttackRange)
+        if (inRange && _player != null && !_playerInAttackRange)
         {
             DashAndStop(_player, _speed);
         }
 
         if (_player != null && _playerInAttackRange)
         {
-            PlayerInAttackRange();
+            DetectPlayerInAttackRange();
         }
 
-        AnimationsManager(_inRange,_playerInAttackRange);
+        AnimationsManager(inRange,_playerInAttackRange);
 
         if (_isDead)
         {
@@ -47,7 +52,7 @@ public class TankEnemy : Enemy, IDamageEnemy
                 _animator.applyRootMotion = _isDead;
                 _animator.SetBool("isDead", true);
                 _animator.SetBool("isAttacking", false);
-                _inRange = false;
+                inRange = false;
                 Collider[] colliders = GetComponentsInChildren<Collider>();
                 foreach (Collider col in colliders)
                 {
@@ -77,7 +82,7 @@ public class TankEnemy : Enemy, IDamageEnemy
         if (player != null)
         {
             Debug.Log("El jugador entró en la zona del enemigo.");
-            _inRange = true;
+            inRange = true;
         }
     }
 
@@ -87,7 +92,7 @@ public class TankEnemy : Enemy, IDamageEnemy
         if (player != null)
         {
             Debug.Log("El jugador salió en la zona del enemigo.");
-            _inRange = false;
+            inRange = false;
         }
     }
 
@@ -108,7 +113,7 @@ public class TankEnemy : Enemy, IDamageEnemy
 
     }
 
-    public void PlayerInAttackRange()
+    public void DetectPlayerInAttackRange()
     {
         if (!_isDead)
         {
@@ -139,11 +144,11 @@ public class TankEnemy : Enemy, IDamageEnemy
     }
     public void EnableDamageCollider()
     {
-        damageArea.SetActive(true);
+        _damageArea.SetActive(true);
     }
 
     public void DisableDamageCollider()
     {
-        damageArea.SetActive(false);
+        _damageArea.SetActive(false);
     }
 }

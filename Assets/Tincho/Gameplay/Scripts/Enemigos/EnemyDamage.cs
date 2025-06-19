@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
-    [SerializeField] private float damageAmount = 10f;
+    [SerializeField] private float _damageAmount = 10f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -11,7 +11,7 @@ public class EnemyDamage : MonoBehaviour
             PlayerHealing player = other.GetComponent<PlayerHealing>();
             if (player != null)
             {
-                player.TakeDamage(damageAmount);
+                player.TakeDamage(_damageAmount);
             }
         }
     }

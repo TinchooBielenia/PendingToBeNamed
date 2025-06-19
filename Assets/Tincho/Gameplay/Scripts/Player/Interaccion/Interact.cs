@@ -5,7 +5,7 @@ public class Interact : MonoBehaviour
     // This class handles how the player interacts with objects under the layer "Interactable" using Raycast and an Interface.
 
     [Header("Raycast Settings")]
-    [SerializeField] private float interactDistance = 3f;
+    [SerializeField] private float _interactDistance = 3f;
     [SerializeField] private LayerMask _interactLayer;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private AudioSource _interactSFX;
@@ -19,7 +19,7 @@ public class Interact : MonoBehaviour
     private void Update()
     {
         Ray debugRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-        Debug.DrawRay(debugRay.origin, debugRay.direction * interactDistance, Color.green);
+        Debug.DrawRay(debugRay.origin, debugRay.direction * _interactDistance, Color.green);
         PlayerInteract();
     }
 
@@ -32,7 +32,7 @@ public class Interact : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, interactDistance, _interactLayer))
+            if (Physics.Raycast(ray, out hit, _interactDistance, _interactLayer))
             {
                 _interactSFX.Play();
                 IInteraction interactable = hit.collider.GetComponentInParent<IInteraction>();

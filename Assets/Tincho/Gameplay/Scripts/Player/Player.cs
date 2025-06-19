@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -23,22 +21,16 @@ public class Player : MonoBehaviour
     public bool isMoving => _isMoving;
     public bool isSprinting;
 
-    //[SerializeField] private int jumpForce;
-    //private bool _isGrounded;
-    //private bool _isJumping;
-
     [Header("SFX")]
-    public AudioSource footstepsSFX;
-    public AudioSource footstepsSprintFX;
-    public AudioSource heavyBreathingFX;
-    public AudioSource deathSFX;
+    [SerializeField] private AudioSource _footstepsSFX;
+    [SerializeField] private AudioSource _footstepsSprintFX;
+    [SerializeField] private AudioSource _heavyBreathingFX;
+    [SerializeField] private AudioSource _deathSFX;
 
 
 
     private void Start()
     {
-        //jumpForce = 3;
-
         _speed = _ogSpeed;
 
         _playerStats = GetComponent<PlayerStats>();
@@ -47,7 +39,7 @@ public class Player : MonoBehaviour
 
         _animator = GetComponentInChildren<Animator>(); 
 
-        heavyBreathingFX.enabled = false;
+        _heavyBreathingFX.enabled = false;
 
         _rb = GetComponent<Rigidbody>();
 
@@ -56,9 +48,9 @@ public class Player : MonoBehaviour
         _movementHandler = new Movement(
             _animator,
             _rb,
-            footstepsSFX,
-            footstepsSprintFX,
-            heavyBreathingFX,
+            _footstepsSFX,
+            _footstepsSprintFX,
+            _heavyBreathingFX,
             _ogSpeed,
             _sprintMultiplier,
             transform,
@@ -73,21 +65,8 @@ public class Player : MonoBehaviour
         _xAxis = input.x;
         _zAxis = input.y * zAxisDirection;
 
-        //if (InputController.Instance.JumpPressed) && _isGrounded)
-        //{
-        //    _rb.velocity = new Vector3(_rb.velocity.x, jumpForce, _rb.velocity.z);
-        //}
-
         _movementHandler.MoveAndSprint(_xAxis, _zAxis);
     }
-
-    //private void OnCollisionEnter(Collision other)
-    //{
-    //    Debug.Log("El jugador esta en el piso.");
-    //    _isGrounded = true;
-    //    _isJumping = true;
-    //    _animator.SetBool("isJumping", true);
-    //}
 
     // This method inverts the zAxis at the moment player interacts with the InverterObject.
     public void InvertZAxis(bool state)
@@ -110,10 +89,10 @@ public class Player : MonoBehaviour
         enabled = false; 
         _movementHandler.DisableMovement(); 
 
-        footstepsSFX.Stop();
-        footstepsSprintFX.Stop();
-        heavyBreathingFX.Stop();
-        deathSFX.Play();
+        _footstepsSFX.Stop();
+        _footstepsSprintFX.Stop();
+        _heavyBreathingFX.Stop();
+        _deathSFX.Play();
 
         _rb.velocity = Vector3.zero;
         _rb.isKinematic = true;

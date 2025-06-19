@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class TankEnemyAttack : MonoBehaviour
@@ -15,9 +14,7 @@ public class TankEnemyAttack : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //_tankEnemy.OnPlayerInAttackRange(true);
-            Debug.Log("El jugador entro en la zona de ataque del enemigo.");
-            _tankEnemy._playerInAttackRange = true;
+            _tankEnemy.PlayerInAttackRange = true;
         }
     }
 
@@ -25,9 +22,7 @@ public class TankEnemyAttack : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //_tankEnemy.OnPlayerInAttackRange(false);
-            Debug.Log("El jugador salio de la zona de ataque del enemigo.");
-            _tankEnemy._playerInAttackRange = false;
+            _tankEnemy.PlayerInAttackRange = false;
         }
     }
 }

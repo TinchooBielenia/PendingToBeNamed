@@ -15,16 +15,26 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _timerDelay;
     [SerializeField] private float _timerEarlyRecoverBase = 3;
     [SerializeField] private float _timerEarlyRecover;
-    [SerializeField] public bool staminaIsBeingConsumed;
-    public bool canSprint = true;
-    [SerializeField] private Image staminaBar;
+    [SerializeField] private bool _staminaIsBeingConsumed;
+    [SerializeField] private bool _canSprint = true;
+    [SerializeField] private Image _staminaBar;
 
+    public bool GetCanSprint
+    {
+        get { return _canSprint; }
+        set { _canSprint = value; }
+    }
+    public bool GetStaminaIsBeingConsumed
+    {
+        get { return _staminaIsBeingConsumed; }
+        set { _staminaIsBeingConsumed = value; }
+    }
     void Start()
     {
         _currentStamina = _maxStamina;
         _timerDelay = _timerBase;
 
-        staminaIsBeingConsumed = false;
+        _staminaIsBeingConsumed = false;
     }
 
     private void Update()
@@ -48,9 +58,9 @@ public class PlayerStats : MonoBehaviour
     // - Stamina is not at 0%.
     // - Stamina is not being consumed.
 
-    public void EarlyDelay()
+    private void EarlyDelay()
     {
-        if (!staminaIsBeingConsumed && _currentStamina > 0)
+        if (!_staminaIsBeingConsumed && _currentStamina > 0)
         {
             _timerEarlyRecover -= Time.deltaTime;
         }
@@ -60,12 +70,12 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void StaminaDelay()
+    private void StaminaDelay()
     {
         if (_currentStamina <= 0)
         {
             _timerDelay -= Time.deltaTime;
-            canSprint = false;
+            _canSprint = false;
         }
     }
     
@@ -89,18 +99,18 @@ public class PlayerStats : MonoBehaviour
 
     }
 
-    public void RestartDelay()
+    private void RestartDelay()
     {
         if (_currentStamina >= _maxStamina)
         {
             _timerDelay = _timerBase;
-            canSprint = true;
+            _canSprint = true;
             
         }
     }
 
     public void ManageStaminaBar()
     {
-        staminaBar.fillAmount = _currentStamina / _maxStamina;
+        _staminaBar.fillAmount = _currentStamina / _maxStamina;
     }
 }

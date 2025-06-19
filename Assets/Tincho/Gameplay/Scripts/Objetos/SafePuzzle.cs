@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SafePuzzle : MonoBehaviour, IInteraction
 {
-    [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject _canvas;
 
     private bool _isCanvasVisible = false;
 
@@ -56,14 +56,14 @@ public class SafePuzzle : MonoBehaviour, IInteraction
     private void ShowKeypad()
     {
         _isCanvasVisible = true;
-        canvas.SetActive(true);
+        _canvas.SetActive(true);
         Time.timeScale = 0f;
         _isInteracting = false;
     }
 
     private void HideKeypad()
     {
-        canvas.SetActive(false);
+        _canvas.SetActive(false);
         Time.timeScale = 1f;
         _isCanvasVisible = false;
     }

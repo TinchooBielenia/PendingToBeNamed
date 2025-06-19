@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,17 +14,13 @@ public class Enemy : MonoBehaviour
         _transform = transform;
     }
 
-    protected void GetDamage(int damage)
-    {
-        _enemyLife -= damage;
-    }
+    protected void GetDamage(int damage) => _enemyLife -= damage;
+
 
     protected void Death()
     {
         if (_enemyLife <= 0)
         {
-            Debug.Log("Enemy has died.");
-            //gameObject.gameObject.SetActive(false);
             _isDead = true;
 
         }

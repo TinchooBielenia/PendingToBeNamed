@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class RandomizarCables : MonoBehaviour
+public class RandomizeCable : MonoBehaviour
 {
     void Awake()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NoteController : MonoBehaviour, IInteraction
 {
-    [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject _canvas;
     private bool _isInteracting = false;
     private bool _isCanvasVisible = false;
     [SerializeField] private TextMeshProUGUI _noteValue;
@@ -36,7 +36,7 @@ public class NoteController : MonoBehaviour, IInteraction
     private void ShowNote()
     {
         _isCanvasVisible = true;
-        canvas.SetActive(true);
+        _canvas.SetActive(true);
         Time.timeScale = 0f;
         _isInteracting = false;
         _noteValue.text = TextContainer.TextSwitch(_noteID);
@@ -44,7 +44,7 @@ public class NoteController : MonoBehaviour, IInteraction
 
     private void HideNote()
     {
-        canvas.SetActive(false);
+        _canvas.SetActive(false);
         Time.timeScale = 1f;
         _isCanvasVisible = false;
     }

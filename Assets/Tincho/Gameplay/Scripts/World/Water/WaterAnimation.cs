@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class WaterAnimation : MonoBehaviour
 {
-    [SerializeField] private float scrollSpeedX = 0.1f;
-    [SerializeField] private float scrollSpeedY = 0.1f;
-    private Renderer rend;
+    [SerializeField] private float _scrollSpeedX = 0.1f;
+    [SerializeField] private float _scrollSpeedY = 0.1f;
+    private Renderer _rend;
 
     private void Start()
     {
-        rend = GetComponent<Renderer>();
+        _rend = GetComponent<Renderer>();
     }
 
     private void Update()
     {
-        float offsetX = Time.time * scrollSpeedX;
-        float offsetY = Time.time * scrollSpeedY;
-        rend.material.mainTextureOffset = new Vector2(offsetX, offsetY);
+        float offsetX = Time.time * _scrollSpeedX;
+        float offsetY = Time.time * _scrollSpeedY;
+        _rend.material.mainTextureOffset = new Vector2(offsetX, offsetY);
     }
 }

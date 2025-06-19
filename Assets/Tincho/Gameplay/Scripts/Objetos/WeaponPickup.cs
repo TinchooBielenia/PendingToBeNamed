@@ -2,27 +2,27 @@ using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour
 {
-    [SerializeField] private Transform handBone;
-    [SerializeField] private Transform gunSocket;
-    [SerializeField] private GameObject weaponPrefab;
-    [SerializeField] private AudioSource pickUpSFX;
+    [SerializeField] private Transform _handBone;
+    [SerializeField] private Transform _gunSocket;
+    [SerializeField] private GameObject _weaponPrefab;
+    [SerializeField] private AudioSource _pickUpSFX;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && pickUpSFX != null)
+        if (other.CompareTag("Player") && _pickUpSFX != null)
         {
             Player _player = other.GetComponent<Player>();
 
-            pickUpSFX.Play();
-            GameObject newWeapon = Instantiate(weaponPrefab, handBone);
-            newWeapon.transform.SetParent(gunSocket);
+            _pickUpSFX.Play();
+            GameObject newWeapon = Instantiate(_weaponPrefab, _handBone);
+            newWeapon.transform.SetParent(_gunSocket);
             newWeapon.transform.localPosition = Vector3.zero;
             newWeapon.transform.localRotation = Quaternion.identity;
 
             Transform muzzlePoint = newWeapon.transform.Find("muzzlePoint");
 
             PlayerShoot _playerShoot = _player.gameObject.GetComponent<PlayerShoot>();
-            _playerShoot.SetHasWeapon(true);
+            _playerShoot.HasWeapon = true;
             if (_playerShoot != null && muzzlePoint != null)
             {
                 _playerShoot.SetMuzzlePoint(muzzlePoint);

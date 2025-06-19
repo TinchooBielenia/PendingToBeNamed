@@ -2,27 +2,27 @@ using UnityEngine;
 
 public class OutlineHandler : MonoBehaviour
 {
-    public Material outlineMaterial;
+    [SerializeField] private Material _outlineMaterial;
 
-    private Renderer objectRenderer;
-    private Material[] originalMaterials;
+    private Renderer _objectRenderer;
+    private Material[] _originalMaterials;
 
     void Awake()
     {
-        objectRenderer = GetComponent<Renderer>();
-        originalMaterials = objectRenderer.materials;
+        _objectRenderer = GetComponent<Renderer>();
+        _originalMaterials = _objectRenderer.materials;
     }
 
     public void EnableOutline()
     {
-        Material[] newMats = new Material[originalMaterials.Length + 1];
-        originalMaterials.CopyTo(newMats, 0);
-        newMats[newMats.Length - 1] = outlineMaterial;
-        objectRenderer.materials = newMats;
+        Material[] newMats = new Material[_originalMaterials.Length + 1];
+        _originalMaterials.CopyTo(newMats, 0);
+        newMats[newMats.Length - 1] = _outlineMaterial;
+        _objectRenderer.materials = newMats;
     }
 
     public void DisableOutline()
     {
-        objectRenderer.materials = originalMaterials;
+        _objectRenderer.materials = _originalMaterials;
     }
 }

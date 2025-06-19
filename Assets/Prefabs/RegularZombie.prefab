@@ -92,7 +92,7 @@ MonoBehaviour:
   _enemyRb: {fileID: 2420923724914762045}
   _getDamagedSFX: {fileID: 1697317885035457369}
   _playerInAttackRange: 0
-  damageArea: {fileID: 3117755977371862626}
+  damageArea: {fileID: 9126103326827982447}
   _lootList:
   - {fileID: 6641715986346531347, guid: aa38fb3a7025cb24a96b105476b5f1c6, type: 3}
 --- !u!95 &7653059217454973648
@@ -264,73 +264,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &3117755977371862626
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7806643638272498858}
-  - component: {fileID: 1325207927859916206}
-  - component: {fileID: 1948984407814457157}
-  m_Layer: 0
-  m_Name: DamageArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7806643638272498858
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3117755977371862626}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.001, y: 0.1476, z: -0}
-  m_LocalScale: {x: 0.21258505, y: 0.21258505, z: 0.21258505}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5228814544581646403}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1325207927859916206
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3117755977371862626}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 4, z: 4}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1948984407814457157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3117755977371862626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8faa2681e4d20d94c80ddf5e82b736e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 10
 --- !u!1 &5338520488541058226
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8faa2681e4d20d94c80ddf5e82b736e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
+  _damageAmount: 10
 --- !u!1001 &5847317004247410571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -584,9 +517,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: d4c68ce7462ce81479164fa9feb89974, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9182496847193097401}
-    - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: d4c68ce7462ce81479164fa9feb89974, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7806643638272498858}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4c68ce7462ce81479164fa9feb89974, type: 3}
 --- !u!4 &5228814544581646403 stripped

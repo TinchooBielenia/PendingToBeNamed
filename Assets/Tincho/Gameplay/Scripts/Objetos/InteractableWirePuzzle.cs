@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractableWirePuzzle : MonoBehaviour, IInteraction
@@ -15,7 +12,7 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private float _victoryTimer;
     [SerializeField] private AudioSource _electricGeneratorSFX;
     private bool _puzzleFailed;
-    [SerializeField] MiniCameraDisplay _camera;
+    [SerializeField] private FocusCamera _camera;
 
 
     private void Update()
@@ -33,11 +30,6 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         {
             ClosePuzzleFailed();
         }
-
-      /*  if (Input.GetKeyDown(KeyCode.F))
-        {
-            Victory();
-        }*/
     }
 
     public void TriggerInteraction()
@@ -74,16 +66,10 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         Invoke(nameof(ShowCamera),2f);
     }
 
-    private void ShowCamera()
-    {
-        _camera.ShowVictoryCamera();
-    }
-
-    private void PuzzleFailed()
-    {
-        _puzzleFailed = true;
-    }
-
+    private void ShowCamera() => _camera.ShowVictoryCamera();
+    
+    private void PuzzleFailed() => _puzzleFailed = true;
+    
     private void ClosePuzzleVictory()
     {
         if (_wirePuzzleInstance != null)
@@ -104,7 +90,6 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
             _wirePuzzleClass.OnPuzzleFailed -= PuzzleFailed;
             _wirePuzzleClass = null;
         }
-        //_camera.SetActive(true);
     }
 
     private void ClosePuzzleFailed()

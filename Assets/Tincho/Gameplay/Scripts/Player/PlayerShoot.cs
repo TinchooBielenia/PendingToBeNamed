@@ -20,11 +20,10 @@ public class PlayerShoot : MonoBehaviour
     private PlayerShootStats _player;
 
     private bool _hasWeapon = false;
-    public bool GetHasWeapon => _hasWeapon;
-
-    public void SetHasWeapon(bool value)
+    public bool HasWeapon
     {
-        _hasWeapon = value;
+        get { return _hasWeapon; }
+        set { _hasWeapon = value; }
     }
     public void SetMuzzlePoint(Transform muzzle)
     {
@@ -41,7 +40,7 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         if (_playerHealing.GetPlayerLife() <= 0) return;
-        if (_hasWeapon && _player.magazineSize > 0 && Input.GetMouseButtonDown(0))
+        if (_hasWeapon && _player.MagazineSize > 0 && Input.GetMouseButtonDown(0))
         {
             if (Time.time - _lastShootTime >= _shootCooldown)
             {
@@ -53,11 +52,11 @@ public class PlayerShoot : MonoBehaviour
 
     public void Shoot()
     {
-        if (_player.magazineSize <= 0)
+        if (_player.MagazineSize <= 0)
             return;
 
         _shootSFX.Play();
-        _player.magazineSize--;
+        _player.MagazineSize--;
 
         Ray ray = new Ray(_camera.position, _camera.forward);
         Debug.DrawRay(ray.origin, ray.direction * _shootDistance, Color.blue, 1f);
@@ -72,7 +71,7 @@ public class PlayerShoot : MonoBehaviour
                 if (enemy != null)
                 {
                     Debug.Log("Player is damaging " + hit.collider.name);
-                    enemy.TakeHit(_player.enemyDamage);
+                    enemy.TakeHit(_player.GetEnemyDamage);
                 }
             }
         }
