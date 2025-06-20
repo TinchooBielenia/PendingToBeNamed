@@ -132,7 +132,6 @@ public class TankEnemy : Enemy, IDamageEnemy
         }
         else if (playerInDetectionRange && playerInAttackRange)
         {
-            //_animator.SetBool("isRunning", false);
             _animator.SetBool("isAttacking", true);
         }
         else if (!playerInDetectionRange && !playerInAttackRange)

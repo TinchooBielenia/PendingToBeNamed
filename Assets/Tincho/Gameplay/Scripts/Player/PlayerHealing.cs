@@ -35,7 +35,8 @@ public class PlayerHealing : MonoBehaviour
             if (!_isHealing)
             {
                 _healingSFX.Play();
-                _healingAudioSFX.Play();
+                if (!_healingAudioSFX.isPlaying)
+                    _healingAudioSFX.Play();
                 _isHealing = true;
             }
         }
@@ -58,8 +59,11 @@ public class PlayerHealing : MonoBehaviour
     {
         if (other.CompareTag("HealingWater"))
         {
-            _healingSFX.Stop();
-            _healingAudioSFX.Stop();
+            if (_healingSFX.isPlaying)
+                _healingSFX.Stop();
+
+            if (_healingAudioSFX.isPlaying)
+                _healingAudioSFX.Stop();
             _isHealing = false;
         }
     }
