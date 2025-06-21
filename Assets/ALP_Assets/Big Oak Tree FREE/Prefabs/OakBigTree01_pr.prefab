@@ -123,7 +123,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.26932108
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -207,7 +207,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.98318994
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -290,7 +290,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.15477775
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -423,7 +423,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7512474869427928877}
   - component: {fileID: 3322446779068336220}
-  - component: {fileID: 6299599455294965747}
   m_Layer: 0
   m_Name: OakBigTree01_pr
   m_TagString: Untagged
@@ -462,53 +461,31 @@ LODGroup:
   serializedVersion: 2
   m_LocalReferencePoint: {x: -1.5896244, y: 18.760677, z: 1.0013332}
   m_Size: 37.920937
-  m_FadeMode: 1
-  m_AnimateCrossFading: 0
+  m_FadeMode: 2
+  m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
   - screenRelativeHeight: 0.98318994
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 8250954239297173379}
-    - renderer: {fileID: 0}
-  - screenRelativeHeight: 0.5636367
+  - screenRelativeHeight: 0.84861934
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 8934149682223108290}
-  - screenRelativeHeight: 0.26932108
+  - screenRelativeHeight: 0.67828417
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4201504807563828866}
-  - screenRelativeHeight: 0.15477775
+  - screenRelativeHeight: 0.5358839
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 3084317301103864826}
-  - screenRelativeHeight: 0.0039210888
+  - screenRelativeHeight: 0.047632813
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2730785710225153867}
   m_Enabled: 1
---- !u!65 &6299599455294965747
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7136653705662473623}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5048938, y: 31.666948, z: 4.2963676}
-  m_Center: {x: 0.036231756, y: 15.333476, z: 0.17120218}
 --- !u!1 &7614001344949582633
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +555,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.5636367
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
