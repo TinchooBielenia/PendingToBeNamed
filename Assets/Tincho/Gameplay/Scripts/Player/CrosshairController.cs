@@ -26,7 +26,7 @@ public class CrosshairController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, _checkDistance, _interactLayer))
         {
-            //if the object is interactable then it wil
+            //if the object is interactable then it will change the size of the crosshair.
             if (hit.collider.GetComponent<IInteraction>() != null)
             {
                 _crosshairImage.transform.localScale = _hoverScale;

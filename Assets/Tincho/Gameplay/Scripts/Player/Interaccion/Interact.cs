@@ -9,11 +9,11 @@ public class Interact : MonoBehaviour
     [SerializeField] private LayerMask _interactLayer;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private AudioSource _interactSFX;
-    private PlayerStats _player;
+    private PlayerStaminaStats _player;
 
     private void Start()
     {
-        _player = GetComponentInParent<PlayerStats>();
+        _player = GetComponentInParent<PlayerStaminaStats>();
     }
 
     private void Update()

@@ -13,7 +13,7 @@ public class Movement
     private float _sprintMultiplier;
     private float _speed;
     private Transform _transform;
-    private PlayerStats _playerStats;
+    private PlayerStaminaStats _playerStats;
     private bool _canMove = true;
 
 
@@ -28,7 +28,7 @@ public class Movement
         float ogSpeed,
         float sprintMultiplier,
         Transform transform,
-        PlayerStats playerStats)
+        PlayerStaminaStats playerStats)
     {
         _animator = animator;
         _rb = rb;
@@ -79,8 +79,7 @@ public class Movement
         {
             _animator.SetBool("isSprinting", false);
             _speed = _ogSpeed;
-            _playerStats.RecoverStaminaFromZero();
-            _playerStats.RecoverIncompletedStamina();
+            _playerStats.RecoverStamina();
             _playerStats.GetStaminaIsBeingConsumed = false;
         }
 

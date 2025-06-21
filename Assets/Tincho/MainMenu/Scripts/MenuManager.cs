@@ -1,6 +1,9 @@
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro.EditorUtilities;
+using TMPro;
+using System.Collections.Generic;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,18 +11,23 @@ public class MenuManager : MonoBehaviour
 
     [Header("Botones del menú")]
     [SerializeField] private Button _playButton;
+    [SerializeField] private Button _controlsButton;
     [SerializeField] private Button _creditsButton;
     [SerializeField] private Button _quitButton;
-    [SerializeField] private Button _backButton;
 
     [Header("Sonido botones")]
     [SerializeField] private AudioSource _playButtonSFX;
 
     [Header("Escenas")]
-    [SerializeField] private string _gameplaySceneName = "02_Gameplay"; 
+    [SerializeField] private string _gameplaySceneName = "02_Gameplay";
 
-    [Header("Imagenes")]
-    [SerializeField] private RawImage _creditsImage;
+    [Header("Mostrables en pantalla")]
+    [SerializeField] private List<GameObject> _imagesDisplayedOnScreen;
+
+    [Header("Misc")]
+    [SerializeField] private Image _sidePanel;
+    private bool _sidePanelActive = false;
+    private GameObject _currentVisible;
 
 
     private void Awake()
@@ -37,21 +45,24 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        // Asignar listeners a los botones
+        _sidePanel.gameObject.SetActive(false);
+
+        foreach (GameObject go in _imagesDisplayedOnScreen)
+        {
+            go.SetActive(false);
+        }
+
         if (_playButton != null)
             _playButton.onClick.AddListener(PlayGame);
 
-        if (_creditsButton != null)
-            _creditsButton.onClick.AddListener(OpenCredits);
+        if (_controlsButton != null)
+            _controlsButton.onClick.AddListener(() => ShowOnly(_imagesDisplayedOnScreen[0]));
 
-        if (_backButton != null)
-            _backButton.onClick.AddListener(BackButton);
+        if (_creditsButton != null)
+            _creditsButton.onClick.AddListener(() => ShowOnly(_imagesDisplayedOnScreen[1]));
 
         if (_quitButton != null)
             _quitButton.onClick.AddListener(QuitGame);
-
-        _creditsImage.gameObject.SetActive(false);
-        _backButton.gameObject.SetActive(false);
     }
 
     private void PlayGame()
@@ -60,17 +71,38 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(_gameplaySceneName);
     }
 
-    private void OpenCredits()
+    private void OpenSidePanel()
     {
-        Debug.Log("Abriendo creditos...");
-        _creditsImage.gameObject.SetActive(true);
-        _backButton.gameObject.SetActive(true);
+        _sidePanel.gameObject.SetActive(true);
+        _sidePanelActive = true;
     }
 
-    private void BackButton()
+    private void CloseSidePanel()
     {
-        _creditsImage.gameObject.SetActive(false);
-        _backButton.gameObject.SetActive(false);
+        _sidePanel.gameObject.SetActive(false);
+        _sidePanelActive = false;
+    }
+
+    private void ShowOnly(GameObject toShow)
+    {
+        if (_currentVisible == toShow)
+        {
+            toShow.SetActive(false);
+            CloseSidePanel();
+            _currentVisible = null;
+            return;
+        }
+
+        foreach (GameObject go in _imagesDisplayedOnScreen)
+        {
+            go.SetActive(false);
+        }
+
+        toShow.SetActive(true);
+        _currentVisible = toShow;
+
+        if (!_sidePanelActive)
+            OpenSidePanel();
     }
 
     private void QuitGame()

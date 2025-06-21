@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private float _xAxis, _zAxis, _yAxis;
     private Rigidbody _rb;
     private bool _isMoving;
-    private PlayerStats _playerStats;
+    private PlayerStaminaStats _playerStats;
     private Animator _animator;
     public int zAxisDirection = 1;
     public bool isMoving => _isMoving;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     {
         _speed = _ogSpeed;
 
-        _playerStats = GetComponent<PlayerStats>();
+        _playerStats = GetComponent<PlayerStaminaStats>();
 
         isSprinting = false;
 

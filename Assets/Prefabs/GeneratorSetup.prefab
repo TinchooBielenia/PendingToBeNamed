@@ -738,6 +738,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7895136018894818723, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 8992807186670111771}
+    - target: {fileID: 7895136018894818723, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
       propertyPath: _victoryTimer
       value: 3
       objectReference: {fileID: 0}

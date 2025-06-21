@@ -7,6 +7,7 @@ public class PlayerHealing : MonoBehaviour
     [Header("Life")]
     [SerializeField] private float _playerLife;
     [SerializeField] private float _maxPlayerLife;
+    [SerializeField] private float _healingRate;
 
     [SerializeField] private ParticleSystem _healingSFX;
     [SerializeField] private bool _isHealing = false;
@@ -19,7 +20,6 @@ public class PlayerHealing : MonoBehaviour
 
     void Start()
     {
-        _playerLife = 80;
         _animator = GetComponent<Animator>();
     }
 
@@ -46,7 +46,7 @@ public class PlayerHealing : MonoBehaviour
     {
         if (other.CompareTag("HealingWater") && _playerLife < _maxPlayerLife)
         {
-            _playerLife += Time.deltaTime;
+            _playerLife += Time.deltaTime * _healingRate;
         }
         else if (_playerLife >= _maxPlayerLife)
         {
