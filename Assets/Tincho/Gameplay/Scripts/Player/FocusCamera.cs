@@ -7,6 +7,7 @@ public class FocusCamera : MonoBehaviour
     [SerializeField] private float _displayDuration = 3f;
     [SerializeField] private Vector2 _cameraPosition = new Vector2(0f, 0f);
     [SerializeField] private Vector2 _cameraSize = new Vector2(1f, 1f);
+    [SerializeField] private Animator _mainGateAnimator;
 
     private Rect _ogRect;
 
@@ -26,6 +27,7 @@ public class FocusCamera : MonoBehaviour
         {
             _victoryCamera.rect = new Rect(_cameraPosition.x, _cameraPosition.y, _cameraSize.x, _cameraSize.y);
             _victoryCamera.enabled = true;
+            _mainGateAnimator.SetTrigger("mainGateOpened");
             StartCoroutine(HideAfterDelay());
         }
     }
