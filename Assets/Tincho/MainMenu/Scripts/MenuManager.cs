@@ -12,11 +12,9 @@ public class MenuManager : MonoBehaviour
     [Header("Botones del menú")]
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _controlsButton;
+    [SerializeField] private Button _audioButton;
     [SerializeField] private Button _creditsButton;
     [SerializeField] private Button _quitButton;
-
-    [Header("Sonido botones")]
-    [SerializeField] private AudioSource _playButtonSFX;
 
     [Header("Escenas")]
     [SerializeField] private string _gameplaySceneName = "02_Gameplay";
@@ -57,6 +55,9 @@ public class MenuManager : MonoBehaviour
 
         if (_controlsButton != null)
             _controlsButton.onClick.AddListener(() => ShowOnly(_imagesDisplayedOnScreen[0]));
+
+        if (_audioButton != null)
+            _audioButton.onClick.AddListener(() => ShowOnly(_imagesDisplayedOnScreen[2]));
 
         if (_creditsButton != null)
             _creditsButton.onClick.AddListener(() => ShowOnly(_imagesDisplayedOnScreen[1]));

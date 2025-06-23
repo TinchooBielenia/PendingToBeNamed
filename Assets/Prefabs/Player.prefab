@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6979178965844593336}
   - component: {fileID: 3909046310959811703}
   m_Layer: 0
-  m_Name: SHotSFX
+  m_Name: ShotSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,8 +489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265b8516c833e5242a94ca99365b904b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 2
-  playerRigidbody: {fileID: 8830591888380246563}
+  _startMouseSensitivity: 0
+  _playerRigidbody: {fileID: 0}
 --- !u!1 &2681695557091082343
 GameObject:
   m_ObjectHideFlags: 0
@@ -5621,7 +5621,7 @@ GameObject:
   - component: {fileID: 8065520450424854747}
   - component: {fileID: 6510441997172012565}
   m_Layer: 0
-  m_Name: InteractSound
+  m_Name: InteractSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5749,7 +5749,7 @@ GameObject:
   - component: {fileID: 7921601280124631131}
   - component: {fileID: 3802821575374858220}
   m_Layer: 0
-  m_Name: Walking Steps
+  m_Name: Walking StepsSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6124,10 +6124,10 @@ MonoBehaviour:
   _sprintMultiplier: 1.5
   zAxisDirection: 1
   isSprinting: 0
-  footstepsSFX: {fileID: 3802821575374858220}
-  footstepsSprintFX: {fileID: 4661512450901799807}
-  heavyBreathingFX: {fileID: 4568377705595210185}
-  deathSFX: {fileID: 2073322268686478380}
+  _footstepsSFX: {fileID: 0}
+  _footstepsSprintFX: {fileID: 0}
+  _heavyBreathingFX: {fileID: 0}
+  _deathSFX: {fileID: 0}
 --- !u!114 &5612163692760457605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6144,13 +6144,11 @@ MonoBehaviour:
   _currentStamina: 0
   _staminaUseRate: 5
   _staminaRegenRate: 10
-  _timerBase: 10
-  _timerDelay: 0
+  _timerRecoverBase: 10
+  _timerRecoverDelay: 0
   _timerEarlyRecoverBase: 3
   _timerEarlyRecover: 0
-  staminaIsBeingConsumed: 0
-  canSprint: 1
-  staminaBar: {fileID: 0}
+  _staminaBar: {fileID: 0}
 --- !u!114 &11611146777217055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6163,7 +6161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a251f9dd69a22945bb26ef484aa8ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactDistance: 3
+  _interactDistance: 3
   _interactLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -6211,6 +6209,7 @@ MonoBehaviour:
   _shootCooldown: 0.5
   _tracerPrefab: {fileID: 3363379489429997898, guid: 20e1a79674b40d5418011de91566fc3d, type: 3}
   _muzzlePoint: {fileID: 7570451354961138619}
+  _playerHealing: {fileID: 0}
 --- !u!114 &4126965735863660723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6223,9 +6222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9e0ffb9894b4b419d750ea18d8d577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magazineSize: 0
-  fullMagazineSize: 10
-  enemyDamage: 0
+  _magazineSize: 0
+  _fullMagazineSize: 10
+  _enemyDamage: 0
   _ammoBoxSFX: {fileID: 8529737506256441953}
   _bullet: {fileID: 0}
   _bulletCounter: {fileID: 0}
@@ -6243,6 +6242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerLife: 0
   _maxPlayerLife: 20
+  _healingRate: 0
   _healingSFX: {fileID: 795198543649994548}
   _isHealing: 0
   _healingAudioSFX: {fileID: 1852227162757213923}
@@ -6260,6 +6260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698154a8f2de1dc4f887828c405db634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnPoint: {x: 0, y: 0, z: 0}
   _player: {fileID: 352319026420430728}
 --- !u!114 &7911137612974401426
 MonoBehaviour:
@@ -6412,7 +6413,7 @@ GameObject:
   - component: {fileID: 8887923729966306331}
   - component: {fileID: 4661512450901799807}
   m_Layer: 0
-  m_Name: Sprint Steps
+  m_Name: Sprint StepsSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6540,7 +6541,7 @@ GameObject:
   - component: {fileID: 5081197443539628436}
   - component: {fileID: 4568377705595210185}
   m_Layer: 0
-  m_Name: Heavy Breathing
+  m_Name: HeavyBreathingSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
