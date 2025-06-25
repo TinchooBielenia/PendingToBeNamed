@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4990024032060489473}
   - component: {fileID: 2174848373695944984}
   - component: {fileID: 3232789509957543382}
-  - component: {fileID: 5018590020214729745}
+  - component: {fileID: 3031103034356056389}
   m_Layer: 9
   m_Name: HordeEnemy
   m_TagString: Untagged
@@ -53,6 +53,8 @@ MonoBehaviour:
   _player: {fileID: 0}
   _agent: {fileID: 3232789509957543382}
   _animator: {fileID: 2174848373695944984}
+  _damageAmount: 6
+  _damageCooldown: 1
 --- !u!95 &2174848373695944984
 Animator:
   serializedVersion: 5
@@ -84,7 +86,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 6.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -96,8 +98,8 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &5018590020214729745
-CapsuleCollider:
+--- !u!65 &3031103034356056389
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,14 +113,12 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.1022444
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.1022325, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.44295502, y: 1, z: 0.8304596}
+  m_Center: {x: -0.01001358, y: 1.24, z: 0.27591705}
 --- !u!1001 &529187364436762303
 PrefabInstance:
   m_ObjectHideFlags: 0

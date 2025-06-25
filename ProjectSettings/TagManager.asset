@@ -22,9 +22,9 @@ TagManager:
   - Interactable
   - Enemies
   - Ground
-  - 
-  - 
-  - 
+  - EnemyNavMesh
+  - Player
+  - HordeEnemy
   - 
   - 
   - 
