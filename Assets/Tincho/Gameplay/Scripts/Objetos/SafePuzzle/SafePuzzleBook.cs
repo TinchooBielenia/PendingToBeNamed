@@ -6,6 +6,7 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
 {
     [SerializeField] private GameObject _canvas;
     [SerializeField] private List<Card> _photosList;
+    [SerializeField] private SafePuzzle _safePuzzleCorrectCode;
     private bool _isInteracting;
     private bool _photosShuffled = false;
     private bool _isCanvasVisible;
