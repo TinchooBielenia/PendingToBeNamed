@@ -10,6 +10,7 @@ TagManager:
   - Ammo
   - HealingWater
   - Gun
+  - MetallicCableDoor
   layers:
   - Default
   - TransparentFX
