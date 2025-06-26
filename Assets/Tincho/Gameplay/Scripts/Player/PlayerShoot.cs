@@ -5,8 +5,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private Transform _camera;
     [SerializeField] private float _shootDistance = 10f;
 
-    //Variable used to make a reference to the "enemy" layer mask.
-    [SerializeField] private int _enemyLayer;
+    [SerializeField] private LayerMask _enemyLayers;
     [SerializeField] private AudioSource _shootSFX;
     [SerializeField] private float _shootCooldown = 0.5f;
     [SerializeField] private GameObject _tracerPrefab;
@@ -65,7 +64,7 @@ public class PlayerShoot : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _shootDistance))
         {
             endPoint = hit.point;
-            if (hit.collider.gameObject.layer == _enemyLayer)
+            if (((1 << hit.collider.gameObject.layer) & _enemyLayers) != 0)
             {
                 IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
                 if (enemy != null)

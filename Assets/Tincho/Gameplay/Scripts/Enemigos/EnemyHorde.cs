@@ -13,6 +13,9 @@ public class EnemyHorde : MonoBehaviour, IDamageEnemy
     private float _stunTimer = 0f;
 
     [SerializeField] private Animator _animator;
+    [SerializeField] private int _damageAmount;
+    [SerializeField] private float _damageCooldown = 1f;
+    private float _lastDamageTime = -Mathf.Infinity;
 
     private void Start()
     {
@@ -34,22 +37,27 @@ public class EnemyHorde : MonoBehaviour, IDamageEnemy
         }
     }
 
+
     private void MoveEnemy()
     {
         float distance = Vector3.Distance(transform.position, _player.position);
-        bool shouldMove = distance > 0.1f;
+        bool shouldMove = distance > 2f;
 
         _animator.SetBool("isRunning", shouldMove);
 
         if (shouldMove)
         {
-            _agent.SetDestination(_player.position);
+            Vector3 direction = (_player.position - transform.position).normalized;
+            Vector3 targetPosition = _player.position - direction * 1.5f;
+
+            _agent.SetDestination(targetPosition);
         }
         else
         {
             _agent.ResetPath();
         }
     }
+
 
     private void StunEnemy()
     {
@@ -81,11 +89,26 @@ public class EnemyHorde : MonoBehaviour, IDamageEnemy
         _stunTimer = _stunDuration;
 
         if (_animator != null)
-            _animator.SetBool("isRunning", false);
+        {
+            _animator.SetTrigger("Hit");  
+            _animator.SetBool("isRunning", false); 
+        }
 
         if (_currentLife <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && Time.time >= _lastDamageTime + _damageCooldown)
+        {
+            PlayerHealing player = other.GetComponent<PlayerHealing>();
+            if (player != null)
+            {
+                player.TakeDamage(_damageAmount); 
+                _lastDamageTime = Time.time;
+            }
         }
     }
 }

@@ -32,7 +32,11 @@ public class MouseCamera : MonoBehaviour
             Cursor.visible = false;
             _mouseSensitivity = _startMouseSensitivity;
         }
+        MoveCamera();
+    }
 
+    private void MoveCamera()
+    {
         // Base mouse movement.
         float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
@@ -46,5 +50,6 @@ public class MouseCamera : MonoBehaviour
         Quaternion deltaRotation = Quaternion.Euler(0f, mouseX, 0f);
         _playerRigidbody.MoveRotation(_playerRigidbody.rotation * deltaRotation);
     }
+
 }
 
