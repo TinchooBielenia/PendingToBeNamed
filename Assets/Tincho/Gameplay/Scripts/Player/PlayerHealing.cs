@@ -28,25 +28,14 @@ public class PlayerHealing : MonoBehaviour
         ManageLifeBar();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("HealingWater") && _playerLife < _maxPlayerLife)
-        {
-            if (!_isHealing)
-            {
-                _healingSFX.Play();
-                if (!_healingAudioSFX.isPlaying)
-                    _healingAudioSFX.Play();
-                _isHealing = true;
-            }
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("HealingWater") && _playerLife < _maxPlayerLife)
         {
             _playerLife += Time.deltaTime * _healingRate;
+            _healingSFX.Play();
+            if (!_healingAudioSFX.isPlaying)
+                _healingAudioSFX.Play();
         }
         else if (_playerLife >= _maxPlayerLife)
         {
