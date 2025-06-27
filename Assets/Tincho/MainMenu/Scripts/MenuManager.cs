@@ -28,7 +28,8 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton
+        Time.timeScale = 1f;
+        /*// Singleton
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -36,7 +37,7 @@ public class MenuManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);*/
     }
 
     private void Start()

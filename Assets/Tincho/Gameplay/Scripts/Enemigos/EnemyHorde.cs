@@ -18,6 +18,7 @@ public class EnemyHorde : Enemy , IDamageEnemy
     [SerializeField] private float _damageCooldown = 1f;
     private float _lastDamageTime = -Mathf.Infinity;
     [SerializeField] private List<GameObject> _hordeEnemyLootList;
+    [SerializeField] private AudioSource _getDamagedSFX;
 
     private void Start()
     {
@@ -90,6 +91,7 @@ public class EnemyHorde : Enemy , IDamageEnemy
     {
         _currentLife -= damage;
         _enemyLife = _currentLife;
+        _getDamagedSFX.Play();
 
         _isStunned = true;
         _stunTimer = _stunDuration;
