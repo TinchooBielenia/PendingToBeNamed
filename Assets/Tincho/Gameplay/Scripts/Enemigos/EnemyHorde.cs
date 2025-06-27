@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyHorde : MonoBehaviour, IDamageEnemy
+public class EnemyHorde : Enemy , IDamageEnemy
 {
     [SerializeField] private float _stunDuration = 5f;
     [SerializeField] private int _maxLife = 3;
@@ -16,15 +17,19 @@ public class EnemyHorde : MonoBehaviour, IDamageEnemy
     [SerializeField] private int _damageAmount;
     [SerializeField] private float _damageCooldown = 1f;
     private float _lastDamageTime = -Mathf.Infinity;
+    [SerializeField] private List<GameObject> _hordeEnemyLootList;
 
     private void Start()
     {
         _currentLife = _maxLife;
         _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _lootList = _hordeEnemyLootList;
+
     }
 
     private void Update()
     {
+        if (_isDead) return;
         if (_isStunned)
         {
             StunEnemy();
@@ -84,6 +89,7 @@ public class EnemyHorde : MonoBehaviour, IDamageEnemy
     public void TakeHit(int damage)
     {
         _currentLife -= damage;
+        _enemyLife = _currentLife;
 
         _isStunned = true;
         _stunTimer = _stunDuration;
@@ -96,7 +102,18 @@ public class EnemyHorde : MonoBehaviour, IDamageEnemy
 
         if (_currentLife <= 0)
         {
-            Destroy(gameObject);
+            Death();
+            if (_isDead)
+            {
+                _animator.SetTrigger("Die");
+                _agent.isStopped = true;
+                Collider col = GetComponent<Collider>();
+                if (col != null)
+                {
+                    col.enabled = false;
+                }
+                Destroy(gameObject, 5f);
+            }
         }
     }
     private void OnTriggerStay(Collider other)

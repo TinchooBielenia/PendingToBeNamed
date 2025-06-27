@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef4efbc22fc62d41a66eaa2d2600d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyLife: 10
+  _maxEnemyLife: 100
   _stunDuration: 1
   _maxLife: 20
   _player: {fileID: 0}
@@ -55,6 +57,8 @@ MonoBehaviour:
   _animator: {fileID: 2174848373695944984}
   _damageAmount: 6
   _damageCooldown: 1
+  _hordeEnemyLootList:
+  - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
 --- !u!95 &2174848373695944984
 Animator:
   serializedVersion: 5

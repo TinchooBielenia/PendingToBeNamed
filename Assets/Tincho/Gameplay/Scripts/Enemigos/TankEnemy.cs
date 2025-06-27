@@ -14,7 +14,7 @@ public class TankEnemy : Enemy, IDamageEnemy
     private Animator _animator;
     private bool _playerInAttackRange = false;
     [SerializeField] private GameObject _damageArea;
-    [SerializeField] private List<GameObject> _lootList;
+    [SerializeField] private List<GameObject> _tankEnemyLootList;
 
     public bool PlayerInAttackRange
     {
@@ -29,10 +29,14 @@ public class TankEnemy : Enemy, IDamageEnemy
         _speed = _maxSpeed;
         _animator = GetComponentInChildren<Animator>();
         _enemyRb.isKinematic = false;
+        _lootList = _tankEnemyLootList;
+
     }
 
     private void Update()
     {
+        if (_isDead) return; 
+
         if (inRange && _player != null && !_playerInAttackRange)
         {
             DashAndStop(_player, _speed);
@@ -43,25 +47,36 @@ public class TankEnemy : Enemy, IDamageEnemy
             DetectPlayerInAttackRange();
         }
 
-        AnimationsManager(inRange,_playerInAttackRange);
+        AnimationsManager(inRange, _playerInAttackRange);
+    }
+    protected override void Death()
+    {
+        if (_isDead) return;
 
-        if (_isDead)
+        if (_enemyLife <= 0)
         {
+            _isDead = true;
+
             if (_animator != null)
             {
-                _animator.applyRootMotion = _isDead;
-                _animator.SetBool("isDead", true);
+                _animator.applyRootMotion = true;
+                _animator.SetTrigger("Dead");
                 _animator.SetBool("isAttacking", false);
-                inRange = false;
-                Collider[] colliders = GetComponentsInChildren<Collider>();
-                foreach (Collider col in colliders)
-                {
-                    col.enabled = false;
-                }
-                _enemyRb.isKinematic = true;
-
-                LootOnDeath(_lootList);
             }
+
+            inRange = false;
+
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
+
+            _enemyRb.isKinematic = true;
+
+            LootOnDeath(_lootList); 
+
+            Destroy(gameObject, 5f); 
         }
     }
 

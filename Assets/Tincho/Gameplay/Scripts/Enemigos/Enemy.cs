@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     protected Transform _transform;
     protected bool _isDead;
     protected bool _hasDroppedLoot;
+    protected List<GameObject> _lootList;
+
 
     protected virtual void Awake()
     {
@@ -17,11 +19,12 @@ public class Enemy : MonoBehaviour
     protected void GetDamage(int damage) => _enemyLife -= damage;
 
 
-    protected void Death()
+    protected virtual void Death()
     {
         if (_enemyLife <= 0)
         {
             _isDead = true;
+            LootOnDeath(_lootList);
 
         }
     }
