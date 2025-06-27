@@ -14,7 +14,15 @@ public class MetallicDoor : MonoBehaviour, IInteraction
 
     public void TriggerInteraction()
     {
-        _isInteracting = true;
+        if (PlayerItemsPickedUp.instance.HasItem("Generator Key"))
+        {
+            _isInteracting = true;
+        }
+        else
+        {
+            _isInteracting= false;
+        }
+        
     }
 
     private void Update()

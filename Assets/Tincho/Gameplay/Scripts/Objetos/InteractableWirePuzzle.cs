@@ -32,6 +32,11 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         {
             ClosePuzzleFailed();
         }
+
+        if (InputController.Instance.EscapeKey)
+        {
+            ClosePuzzleOnDemand();
+        }
     }
 
     public void TriggerInteraction()
@@ -96,6 +101,20 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     }
 
     private void ClosePuzzleFailed()
+    {
+        if (_wirePuzzleInstance != null)
+        {
+            Destroy(_wirePuzzleInstance);
+            _wirePuzzleInstance = null;
+        }
+
+        _player.SetActive(true);
+        _hud.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void ClosePuzzleOnDemand()
     {
         if (_wirePuzzleInstance != null)
         {
