@@ -1177,6 +1177,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8829198433688710820, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6128353860820421116, guid: 0132beba043dcf84597b82ccb5672fe1, type: 3}

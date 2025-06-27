@@ -95,6 +95,8 @@ public class Player : MonoBehaviour
         _heavyBreathingFX.Stop();
         _deathSFX.Play();
 
+        FindObjectOfType<MouseCamera>().enabled = false;
+
         _rb.velocity = Vector3.zero;
         _rb.isKinematic = true;
         Collider col = GetComponent<Collider>();
