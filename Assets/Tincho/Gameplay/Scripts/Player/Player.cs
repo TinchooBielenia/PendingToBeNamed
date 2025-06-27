@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public int zAxisDirection = 1;
     public bool isMoving => _isMoving;
     public bool isSprinting;
+    [SerializeField] private MouseCamera _mouseCamera;
 
     [Header("SFX")]
     [SerializeField] private AudioSource _footstepsSFX;
@@ -83,20 +84,20 @@ public class Player : MonoBehaviour
     }
     public void Die()
     {
+        FrozenPlayer();
         _animator.applyRootMotion = true;
-
         _animator.SetTrigger("Death");
+        _deathSFX.Play();
+        SceneHanlder.Instance.OnPlayerDeath();
+    }
 
-        enabled = false; 
-        _movementHandler.DisableMovement(); 
-
+    public void FrozenPlayer()
+    {
+        _movementHandler.DisableMovement();
         _footstepsSFX.Stop();
         _footstepsSprintFX.Stop();
         _heavyBreathingFX.Stop();
-        _deathSFX.Play();
-
-        FindObjectOfType<MouseCamera>().enabled = false;
-
+        _mouseCamera.enabled = false;
         _rb.velocity = Vector3.zero;
         _rb.isKinematic = true;
         Collider col = GetComponent<Collider>();
@@ -104,7 +105,5 @@ public class Player : MonoBehaviour
         {
             col.enabled = false;
         }
-
-        SceneHanlder.Instance.OnPlayerDeath();
     }
 }

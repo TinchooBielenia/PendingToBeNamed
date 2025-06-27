@@ -10,6 +10,7 @@ public class SceneHanlder : MonoBehaviour
     [SerializeField] private float _resetDelay;
     private string _currentScene;
     [SerializeField] private string _mainMenuScene;
+    [SerializeField] private Player _player;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class SceneHanlder : MonoBehaviour
     private void Start()
     {
         _currentScene = SceneManager.GetActiveScene().name;
+        _victoryCanvas.SetActive(false);
     }
 
     public void OnPlayerDeath()
@@ -37,7 +39,10 @@ public class SceneHanlder : MonoBehaviour
     public void OnPlayerVictory()
     {
         _victoryCanvas.SetActive(true);
-        StartCoroutine(ResetScene(_mainMenuScene));
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        _player.FrozenPlayer();
     }
 
     private IEnumerator ResetScene(string desiredScene)
@@ -45,5 +50,10 @@ public class SceneHanlder : MonoBehaviour
         yield return new WaitForSeconds(_resetDelay);
 
         SceneManager.LoadScene(desiredScene);
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene(_mainMenuScene);
     }
 }

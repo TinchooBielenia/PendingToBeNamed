@@ -6123,6 +6123,7 @@ MonoBehaviour:
   _sprintMultiplier: 1.5
   zAxisDirection: 1
   isSprinting: 0
+  _mouseCamera: {fileID: 724123608722133745}
   _footstepsSFX: {fileID: 3802821575374858220}
   _footstepsSprintFX: {fileID: 4661512450901799807}
   _heavyBreathingFX: {fileID: 4568377705595210185}
@@ -6168,6 +6169,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _interactSFX: {fileID: 6510441997172012565}
+  _interactCooldown: 0.2
 --- !u!95 &6658387245088763805
 Animator:
   serializedVersion: 5

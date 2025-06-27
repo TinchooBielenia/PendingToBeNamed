@@ -44,5 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b89df288cc7eb4c831a87ee22b11b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathCanvas: {fileID: 0}
+  _deathCanvas: {fileID: 1718539138109976187, guid: 9b55ad0c16087ae4692aad630d1114d3, type: 3}
+  _victoryCanvas: {fileID: 439952190428159170, guid: 4dea4173f8d5d344c9bab791804e7ab1, type: 3}
   _resetDelay: 6
+  _mainMenuScene: 01_Main_Menu
+  _player: {fileID: 0}
