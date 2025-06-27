@@ -18,6 +18,7 @@ public class SafePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private AudioSource _buttonBeepSFX;
     [SerializeField] private AudioSource _openedSafeSFX;
     [SerializeField] private AudioSource _puzzleSolvedSFX;
+    [SerializeField] private EnemySpawner _spawner;
 
     private float _delayCount;
 
@@ -94,6 +95,7 @@ public class SafePuzzle : MonoBehaviour, IInteraction
             _animator.SetTrigger("puzzleSaved");
             _puzzleSolvedSFX.Play();
             StartCoroutine(OpenSafeSFX());
+            _spawner.StartSpawning(10);
         }
         else
         {

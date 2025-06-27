@@ -7,19 +7,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int _zombiesQuantity = 5; 
     [SerializeField] private float _spawnDelay = 0.3f;
 
-     private void Start()
-     {
-         StartCoroutine(SpawnHorde());
-     }
-
-    public void StartSpawning()
+    public void StartSpawning(int zombieAmount)
     {
-        StartCoroutine(SpawnHorde());
+        StartCoroutine(SpawnHorde(zombieAmount));
     }
 
-    private IEnumerator SpawnHorde()
+    private IEnumerator SpawnHorde(int zombieQuantity)
     {
-        for (int i = 0; i < _zombiesQuantity; i++)
+        for (int i = 0; i < zombieQuantity; i++)
         {
             Vector3 offset = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
             Vector3 spawnPos = transform.position + offset + Vector3.up * 1f;
