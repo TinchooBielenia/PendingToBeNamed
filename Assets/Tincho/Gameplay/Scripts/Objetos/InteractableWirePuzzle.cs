@@ -13,7 +13,8 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private AudioSource _electricGeneratorSFX;
     private bool _puzzleFailed;
     [SerializeField] private FocusCamera _camera;
-    [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private EnemySpawner _spawner;
+    [SerializeField] private int _spawnerAmount;
 
 
     private void Update()
@@ -65,7 +66,6 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         _startVictoryTimer = true;
         _electricGeneratorSFX.Play();
         Invoke(nameof(ShowCamera),1f);
-        _enemySpawner.StartSpawning(20);
     }
 
     private void ShowCamera() => _camera.ShowVictoryCamera();
@@ -85,6 +85,7 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         Cursor.visible = false;
         gameObject.layer = 0;
         _startVictoryTimer = false;
+        _spawner.StartSpawning(_spawnerAmount);
 
         if (_wirePuzzleClass != null)
         {

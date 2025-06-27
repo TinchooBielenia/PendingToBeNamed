@@ -18,7 +18,9 @@ public class SafePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private AudioSource _buttonBeepSFX;
     [SerializeField] private AudioSource _openedSafeSFX;
     [SerializeField] private AudioSource _puzzleSolvedSFX;
+    [SerializeField] private AudioSource _wrongCodeSFX;
     [SerializeField] private EnemySpawner _spawner;
+    [SerializeField] private int _spawnerAmount;
 
     private float _delayCount;
 
@@ -95,11 +97,12 @@ public class SafePuzzle : MonoBehaviour, IInteraction
             _animator.SetTrigger("puzzleSaved");
             _puzzleSolvedSFX.Play();
             StartCoroutine(OpenSafeSFX());
-            _spawner.StartSpawning(10);
+            _spawner.StartSpawning(_spawnerAmount);
         }
         else
         {
             Debug.Log("Código incorrecto.");
+            _wrongCodeSFX.Play();
             ClearInput();
         }
     }

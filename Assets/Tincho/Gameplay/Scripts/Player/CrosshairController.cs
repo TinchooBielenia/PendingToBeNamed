@@ -11,6 +11,8 @@ public class CrosshairController : MonoBehaviour
     [SerializeField] private Vector3 _normalScale = Vector3.one;
     [SerializeField] private Vector3 _hoverScale = new Vector3(1.5f, 1.5f, 1f);
 
+    [SerializeField] private GameObject _interactCanvas;
+
 
     private Camera _mainCamera;
     void Start()
@@ -30,11 +32,13 @@ public class CrosshairController : MonoBehaviour
             if (hit.collider.GetComponent<IInteraction>() != null)
             {
                 _crosshairImage.transform.localScale = _hoverScale;
+                _interactCanvas.SetActive(true);
                 return;
             }
         }
         //if the object is not interactable reset the size 
-        _crosshairImage.transform.localScale = _normalScale; 
+        _crosshairImage.transform.localScale = _normalScale;
+        _interactCanvas.SetActive(false);
 
     }
 }

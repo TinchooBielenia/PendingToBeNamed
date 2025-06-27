@@ -1331,6 +1331,8 @@ PrefabInstance:
     - {fileID: -516098083770646512, guid: d567ffef21a7da64195710e3db7b2b9f, type: 3}
     - {fileID: 8416272007918961125, guid: d567ffef21a7da64195710e3db7b2b9f, type: 3}
     - {fileID: -5063223942988036812, guid: d567ffef21a7da64195710e3db7b2b9f, type: 3}
+    - {fileID: 5245042011116262203, guid: d567ffef21a7da64195710e3db7b2b9f, type: 3}
+    - {fileID: 6919683763462532184, guid: d567ffef21a7da64195710e3db7b2b9f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d567ffef21a7da64195710e3db7b2b9f, type: 3}
@@ -2316,11 +2318,59 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedicineWallCupboard
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ce140a9f8c40ce4ba79716232f56a7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0ce140a9f8c40ce4ba79716232f56a7f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4926923195744779249}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0ce140a9f8c40ce4ba79716232f56a7f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7800221300955098825}
   m_SourcePrefab: {fileID: 100100000, guid: 0ce140a9f8c40ce4ba79716232f56a7f, type: 3}
+--- !u!1 &2572292425342755008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0ce140a9f8c40ce4ba79716232f56a7f, type: 3}
+  m_PrefabInstance: {fileID: 3419348692354112913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4926923195744779249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2572292425342755008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4cbb0547f51a6741bca0b25da4c0cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &7800221300955098825
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2572292425342755008}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.00485438, y: 0.0024936567, z: 0.006609837}
+  m_Center: {x: -0.00004083892, y: -0.0012421564, z: -0.000000035155765}
 --- !u!4 &2952477864559901306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ce140a9f8c40ce4ba79716232f56a7f, type: 3}
@@ -6071,7 +6121,9 @@ PrefabInstance:
       value: Lampara
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6663401871617925797, guid: b23855f2be4544b439d648c0855c45ca, type: 3}
+    - {fileID: 8358481231154619796, guid: b23855f2be4544b439d648c0855c45ca, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23855f2be4544b439d648c0855c45ca, type: 3}

@@ -1,19 +1,29 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _zombiePrefab;
-    [SerializeField] private int _zombiesQuantity = 5; 
     [SerializeField] private float _spawnDelay = 0.3f;
+    //[SerializeField] private Camera _spawnerCamera;
+    [SerializeField] private float _displayDuration;
+
+    //private void Start()
+    //{
+    //    _spawnerCamera.enabled = false;
+    //}
 
     public void StartSpawning(int zombieAmount)
     {
         StartCoroutine(SpawnHorde(zombieAmount));
     }
 
+
     private IEnumerator SpawnHorde(int zombieQuantity)
     {
+        //ShowSpawnerCamera();
+
         for (int i = 0; i < zombieQuantity; i++)
         {
             Vector3 offset = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
@@ -22,4 +32,19 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(_spawnDelay);
         }
     }
+
+    //public void ShowSpawnerCamera()
+    //{
+    //    if (_spawnerCamera != null)
+    //    {
+    //        _spawnerCamera.enabled = true;
+    //        StartCoroutine(HideAfterDelay());
+    //    }
+    //}
+
+    //private IEnumerator HideAfterDelay()
+    //{
+    //    yield return new WaitForSeconds(_displayDuration);
+    //    _spawnerCamera.enabled = false;
+    //}
 }

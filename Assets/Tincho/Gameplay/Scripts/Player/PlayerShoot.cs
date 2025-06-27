@@ -12,7 +12,8 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private Transform _muzzlePoint;
     [SerializeField] private PlayerHealing _playerHealing;
     private float _lastShootTime = -Mathf.Infinity;
-   
+    private bool _canShoot = false;
+
 
     private Animator _animator;
 
@@ -39,21 +40,23 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         if (_playerHealing.GetPlayerLife() <= 0) return;
+
         if (_hasWeapon && _player.MagazineSize > 0 && Input.GetMouseButtonDown(0))
         {
             if (Time.time - _lastShootTime >= _shootCooldown)
             {
-                _animator.SetTrigger("Shoot");
                 _lastShootTime = Time.time;
+                _canShoot = true;
+                _animator.SetTrigger("Shoot");
             }
         }
     }
 
     public void Shoot()
     {
-        if (_player.MagazineSize <= 0)
-            return;
+        if (!_canShoot || _player.MagazineSize <= 0) return;
 
+        _canShoot = false;
         _shootSFX.Play();
         _player.MagazineSize--;
 

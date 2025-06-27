@@ -1,8 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro.EditorUtilities;
-using TMPro;
 using System.Collections.Generic;
 
 public class MenuManager : MonoBehaviour
