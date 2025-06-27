@@ -91,9 +91,9 @@ MonoBehaviour:
   _maxSpeed: 4
   _enemyRb: {fileID: 2420923724914762045}
   _getDamagedSFX: {fileID: 1697317885035457369}
-  _damageArea: {fileID: 0}
-  _lootList:
-  - {fileID: 6641715986346531347, guid: aa38fb3a7025cb24a96b105476b5f1c6, type: 3}
+  _damageArea: {fileID: 9126103326827982447}
+  _tankEnemyLootList:
+  - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
 --- !u!95 &7653059217454973648
 Animator:
   serializedVersion: 5
