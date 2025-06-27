@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,8 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
     private bool _isInteracting;
     private bool _photosShuffled = false;
     private bool _isCanvasVisible;
+    [SerializeField] private string _currentCorrectCode;
+    [SerializeField] private AudioSource _openBookSFX;
 
     private void Start()
     {
@@ -42,6 +44,7 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
     {
         _isCanvasVisible = true;
         _canvas.SetActive(true);
+        _openBookSFX.Play();
         Time.timeScale = 0f;
         _isInteracting = false;
     }
@@ -64,16 +67,29 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
         {
             for (int i = 0; i < _photosList.Count; i++)
             {
+                _currentCorrectCode = "";
                 int randomIndex = UnityEngine.Random.Range(i, _photosList.Count);
                 Card temp = _photosList[i];
                 _photosList[i] = _photosList[randomIndex];
                 _photosList[randomIndex] = temp;
             }
 
-            // Refleja el orden en la jerarqu�a del canvas
+            // Refleja el orden en la jerarquía del canvas
             for (int i = 0; i < _photosList.Count; i++)
             {
                 _photosList[i].photo.transform.SetSiblingIndex(i);
+            }
+
+            //Armar el string del código correcto
+            foreach (Card card in _photosList)
+            {
+                _currentCorrectCode += card.value.ToString();
+            }
+
+            //Pasarlo al SafePuzzle
+            if (_safePuzzleCorrectCode != null)
+            {
+                _safePuzzleCorrectCode.UpdateCorrectCode(_currentCorrectCode);
             }
 
             _photosShuffled = true;

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Interact : MonoBehaviour
@@ -9,26 +10,27 @@ public class Interact : MonoBehaviour
     [SerializeField] private LayerMask _interactLayer;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private AudioSource _interactSFX;
-    private PlayerStaminaStats _player;
-
-    private void Start()
-    {
-        _player = GetComponentInParent<PlayerStaminaStats>();
-    }
+    [SerializeField] private float _interactCooldown = 0.2f;
+    private float _lastInteractAttempt = 0;
 
     private void Update()
     {
         Ray debugRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
         Debug.DrawRay(debugRay.origin, debugRay.direction * _interactDistance, Color.green);
+        
         PlayerInteract();
+
     }
 
     // Player interacts with objects using Mouse 0.
     private void PlayerInteract()
     {
+        if (!InputController.Instance.InteractPressed || Time.time < _lastInteractAttempt) return;
+
+        _lastInteractAttempt = Time.time + _interactCooldown;
+
         if (InputController.Instance.InteractPressed)
         {
-
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hit;
 
@@ -41,11 +43,8 @@ public class Interact : MonoBehaviour
                     Debug.Log("Player is interacting with " + hit.collider.name);
                     interactable.TriggerInteraction();
                 }
-            }
-
-          
+            }   
         }
-
 
     }
 }

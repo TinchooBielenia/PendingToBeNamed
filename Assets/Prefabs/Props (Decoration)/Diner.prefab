@@ -84,15 +84,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ed03893fee35b9a4aa87919679f3e1b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 116.3
+      value: 42.97544
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed03893fee35b9a4aa87919679f3e1b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.44
+      value: -5.3631673
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed03893fee35b9a4aa87919679f3e1b2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 146.9
+      value: 66.65707
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed03893fee35b9a4aa87919679f3e1b2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -124,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ed03893fee35b9a4aa87919679f3e1b2, type: 3}
       propertyPath: m_Name
-      value: Diner 1
+      value: Diner
       objectReference: {fileID: 0}
     - target: {fileID: 5140741878173999787, guid: ed03893fee35b9a4aa87919679f3e1b2, type: 3}
       propertyPath: m_Name

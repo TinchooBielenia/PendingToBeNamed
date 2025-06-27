@@ -3,14 +3,12 @@ using UnityEngine;
 public class MetallicDoorKey : MonoBehaviour, IInteraction
 {
     private bool _isInteracting;
-    private bool _playerHasKey;
-    [SerializeField] private bool _playerIsInDoorRange;
-    [SerializeField] private Animator _metallicDoorAnimation;
+    [SerializeField] private string _key;
 
     private void Start()
     {
         _isInteracting = false;
-        _playerHasKey = false;
+        _key = "Generator Key";
     }
 
     private void Update()
@@ -18,11 +16,6 @@ public class MetallicDoorKey : MonoBehaviour, IInteraction
         if (_isInteracting)
         {
             TakeKey();
-        }
-
-        if (_playerIsInDoorRange && _isInteracting && _playerHasKey)
-        {
-            OpenMetallicDoor();
         }
     }
 
@@ -33,21 +26,7 @@ public class MetallicDoorKey : MonoBehaviour, IInteraction
 
     private void TakeKey()
     {
-        _playerHasKey = true;
-        gameObject.SetActive(false);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("MetallicCableDoor"))
-        {
-            _metallicDoorAnimation = other.GetComponent<Animator>();
-            _playerIsInDoorRange = true;
-        }
-    }
-
-    private void OpenMetallicDoor()
-    {
-        _metallicDoorAnimation.SetTrigger("doorOpened");
+        PlayerItemsPickedUp.instance.AddPickedItemToInventory(_key);
+        Destroy(gameObject);
     }
 }

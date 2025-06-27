@@ -1,4 +1,7 @@
+using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -26,8 +29,6 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource _footstepsSprintFX;
     [SerializeField] private AudioSource _heavyBreathingFX;
     [SerializeField] private AudioSource _deathSFX;
-
-
 
     private void Start()
     {
@@ -101,6 +102,7 @@ public class Player : MonoBehaviour
         {
             col.enabled = false;
         }
-    }
 
+        SceneHanlder.Instance.OnPlayerDeath();
+    }
 }

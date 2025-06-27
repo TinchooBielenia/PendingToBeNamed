@@ -10,7 +10,6 @@ public class PlayerHealing : MonoBehaviour
     [SerializeField] private float _healingRate;
 
     [SerializeField] private ParticleSystem _healingSFX;
-    [SerializeField] private bool _isHealing = false;
     [SerializeField] private AudioSource _healingAudioSFX;
     [SerializeField] private Image _lifeBar;
     [SerializeField] private AudioSource _getDamagedSFX;
@@ -28,14 +27,21 @@ public class PlayerHealing : MonoBehaviour
         ManageLifeBar();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("HealingWater") && _playerLife < _maxPlayerLife)
+        {
+            _healingSFX.Play();
+            if (!_healingAudioSFX.isPlaying)
+                _healingAudioSFX.Play();
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("HealingWater") && _playerLife < _maxPlayerLife)
         {
             _playerLife += Time.deltaTime * _healingRate;
-            _healingSFX.Play();
-            if (!_healingAudioSFX.isPlaying)
-                _healingAudioSFX.Play();
         }
         else if (_playerLife >= _maxPlayerLife)
         {
@@ -53,7 +59,6 @@ public class PlayerHealing : MonoBehaviour
 
             if (_healingAudioSFX.isPlaying)
                 _healingAudioSFX.Stop();
-            _isHealing = false;
         }
     }
 

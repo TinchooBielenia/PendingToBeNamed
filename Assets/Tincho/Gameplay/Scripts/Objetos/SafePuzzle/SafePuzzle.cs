@@ -11,7 +11,7 @@ public class SafePuzzle : MonoBehaviour, IInteraction
 
     private bool _isInteracting = false;
 
-    [SerializeField] private string _correctCode = "1234";
+    [SerializeField] private string _correctCode;
 
     [SerializeField] private TextMeshProUGUI _displayText;
 
@@ -107,6 +107,11 @@ public class SafePuzzle : MonoBehaviour, IInteraction
         yield return new WaitForSeconds(_delayCount);
 
         _openedSafeSFX.Play();
+    }
+
+    public void UpdateCorrectCode(string code)
+    {
+        _correctCode = code;
     }
 
 }

@@ -413,7 +413,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.17624752, y: -0, z: -0, w: 0.9843459}
   m_LocalPosition: {x: 0.39300537, y: 1.838, z: -1.501}
-  m_LocalScale: {x: 0.29130724, y: 0.29130724, z: 0.12412893}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 352319026420430728}
@@ -6014,6 +6014,7 @@ GameObject:
   - component: {fileID: 428687553737489282}
   - component: {fileID: 8175109417629320158}
   - component: {fileID: 7911137612974401426}
+  - component: {fileID: 542431061119892440}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6077,7 +6078,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: -0.24}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &8830591888380246563
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6202,7 +6203,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 3388263438379354453}
   _shootDistance: 10
-  _enemyLayer: 9
+  _enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
   _shootSFX: {fileID: 3909046310959811703}
   _shootCooldown: 0.5
   _tracerPrefab: {fileID: 3363379489429997898, guid: 20e1a79674b40d5418011de91566fc3d, type: 3}
@@ -6242,7 +6245,6 @@ MonoBehaviour:
   _maxPlayerLife: 100
   _healingRate: 2
   _healingSFX: {fileID: 795198543649994548}
-  _isHealing: 0
   _healingAudioSFX: {fileID: 1852227162757213923}
   _lifeBar: {fileID: 0}
   _getDamagedSFX: {fileID: 158631629172203570}
@@ -6272,6 +6274,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d76738a061433240ae0abf029879c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &542431061119892440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7002620518952003983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af0f004da4bed374ab718205eaba975f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
 --- !u!1 &7337054399805337124
 GameObject:
   m_ObjectHideFlags: 0
@@ -6711,6 +6726,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6d3d4a649572e754ca44b049b6cffc60, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715566404302941441, guid: 6d3d4a649572e754ca44b049b6cffc60, type: 3}
+      propertyPath: m_Name
+      value: mixamorig:RightHand
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
