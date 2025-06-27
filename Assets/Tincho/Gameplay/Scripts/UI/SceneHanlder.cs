@@ -26,7 +26,6 @@ public class SceneHanlder : MonoBehaviour
     private void Start()
     {
         _currentScene = SceneManager.GetActiveScene().name;
-        Debug.Log(_currentScene);
     }
 
     public void OnPlayerDeath()
