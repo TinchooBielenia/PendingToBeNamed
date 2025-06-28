@@ -13,13 +13,17 @@ public class PlayerHealing : MonoBehaviour
     [SerializeField] private AudioSource _healingAudioSFX;
     [SerializeField] private Image _lifeBar;
     [SerializeField] private AudioSource _getDamagedSFX;
+    [SerializeField] private AudioSource _drinkPotionSFX;
     private Animator _animator;
+    private Player _player;
 
     public float GetPlayerLife() => _playerLife;
 
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _player = GetComponent<Player>();   
+
     }
 
     private void Update()
@@ -78,6 +82,20 @@ public class PlayerHealing : MonoBehaviour
             Destroy(_getDamagedSFX);
             GetComponent<Player>().Die();
         }
+    }
+
+    public void DrinkPotion()
+    {
+        _animator.SetTrigger("isDrinkingPotion");
+        _player.FrozenPlayer();
+        _drinkPotionSFX.Play();
+
+        Invoke(nameof(ReturnPlayerControl), 5f);
+    }
+
+    private void ReturnPlayerControl()
+    {
+        _player.UnfreezePlayer();
     }
 
 }

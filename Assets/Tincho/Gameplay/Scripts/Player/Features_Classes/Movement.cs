@@ -123,4 +123,8 @@ public class Movement
     {
         _canMove = false;
     }
+    public void EnableMovement()
+    {
+        _canMove = true;
+    }
 }

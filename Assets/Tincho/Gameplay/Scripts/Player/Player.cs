@@ -103,4 +103,16 @@ public class Player : MonoBehaviour
             col.enabled = false;
         }
     }
+
+    public void UnfreezePlayer()
+    {
+        _movementHandler.EnableMovement();
+        _mouseCamera.enabled = true;
+        _rb.isKinematic = false;
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+        {
+            col.enabled = true;
+        }
+    }
 }
