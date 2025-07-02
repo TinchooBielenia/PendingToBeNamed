@@ -5,8 +5,6 @@ using UnityEngine.AI;
 public class EnemyHorde : Enemy
 {
     [SerializeField] private float _stunDuration = 5f;
-    [SerializeField] private int _maxLife = 3;
-    private int _currentLife;
 
     [SerializeField] private Transform _player;
     [SerializeField] private NavMeshAgent _agent;
@@ -17,13 +15,10 @@ public class EnemyHorde : Enemy
     [SerializeField] private int _damageAmount;
     [SerializeField] private float _damageCooldown = 1f;
     private float _lastDamageTime = -Mathf.Infinity;
-    [SerializeField] private List<GameObject> _hordeEnemyLootList;
 
     private void Start()
     {
-        _currentLife = _maxLife;
         _player = GameObject.FindGameObjectWithTag("Player").transform;
-        _lootList = _hordeEnemyLootList;
     }
 
     private void Update()
@@ -87,8 +82,6 @@ public class EnemyHorde : Enemy
 
     public override void TakeHit(int damage)
     {
-        // _currentLife -= damage;
-        //  _enemyLife = _currentLife;
         base.TakeHit(damage);
         _isStunned = true;
         _stunTimer = _stunDuration;

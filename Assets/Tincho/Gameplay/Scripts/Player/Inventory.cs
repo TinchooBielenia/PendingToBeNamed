@@ -5,7 +5,7 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
 
-    [SerializeField] private List<string> items = new List<string>();
+    [SerializeField] private List<string> _items = new List<string>();
 
     private void Awake()
     {
@@ -21,18 +21,18 @@ public class Inventory : MonoBehaviour
 
     public void AddPickedItemToInventory(string objectPicked)
     {
-        items.Add(objectPicked);
+        _items.Add(objectPicked);
         Debug.Log("Item agregado al inventario: " + objectPicked);
     }
 
     public void DeletePickedItemFromInventory(string objectPicked)
     {
-        items.Remove(objectPicked);
+        _items.Remove(objectPicked);
         Debug.Log("Item eliminado del inventario: " + objectPicked);
     }
 
     public bool HasItem(string itemName)
     {
-        return items.Contains(itemName);
+        return _items.Contains(itemName);
     }
 }

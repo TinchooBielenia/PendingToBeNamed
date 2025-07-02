@@ -6,15 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _zombiePrefab;
     [SerializeField] private float _spawnDelay = 0.3f;
-    //[SerializeField] private Camera _spawnerCamera;
     [SerializeField] private float _displayDuration;
     [SerializeField] private AudioSource _zombieDinerSFX;
-
-
-    //private void Start()
-    //{
-    //    _spawnerCamera.enabled = false;
-    //}
 
     public void StartSpawning(int zombieAmount)
     {
@@ -22,10 +15,8 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnHorde(zombieAmount));
     }
 
-
     private IEnumerator SpawnHorde(int zombieQuantity)
     {
-        //ShowSpawnerCamera();
 
         for (int i = 0; i < zombieQuantity; i++)
         {
@@ -39,19 +30,4 @@ public class EnemySpawner : MonoBehaviour
             _zombieDinerSFX.Stop(); 
         }
     }
-
-    //public void ShowSpawnerCamera()
-    //{
-    //    if (_spawnerCamera != null)
-    //    {
-    //        _spawnerCamera.enabled = true;
-    //        StartCoroutine(HideAfterDelay());
-    //    }
-    //}
-
-    //private IEnumerator HideAfterDelay()
-    //{
-    //    yield return new WaitForSeconds(_displayDuration);
-    //    _spawnerCamera.enabled = false;
-    //}
 }

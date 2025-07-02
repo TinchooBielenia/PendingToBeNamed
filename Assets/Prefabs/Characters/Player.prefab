@@ -6213,7 +6213,7 @@ MonoBehaviour:
   _shootCooldown: 0.5
   _tracerPrefab: {fileID: 3363379489429997898, guid: 20e1a79674b40d5418011de91566fc3d, type: 3}
   _muzzlePoint: {fileID: 7570451354961138619}
-  _playerHealing: {fileID: 6589029408032779666}
+  _playerHealth: {fileID: 6589029408032779666}
 --- !u!114 &4126965735863660723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6270,7 +6270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af0f004da4bed374ab718205eaba975f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  _items: []
 --- !u!114 &6589029408032779666
 MonoBehaviour:
   m_ObjectHideFlags: 0

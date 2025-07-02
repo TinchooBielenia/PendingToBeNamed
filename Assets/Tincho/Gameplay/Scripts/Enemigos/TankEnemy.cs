@@ -45,36 +45,6 @@ public class TankEnemy : Enemy
 
         AnimationsManager(inRange, _playerInAttackRange);
     }
-   /* protected override void Death()
-    {
-        if (_isDead) return;
-
-        if (_enemyLife <= 0)
-        {
-            _isDead = true;
-
-            if (_animator != null)
-            {
-                _animator.applyRootMotion = true;
-                _animator.SetTrigger("Dead");
-                _animator.SetBool("isAttacking", false);
-            }
-
-            inRange = false;
-
-            Collider[] colliders = GetComponentsInChildren<Collider>();
-            foreach (Collider col in colliders)
-            {
-                col.enabled = false;
-            }
-
-            _enemyRb.isKinematic = true;
-
-            LootOnDeath(); 
-
-            Destroy(gameObject, 5f); 
-        }
-    }*/
 
     public override void TakeHit(int damage)
     {

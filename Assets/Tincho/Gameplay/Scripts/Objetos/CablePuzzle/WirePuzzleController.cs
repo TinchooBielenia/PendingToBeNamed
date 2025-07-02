@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WirePuzzleController : MonoBehaviour
 {
-    [SerializeField] int _currentConnections;
+    [SerializeField] private int _currentConnections;
     [SerializeField] private GameObject _winningLight;
     [SerializeField] private AudioSource _connectionSFX;
     [SerializeField] private AudioSource _wrongSFX;

@@ -7,8 +7,8 @@ public class PickUpLoot : MonoBehaviour
     [SerializeField] private AudioSource _ammoBoxSFX;
     [SerializeField] private AudioSource _medkitSFX;
     [SerializeField] private float _medkitHeal;
-    [SerializeField] PlayerShootStats _playerAmmoStats;
-    [SerializeField] PlayerHealth _playerHealthStats;
+    [SerializeField] private PlayerShootStats _playerAmmoStats;
+    [SerializeField] private PlayerHealth _playerHealthStats;
 
     private void OnTriggerEnter(Collider other)
     {
