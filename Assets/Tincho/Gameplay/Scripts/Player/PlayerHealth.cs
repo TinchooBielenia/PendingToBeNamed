@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealing : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     [Header("Life")]
     [SerializeField] private float _playerLife;

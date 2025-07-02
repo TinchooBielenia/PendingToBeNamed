@@ -1,20 +1,17 @@
 ﻿
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class TankEnemy : Enemy, IDamageEnemy   
+public class TankEnemy : Enemy  
 {
     public bool inRange;
     [SerializeField] private Transform _player;
     [SerializeField] private int _speed;
     [SerializeField] private int _maxSpeed;
     [SerializeField] private Rigidbody _enemyRb;
-    [SerializeField] private AudioSource _getDamagedSFX;
     private Animator _animator;
     private bool _playerInAttackRange = false;
     [SerializeField] private GameObject _damageArea;
-    [SerializeField] private List<GameObject> _tankEnemyLootList;
 
     public bool PlayerInAttackRange
     {
@@ -29,7 +26,6 @@ public class TankEnemy : Enemy, IDamageEnemy
         _speed = _maxSpeed;
         _animator = GetComponentInChildren<Animator>();
         _enemyRb.isKinematic = false;
-        _lootList = _tankEnemyLootList;
 
     }
 
@@ -49,7 +45,7 @@ public class TankEnemy : Enemy, IDamageEnemy
 
         AnimationsManager(inRange, _playerInAttackRange);
     }
-    protected override void Death()
+   /* protected override void Death()
     {
         if (_isDead) return;
 
@@ -74,21 +70,42 @@ public class TankEnemy : Enemy, IDamageEnemy
 
             _enemyRb.isKinematic = true;
 
-            LootOnDeath(_lootList); 
+            LootOnDeath(); 
 
             Destroy(gameObject, 5f); 
         }
-    }
+    }*/
 
-    public void TakeHit(int damage)
+    public override void TakeHit(int damage)
     {
-        GetDamage(damage);
-        _getDamagedSFX.Play();
+        base.TakeHit(damage);
         if (!_isDead && _animator != null)
         {
-            _animator.SetTrigger("Hit"); 
+            _animator.SetTrigger("Hit");
         }
-        Death();
+        if (_isDead)
+        {
+            if (_animator != null)
+            {
+                _animator.applyRootMotion = true;
+                _animator.SetTrigger("Dead");
+                _animator.SetBool("isAttacking", false);
+            }
+
+            inRange = false;
+
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
+
+            _enemyRb.isKinematic = true;
+
+            LootOnDeath();
+
+            Destroy(gameObject, 5f);
+        }
     }
 
     private void OnTriggerStay(Collider other)

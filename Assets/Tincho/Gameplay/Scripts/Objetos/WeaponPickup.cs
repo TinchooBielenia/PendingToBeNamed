@@ -15,9 +15,9 @@ public class WeaponPickup : MonoBehaviour
 
             _pickUpSFX.Play();
             GameObject newWeapon = Instantiate(_weaponPrefab, _handBone);
-            newWeapon.transform.SetParent(_gunSocket);
-            newWeapon.transform.localPosition = Vector3.zero;
-            newWeapon.transform.localRotation = Quaternion.identity;
+            Transform transform1 = newWeapon.transform;
+            transform1.SetParent(_gunSocket);
+            transform1.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
             Transform muzzlePoint = newWeapon.transform.Find("muzzlePoint");
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyHorde : Enemy , IDamageEnemy
+public class EnemyHorde : Enemy
 {
     [SerializeField] private float _stunDuration = 5f;
     [SerializeField] private int _maxLife = 3;
@@ -18,14 +18,12 @@ public class EnemyHorde : Enemy , IDamageEnemy
     [SerializeField] private float _damageCooldown = 1f;
     private float _lastDamageTime = -Mathf.Infinity;
     [SerializeField] private List<GameObject> _hordeEnemyLootList;
-    [SerializeField] private AudioSource _getDamagedSFX;
 
     private void Start()
     {
         _currentLife = _maxLife;
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         _lootList = _hordeEnemyLootList;
-
     }
 
     private void Update()
@@ -39,7 +37,7 @@ public class EnemyHorde : Enemy , IDamageEnemy
 
         if (_player != null)
         {
-            MoveEnemy();    
+            MoveEnemy();
         }
     }
 
@@ -87,45 +85,43 @@ public class EnemyHorde : Enemy , IDamageEnemy
             _animator.SetBool("isRunning", false);
     }
 
-    public void TakeHit(int damage)
+    public override void TakeHit(int damage)
     {
-        _currentLife -= damage;
-        _enemyLife = _currentLife;
-        _getDamagedSFX.Play();
-
+        // _currentLife -= damage;
+        //  _enemyLife = _currentLife;
+        base.TakeHit(damage);
         _isStunned = true;
         _stunTimer = _stunDuration;
 
         if (_animator != null)
         {
-            _animator.SetTrigger("Hit");  
-            _animator.SetBool("isRunning", false); 
+            _animator.SetTrigger("Hit");
+            _animator.SetBool("isRunning", false);
         }
 
-        if (_currentLife <= 0)
+
+        if (_isDead)
         {
-            Death();
-            if (_isDead)
+            _animator.SetTrigger("Die");
+            _agent.isStopped = true;
+            LootOnDeath();
+            Collider col = GetComponent<Collider>();
+            if (col != null)
             {
-                _animator.SetTrigger("Die");
-                _agent.isStopped = true;
-                Collider col = GetComponent<Collider>();
-                if (col != null)
-                {
-                    col.enabled = false;
-                }
-                Destroy(gameObject, 5f);
+                col.enabled = false;
             }
+            Destroy(gameObject, 5f);
         }
+
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && Time.time >= _lastDamageTime + _damageCooldown)
         {
-            PlayerHealing player = other.GetComponent<PlayerHealing>();
+            PlayerHealth player = other.GetComponent<PlayerHealth>();
             if (player != null)
             {
-                player.TakeDamage(_damageAmount); 
+                player.TakeDamage(_damageAmount);
                 _lastDamageTime = Time.time;
             }
         }

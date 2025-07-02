@@ -10,7 +10,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private float _shootCooldown = 0.5f;
     [SerializeField] private GameObject _tracerPrefab;
     [SerializeField] private Transform _muzzlePoint;
-    [SerializeField] private PlayerHealing _playerHealing;
+    [SerializeField] private PlayerHealth _playerHealing;
     private float _lastShootTime = -Mathf.Infinity;
     private bool _canShoot = false;
 

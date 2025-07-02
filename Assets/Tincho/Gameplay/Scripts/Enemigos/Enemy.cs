@@ -1,14 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageEnemy
 {
     [SerializeField] protected int _enemyLife;
     [SerializeField] protected int _maxEnemyLife = 100;
     protected Transform _transform;
     protected bool _isDead;
+    [SerializeField] private AudioSource _getDamagedSFX;
     protected bool _hasDroppedLoot;
-    protected List<GameObject> _lootList;
+    [SerializeField] protected List<GameObject> _lootList;
+
+    public virtual void TakeHit(int damage)
+    {
+        if(_isDead) return;
+        _enemyLife -= damage;
+        _getDamagedSFX.Play();
+        if (_enemyLife < 0)
+        {
+            _isDead = true;
+        }
+    }
 
 
     protected virtual void Awake()
@@ -16,26 +28,13 @@ public class Enemy : MonoBehaviour
         _transform = transform;
     }
 
-    protected void GetDamage(int damage) => _enemyLife -= damage;
-
-
-    protected virtual void Death()
-    {
-        if (_enemyLife <= 0)
-        {
-            _isDead = true;
-            LootOnDeath(_lootList);
-
-        }
-    }
-
-    protected void LootOnDeath(List<GameObject> lootList)
+    protected void LootOnDeath()
     {
         if (_hasDroppedLoot) return;
 
-        if (lootList == null || lootList.Count == 0) return;
+        if (_lootList == null || _lootList.Count == 0) return;
 
-        foreach (GameObject loot in lootList)
+        foreach (GameObject loot in _lootList)
         {
             if (loot != null)
             {
