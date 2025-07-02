@@ -6015,6 +6015,7 @@ GameObject:
   - component: {fileID: 7911137612974401426}
   - component: {fileID: 542431061119892440}
   - component: {fileID: 6589029408032779666}
+  - component: {fileID: 1114087289752627243}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6290,6 +6291,21 @@ MonoBehaviour:
   _healingAudioSFX: {fileID: 1852227162757213923}
   _lifeBar: {fileID: 259545263660003455}
   _getDamagedSFX: {fileID: 158631629172203570}
+--- !u!114 &1114087289752627243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7002620518952003983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6eb1e2b33a17bf44a2c059d4931b40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ammoBoxSFX: {fileID: 8529737506256441953}
+  _playerAmmoStats: {fileID: 4126965735863660723}
+  _playerHealthStats: {fileID: 6589029408032779666}
 --- !u!1 &7337054399805337124
 GameObject:
   m_ObjectHideFlags: 0

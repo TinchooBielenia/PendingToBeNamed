@@ -34,20 +34,6 @@ public class PlayerShootStats : MonoBehaviour
         ManageBulletCounter();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (_magazineSize != _fullMagazineSize)
-        {
-            if (other.CompareTag("Ammo"))
-            {
-                _ammoBoxSFX.Play();
-                Debug.Log("El jugador recogió munición.");
-                Destroy(other.gameObject); // Destruye la caja de munición
-                _magazineSize = _fullMagazineSize;
-            }
-        }
-        
-    }
 
     private void ManageBulletCounter()
     {
