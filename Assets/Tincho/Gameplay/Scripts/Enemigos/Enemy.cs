@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class Enemy : MonoBehaviour, IDamageEnemy
 {
     [SerializeField] protected int _enemyLife;

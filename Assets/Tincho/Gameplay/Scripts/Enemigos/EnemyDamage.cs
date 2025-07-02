@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//TP2 - Juliana Dimeglio
 public class EnemyDamage : MonoBehaviour
 {
     [SerializeField] private float _damageAmount = 10f;

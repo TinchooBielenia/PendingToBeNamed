@@ -2,23 +2,21 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+//TP2 - Martin Bielenia
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private Slider _volumeSlider;
     [SerializeField] private AudioMixer _mainGameAudioMixer;
-    [SerializeField] private string _volumeParameter = "Master"; // debe coincidir con el nombre en el Mixer
+    [SerializeField] private string _volumeParameter = "Master"; 
 
     private void Start()
     {
-        // Cargar valor actual del volumen en el Slider
         float currentVolume;
         if (_mainGameAudioMixer.GetFloat(_volumeParameter, out currentVolume))
         {
-            // Convertimos de decibeles a [0,1] para el slider (si es lineal)
             _volumeSlider.value = Mathf.Pow(10f, currentVolume / 20f);
         }
 
-        // Listener del slider
         _volumeSlider.onValueChanged.AddListener(SetVolume);
     }
 

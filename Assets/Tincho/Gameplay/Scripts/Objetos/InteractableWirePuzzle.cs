@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class InteractableWirePuzzle : MonoBehaviour, IInteraction
 {
     private bool _isInteracting = false;

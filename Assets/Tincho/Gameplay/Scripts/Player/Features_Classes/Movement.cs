@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class Movement
 {
     // This class handles the movement in the player. It receives the values from PlayerMovement and use them here.

@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+//TP2 - Martin Bielenia - Juliana Dimeglio
+
 public class Interact : MonoBehaviour
 {
     // This class handles how the player interacts with objects under the layer "Interactable" using Raycast and an Interface.

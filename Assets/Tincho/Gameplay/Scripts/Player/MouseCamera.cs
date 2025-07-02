@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class MouseCamera : MonoBehaviour
 {
     //This class handles how mouse will move the first person camera.

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class WaterAnimation : MonoBehaviour
 {
     [SerializeField] private float _scrollSpeedX = 0.1f;

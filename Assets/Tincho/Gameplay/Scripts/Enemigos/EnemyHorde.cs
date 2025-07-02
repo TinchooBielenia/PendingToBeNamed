@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//TP2 - Juliana Dimeglio
 public class EnemyHorde : Enemy
 {
     [SerializeField] private float _stunDuration = 5f;

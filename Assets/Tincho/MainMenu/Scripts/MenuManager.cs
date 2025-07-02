@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
+//TP2 - Martin Bielenia
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance { get; private set; }

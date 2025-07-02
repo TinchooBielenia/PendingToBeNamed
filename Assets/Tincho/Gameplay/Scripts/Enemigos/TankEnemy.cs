@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TP2 - Juliana Dimeglio - Martin Bielenia
 public class TankEnemy : Enemy  
 {
     public bool inRange;

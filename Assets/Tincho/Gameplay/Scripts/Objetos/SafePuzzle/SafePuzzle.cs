@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class SafePuzzle : MonoBehaviour, IInteraction
 {
     [SerializeField] private GameObject _canvas;

@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+//TP2 - Martin Bielenia
 public class PlayerShootStats : MonoBehaviour
 {
     [SerializeField] private int _magazineSize;

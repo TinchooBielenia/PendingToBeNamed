@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class PickUpLoot : MonoBehaviour
 {
     [SerializeField] private AudioSource _ammoBoxSFX;

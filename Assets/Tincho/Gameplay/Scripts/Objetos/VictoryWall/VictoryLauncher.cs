@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class VictoryLauncher : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

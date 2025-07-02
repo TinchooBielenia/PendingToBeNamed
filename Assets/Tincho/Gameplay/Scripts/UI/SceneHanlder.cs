@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//TP2 - Martin Bielenia
 public class SceneHanlder : MonoBehaviour
 {
     public static SceneHanlder Instance;

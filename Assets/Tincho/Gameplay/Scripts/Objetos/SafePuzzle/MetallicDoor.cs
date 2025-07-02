@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class MetallicDoor : MonoBehaviour, IInteraction
 {
     private Animator _metallicDoorAnimation;

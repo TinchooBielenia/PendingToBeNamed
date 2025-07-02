@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//TP2 - Juliana Dimeglio
 public class CrosshairController : MonoBehaviour
 {
     [SerializeField] private Image _crosshairImage;
@@ -22,13 +23,11 @@ public class CrosshairController : MonoBehaviour
 
     void Update()
     {
-        //casts a ray from the camera to check the distance 
         Ray ray = new Ray(_mainCamera.transform.position, _mainCamera.transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, _checkDistance, _interactLayer))
         {
-            //if the object is interactable then it will change the size of the crosshair.
             if (hit.collider.GetComponent<IInteraction>() != null)
             {
                 _crosshairImage.transform.localScale = _hoverScale;
@@ -36,7 +35,6 @@ public class CrosshairController : MonoBehaviour
                 return;
             }
         }
-        //if the object is not interactable reset the size 
         _crosshairImage.transform.localScale = _normalScale;
         _interactCanvas.SetActive(false);
 

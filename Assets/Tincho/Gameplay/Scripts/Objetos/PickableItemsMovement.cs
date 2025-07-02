@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class PickableItemsMovement : MonoBehaviour
 {
     [SerializeField] private float _height;

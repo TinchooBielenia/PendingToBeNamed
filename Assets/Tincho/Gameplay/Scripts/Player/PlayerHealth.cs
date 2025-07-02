@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+//TP2 - Martin Bielenia
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Life")]

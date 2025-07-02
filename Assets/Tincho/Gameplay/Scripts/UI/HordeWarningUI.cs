@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+//TP2 - Juliana Dimeglio
 public class HordeWarningUI : MonoBehaviour
 {
     public static HordeWarningUI Instance { get; private set; }

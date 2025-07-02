@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class Cable : MonoBehaviour
 {
     public SpriteRenderer cableBody;

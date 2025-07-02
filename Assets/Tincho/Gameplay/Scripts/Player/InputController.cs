@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class InputController : MonoBehaviour
 {
     public static InputController Instance { get; private set; }

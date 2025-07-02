@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia - Juliana Dimeglio
 public class Player : MonoBehaviour
 {
     // This class hanldes how the player moves in the world.

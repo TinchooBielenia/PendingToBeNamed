@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
+//TP2 - Juliana Dimeglio
 public class LightManager : MonoBehaviour
 {
     [SerializeField] private Transform player;

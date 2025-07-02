@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+//TP2 - Juliana Dimeglio
 public class TextContainer
 {
     private static Dictionary<string, string> _hints = new Dictionary<string, string>()

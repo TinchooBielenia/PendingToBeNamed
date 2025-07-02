@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class SafePuzzleBook : MonoBehaviour, IInteraction
 {
     [SerializeField] private GameObject _canvas;

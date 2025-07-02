@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//TP2 - Martin Bielenia
 public class PauseMenuManager : MonoBehaviour
 {
     public static PauseMenuManager Instance { get; private set; }

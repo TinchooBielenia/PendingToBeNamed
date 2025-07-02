@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//TP2 - Martin Bielenia
 public class PlayerStaminaStats : MonoBehaviour
 {
     [Header("StaminaStats")]

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class FocusCamera : MonoBehaviour
 {
     [SerializeField] private Camera _victoryCamera;

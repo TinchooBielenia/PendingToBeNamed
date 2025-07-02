@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Juliana Dimeglio
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private Transform _camera;

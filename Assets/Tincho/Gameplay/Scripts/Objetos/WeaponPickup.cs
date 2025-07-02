@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Juliana Dimeglio
 public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] private Transform _handBone;

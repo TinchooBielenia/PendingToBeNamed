@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+//TP2 - Juliana Dimeglio
 public class NoteController : MonoBehaviour, IInteraction
 {
     [SerializeField] private GameObject _canvas;

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+//TP2 - Juliana Dimeglio
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _zombiePrefab;

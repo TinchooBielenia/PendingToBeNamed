@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class SpawnPosition : MonoBehaviour
 {
     [SerializeField] private Vector3 _spawnPoint = new Vector3();

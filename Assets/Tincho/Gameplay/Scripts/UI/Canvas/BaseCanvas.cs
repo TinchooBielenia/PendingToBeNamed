@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public abstract class BaseCanvas : MonoBehaviour
 {
     public virtual void Open()
