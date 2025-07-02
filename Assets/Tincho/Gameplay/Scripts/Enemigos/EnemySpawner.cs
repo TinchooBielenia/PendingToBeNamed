@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _spawnDelay = 0.3f;
     //[SerializeField] private Camera _spawnerCamera;
     [SerializeField] private float _displayDuration;
-    [SerializeField] private AudioSource _zombieDinerSFX;
+    //[SerializeField] private AudioSource _zombieDinerSFX;
 
 
     //private void Start()
@@ -34,10 +34,10 @@ public class EnemySpawner : MonoBehaviour
             Instantiate(_zombiePrefab, spawnPos, Quaternion.identity);
             yield return new WaitForSeconds(_spawnDelay);
         }
-        if (_zombieDinerSFX != null)
-        {
-            _zombieDinerSFX.Stop(); 
-        }
+        //if (_zombieDinerSFX != null)
+        //{
+        //    _zombieDinerSFX.Stop(); 
+        //}
     }
 
     //public void ShowSpawnerCamera()

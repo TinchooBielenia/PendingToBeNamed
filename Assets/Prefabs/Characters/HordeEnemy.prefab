@@ -179,6 +179,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyLife: 10
   _maxEnemyLife: 100
+  _lootList:
+  - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
+  - {fileID: 6589863202467826999, guid: 3c8902ce086853f4b80daef8601adb4c, type: 3}
   _stunDuration: 1
   _maxLife: 20
   _player: {fileID: 0}

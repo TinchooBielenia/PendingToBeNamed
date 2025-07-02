@@ -13,6 +13,7 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private AudioSource _electricGeneratorSFX;
     private bool _puzzleFailed;
     [SerializeField] private FocusCamera _camera;
+    [SerializeField] private CageMetallicDoor _cageMetallicDoor;
     [SerializeField] private EnemySpawner _spawner;
     [SerializeField] private int _spawnerAmount;
 
@@ -36,6 +37,11 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         if (InputController.Instance.EscapeKey)
         {
             ClosePuzzleOnDemand();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Victory();
         }
     }
 
@@ -91,6 +97,7 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
         gameObject.layer = 0;
         _startVictoryTimer = false;
         _spawner.StartSpawning(_spawnerAmount);
+        _cageMetallicDoor.puzzleWasSolved = true;
 
         if (_wirePuzzleClass != null)
         {

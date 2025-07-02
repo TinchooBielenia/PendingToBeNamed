@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     protected Transform _transform;
     protected bool _isDead;
     protected bool _hasDroppedLoot;
-    protected List<GameObject> _lootList;
+    [SerializeField] protected List<GameObject> _lootList;
 
 
     protected virtual void Awake()
@@ -24,18 +24,18 @@ public class Enemy : MonoBehaviour
         if (_enemyLife <= 0)
         {
             _isDead = true;
-            LootOnDeath(_lootList);
+            LootOnDeath();
 
         }
     }
 
-    protected void LootOnDeath(List<GameObject> lootList)
+    protected void LootOnDeath()
     {
         if (_hasDroppedLoot) return;
 
-        if (lootList == null || lootList.Count == 0) return;
+        if (_lootList == null || _lootList.Count == 0) return;
 
-        foreach (GameObject loot in lootList)
+        foreach (GameObject loot in _lootList)
         {
             if (loot != null)
             {

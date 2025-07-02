@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerItemsPickedUp : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
-    public static PlayerItemsPickedUp instance;
+    public static Inventory instance;
 
     [SerializeField] private List<string> items = new List<string>();
 

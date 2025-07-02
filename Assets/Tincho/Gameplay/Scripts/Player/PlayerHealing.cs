@@ -70,6 +70,7 @@ public class PlayerHealing : MonoBehaviour
     {
         _lifeBar.fillAmount = _playerLife / _maxPlayerLife;
     }
+
     public void TakeDamage(float amount)
     {
         _animator.SetBool("isGettingDamage", true);
@@ -96,6 +97,11 @@ public class PlayerHealing : MonoBehaviour
     private void ReturnPlayerControl()
     {
         _player.UnfreezePlayer();
+    }
+
+    public void HealPlayer(float amount)
+    {
+        _playerLife += amount;
     }
 
 }

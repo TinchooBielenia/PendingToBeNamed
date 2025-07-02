@@ -85,6 +85,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyLife: 0
   _maxEnemyLife: 50
+  _lootList:
+  - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
+  - {fileID: 6589863202467826999, guid: 3c8902ce086853f4b80daef8601adb4c, type: 3}
   inRange: 0
   _player: {fileID: 0}
   _speed: 0
@@ -92,8 +95,6 @@ MonoBehaviour:
   _enemyRb: {fileID: 2420923724914762045}
   _getDamagedSFX: {fileID: 1697317885035457369}
   _damageArea: {fileID: 9126103326827982447}
-  _tankEnemyLootList:
-  - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
 --- !u!95 &7653059217454973648
 Animator:
   serializedVersion: 5

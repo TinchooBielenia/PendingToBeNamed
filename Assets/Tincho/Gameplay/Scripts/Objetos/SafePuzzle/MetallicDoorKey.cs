@@ -26,7 +26,7 @@ public class MetallicDoorKey : MonoBehaviour, IInteraction
 
     private void TakeKey()
     {
-        PlayerItemsPickedUp.instance.AddPickedItemToInventory(_key);
+        Inventory.instance.AddPickedItemToInventory(_key);
         Destroy(gameObject);
     }
 }

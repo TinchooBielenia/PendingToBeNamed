@@ -7,6 +7,7 @@ public class PlayerShoot : MonoBehaviour
 
     [SerializeField] private LayerMask _enemyLayers;
     [SerializeField] private AudioSource _shootSFX;
+    [SerializeField] private AudioSource _emptyGunSFX;
     [SerializeField] private float _shootCooldown = 0.5f;
     [SerializeField] private GameObject _tracerPrefab;
     [SerializeField] private Transform _muzzlePoint;
@@ -41,22 +42,34 @@ public class PlayerShoot : MonoBehaviour
     {
         if (_playerHealing.GetPlayerLife() <= 0) return;
 
-        if (_hasWeapon && _player.MagazineSize > 0 && Input.GetMouseButtonDown(0))
+        if (_hasWeapon && Input.GetMouseButtonDown(0))
         {
             if (Time.time - _lastShootTime >= _shootCooldown)
             {
                 _lastShootTime = Time.time;
-                _canShoot = true;
-                _animator.SetTrigger("Shoot");
+
+                if (_player.MagazineSize > 0)
+                {
+                    _canShoot = true;
+                    _animator.SetTrigger("Shoot"); // dispara la animación
+                }
+                else
+                {
+                    _emptyGunSFX.Play(); // sin balas, sonido de arma vacía
+                }
             }
         }
     }
 
     public void Shoot()
     {
-        if (!_canShoot || _player.MagazineSize <= 0) return;
+        if (!_canShoot || _player.MagazineSize <= 0)
+        {
+            _emptyGunSFX.Play();
+            return;
+        }
 
-        _canShoot = false;
+            _canShoot = false;
         _shootSFX.Play();
         _player.MagazineSize--;
 

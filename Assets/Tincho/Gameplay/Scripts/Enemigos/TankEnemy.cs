@@ -14,7 +14,6 @@ public class TankEnemy : Enemy, IDamageEnemy
     private Animator _animator;
     private bool _playerInAttackRange = false;
     [SerializeField] private GameObject _damageArea;
-    [SerializeField] private List<GameObject> _tankEnemyLootList;
 
     public bool PlayerInAttackRange
     {
@@ -29,7 +28,6 @@ public class TankEnemy : Enemy, IDamageEnemy
         _speed = _maxSpeed;
         _animator = GetComponentInChildren<Animator>();
         _enemyRb.isKinematic = false;
-        _lootList = _tankEnemyLootList;
 
     }
 
@@ -74,7 +72,7 @@ public class TankEnemy : Enemy, IDamageEnemy
 
             _enemyRb.isKinematic = true;
 
-            LootOnDeath(_lootList); 
+            LootOnDeath(); 
 
             Destroy(gameObject, 5f); 
         }

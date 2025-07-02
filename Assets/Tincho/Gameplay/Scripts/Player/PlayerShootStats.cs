@@ -7,7 +7,6 @@ public class PlayerShootStats : MonoBehaviour
     [SerializeField] private int _magazineSize;
     [SerializeField] private int _fullMagazineSize = 10;
     [SerializeField] private int _enemyDamage;
-    [SerializeField] private AudioSource _ammoBoxSFX;
     [SerializeField] private Image _bullet;
     [SerializeField] private TextMeshProUGUI _bulletCounter;
 
@@ -15,6 +14,12 @@ public class PlayerShootStats : MonoBehaviour
     {
         get { return _magazineSize; }
         set { _magazineSize = value; }
+    }
+
+    public int FullMagazineSize
+    {
+        get { return _fullMagazineSize; }
+        set { _fullMagazineSize = value; }
     }
 
     public int GetEnemyDamage => _enemyDamage;
@@ -26,21 +31,6 @@ public class PlayerShootStats : MonoBehaviour
     private void Update()
     {
         ManageBulletCounter();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (_magazineSize != _fullMagazineSize)
-        {
-            if (other.CompareTag("Ammo"))
-            {
-                _ammoBoxSFX.Play();
-                Debug.Log("El jugador recogió munición.");
-                Destroy(other.gameObject); // Destruye la caja de munición
-                _magazineSize = _fullMagazineSize;
-            }
-        }
-        
     }
 
     private void ManageBulletCounter()
