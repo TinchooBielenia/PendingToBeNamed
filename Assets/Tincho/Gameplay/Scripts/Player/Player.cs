@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
         );
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Inputs.
         Vector2 input = InputController.Instance.MoveInput;

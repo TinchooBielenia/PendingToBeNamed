@@ -67,8 +67,7 @@ public class PlayerShoot : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _shootDistance))
         {
             endPoint = hit.point;
-            if (((1 << hit.collider.gameObject.layer) & _enemyLayers) != 0)
-            {
+            if (_enemyLayers.Contains(hit.collider.gameObject.layer)) { 
                 IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
                 if (enemy != null)
                 {
@@ -87,5 +86,11 @@ public class PlayerShoot : MonoBehaviour
         line.SetPosition(1, hitPoint);
         Destroy(tracer, 0.05f);
     }
-
+}
+public static class LayerMaskExtensions
+{
+    public static bool Contains(this LayerMask mask, int layerIndex)
+    {
+        return ((1 << layerIndex) & mask.value) != 0;
+    }
 }
