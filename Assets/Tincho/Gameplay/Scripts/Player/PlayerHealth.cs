@@ -80,4 +80,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void HealPlayer(float amount)
+    {
+        _playerLife += amount;
+    }
+
 }

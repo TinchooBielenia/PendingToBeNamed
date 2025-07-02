@@ -179,6 +179,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyLife: 10
   _maxEnemyLife: 100
+  _getDamagedSFX: {fileID: 7046587007652342006}
+  _lootList:
+  - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
   _stunDuration: 1
   _maxLife: 20
   _player: {fileID: 0}
@@ -188,7 +191,6 @@ MonoBehaviour:
   _damageCooldown: 1
   _hordeEnemyLootList:
   - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
-  _getDamagedSFX: {fileID: 7046587007652342006}
 --- !u!95 &2174848373695944984
 Animator:
   serializedVersion: 5

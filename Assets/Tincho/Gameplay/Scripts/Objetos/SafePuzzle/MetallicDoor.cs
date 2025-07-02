@@ -14,7 +14,7 @@ public class MetallicDoor : MonoBehaviour, IInteraction
 
     public void TriggerInteraction()
     {
-        if (PlayerItemsPickedUp.instance.HasItem("Generator Key"))
+        if (Inventory.instance.HasItem("Generator Key"))
         {
             _isInteracting = true;
         }
@@ -27,7 +27,7 @@ public class MetallicDoor : MonoBehaviour, IInteraction
 
     private void Update()
     {
-        if (_isInteracting && PlayerItemsPickedUp.instance.HasItem("Generator Key"))
+        if (_isInteracting && Inventory.instance.HasItem("Generator Key"))
         {
             OpenMetallicDoor();
         }
@@ -37,7 +37,7 @@ public class MetallicDoor : MonoBehaviour, IInteraction
     {
         _openedDoorSFX.Play();
         _metallicDoorAnimation.SetTrigger("doorOpened");
-        PlayerItemsPickedUp.instance.DeletePickedItemFromInventory("Generator Key");
+        Inventory.instance.DeletePickedItemFromInventory("Generator Key");
         _isInteracting = false;
         gameObject.layer = 0;
     }

@@ -17,6 +17,12 @@ public class PlayerShootStats : MonoBehaviour
         set { _magazineSize = value; }
     }
 
+    public int FullMagazineSize
+    {
+        get { return _fullMagazineSize; }
+        set { _fullMagazineSize = value; }
+    }
+
     public int GetEnemyDamage => _enemyDamage;
     void Start()
     {
