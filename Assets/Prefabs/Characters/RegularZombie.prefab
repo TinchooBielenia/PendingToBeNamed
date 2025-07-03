@@ -91,7 +91,7 @@ MonoBehaviour:
   _agent: {fileID: 3180038166826094069}
   _getDamagedSFX: {fileID: 1697317885035457369}
   _activationRange: 4
-  _moveStopDistance: 2
+  _moveStopDistance: 1.3
   _damageArea: {fileID: 9126103326827982447}
 --- !u!95 &7653059217454973648
 Animator:
@@ -316,7 +316,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 4, z: 4}
+  m_Size: {x: 6, y: 4, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8267139730986569868
 MonoBehaviour:
