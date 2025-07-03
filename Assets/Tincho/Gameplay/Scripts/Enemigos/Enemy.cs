@@ -39,7 +39,8 @@ public class Enemy : MonoBehaviour
         {
             if (loot != null)
             {
-                Instantiate(loot, _transform.position, Quaternion.identity);
+                GameObject spawnedLoot = Instantiate(loot, _transform.position, Quaternion.identity);
+                Destroy(spawnedLoot, 10f);
             }
         }
 

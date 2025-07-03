@@ -89,8 +89,7 @@ public class EnemyHorde : Enemy , IDamageEnemy
 
     public void TakeHit(int damage)
     {
-        _currentLife -= damage;
-        _enemyLife = _currentLife;
+        GetDamage(damage);
         _getDamagedSFX.Play();
 
         _isStunned = true;
