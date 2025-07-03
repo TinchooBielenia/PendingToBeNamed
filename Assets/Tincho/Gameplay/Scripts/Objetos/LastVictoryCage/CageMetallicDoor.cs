@@ -10,12 +10,14 @@ public class CageMetallicDoor : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner2;
     [SerializeField] private int _enemyQuantity;
     [SerializeField] private Animator _mainGate;
+    [SerializeField] private GameObject _doorBlocker;
 
     private void Start()
     {
         _metallicDoorAnimation = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider>();
         _boxCollider.enabled = false;
+        _doorBlocker.gameObject.SetActive(false);
     }
 
     public bool puzzleWasSolved
@@ -44,6 +46,7 @@ public class CageMetallicDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player entro");
+            _doorBlocker.gameObject.SetActive(true);
             _enemySpawner1.StartSpawning(_enemyQuantity);
             _enemySpawner2.StartSpawning(_enemyQuantity);
             _boxCollider.enabled = false;

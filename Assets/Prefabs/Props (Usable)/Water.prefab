@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1246095504443658375}
   - component: {fileID: 2293327268579130753}
   - component: {fileID: 3084734594427111596}
-  - component: {fileID: 925047792885180786}
+  - component: {fileID: 7484759370139475550}
   m_Layer: 0
   m_Name: Water
   m_TagString: HealingWater
@@ -107,7 +107,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 9.999999, y: 2.2204459e-16, z: 9.999999}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &925047792885180786
+--- !u!114 &7484759370139475550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,8 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d346cff6cbe62a1438c873760907a74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeedX: 0.03
-  scrollSpeedY: 0.03
+  _scrollSpeedX: 0.02
+  _scrollSpeedY: 0.02
 --- !u!1 &6684190309587621466
 GameObject:
   m_ObjectHideFlags: 0
