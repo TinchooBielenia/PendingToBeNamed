@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class EnemyHorde : Enemy , IDamageEnemy
 {
     [SerializeField] private float _stunDuration = 5f;
-    [SerializeField] private int _maxLife = 3;
     private int _currentLife;
 
     [SerializeField] private Transform _player;
@@ -19,12 +18,14 @@ public class EnemyHorde : Enemy , IDamageEnemy
     private float _lastDamageTime = -Mathf.Infinity;
     [SerializeField] private List<GameObject> _hordeEnemyLootList;
     [SerializeField] private AudioSource _getDamagedSFX;
+    [SerializeField] private List<GameObject> _skins;
 
     private void Start()
     {
-        _currentLife = _maxLife;
+        _enemyLife = _maxEnemyLife;
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
         _lootList = _hordeEnemyLootList;
-
+        AssignRandomSkin();
     }
 
     private void Update()
@@ -40,6 +41,22 @@ public class EnemyHorde : Enemy , IDamageEnemy
         {
             MoveEnemy();    
         }
+    }
+
+    private void AssignRandomSkin()
+    {
+        if (_skins == null || _skins.Count == 0)
+            return;
+
+        foreach (GameObject skin in _skins)
+            skin.SetActive(false); 
+
+        int randomIndex = Random.Range(0, _skins.Count); 
+
+        GameObject selectedSkin = _skins[randomIndex]; 
+        selectedSkin.SetActive(true); 
+
+        _animator = selectedSkin.GetComponent<Animator>(); 
     }
 
 

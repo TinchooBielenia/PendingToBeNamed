@@ -58,7 +58,7 @@ public class TankEnemy : Enemy, IDamageEnemy
             Vector3 direction = (_player.position - transform.position).normalized;
             Vector3 target = _player.position - direction * _moveStopDistance;
             _agent.SetDestination(target);
-            RotateTowardsPlayerForward();
+            RotateTowardsPlayer();
         }
         else
         {
@@ -117,7 +117,7 @@ public class TankEnemy : Enemy, IDamageEnemy
         if (!_isDead)
         {
             _agent.isStopped = true;
-            RotateTowardsPlayerForward();
+            RotateTowardsPlayer();
         }
     }
 
@@ -132,7 +132,7 @@ public class TankEnemy : Enemy, IDamageEnemy
         }
         else if (playerInDetectionRange && playerInAttackRange)
         {
-            RotateTowardsPlayerForward();
+            RotateTowardsPlayer();
             _animator.SetBool("isAttacking", true);
         }
         else if (!playerInDetectionRange && !playerInAttackRange)
@@ -160,14 +160,14 @@ public class TankEnemy : Enemy, IDamageEnemy
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _moveStopDistance); 
     }
-    private void RotateTowardsPlayerForward()
+    private void RotateTowardsPlayer()
     {
-        Vector3 playerForward = -_player.forward;
-        playerForward.y = 0f; 
+        Vector3 direction = (_player.position - transform.position).normalized;
+        direction.y = 0f; 
 
-        if (playerForward != Vector3.zero)
+        if (direction != Vector3.zero)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(playerForward);
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
     }

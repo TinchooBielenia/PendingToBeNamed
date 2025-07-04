@@ -54,6 +54,7 @@ public class BombEnemy : Enemy, IDamageEnemy
 
     private IEnumerator ExplodeAfterDelay()
     {
+        _animator.SetBool("isRunning", false);
         _isExploding = true;
         yield return new WaitForSeconds(_explosionDelay);
 
@@ -84,11 +85,22 @@ public class BombEnemy : Enemy, IDamageEnemy
 
         GetDamage(damage);
         _animator.SetTrigger("Hit");
+
         if (_enemyLife <= 0 && !_isExploding)
         {
             _agent.ResetPath();
             StartCoroutine(ExplodeAfterDelay());
             if (_animator) _animator.SetBool("isRunning", false);
+        }
+        else
+        {
+            float distance = Vector3.Distance(transform.position, _player.position);
+
+            if (distance <= _moveStopDistance && !_isExploding)
+            {
+                _agent.ResetPath();
+                StartCoroutine(ExplodeAfterDelay());
+            }
         }
     }
 
