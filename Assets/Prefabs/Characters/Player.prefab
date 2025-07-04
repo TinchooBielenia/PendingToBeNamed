@@ -6249,12 +6249,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerLife: 100
   _maxPlayerLife: 100
-  _healingRate: 2
   _healingSFX: {fileID: 795198543649994548}
   _healingAudioSFX: {fileID: 1852227162757213923}
   _lifeBar: {fileID: 0}
   _getDamagedSFX: {fileID: 158631629172203570}
   _drinkPotionSFX: {fileID: 4623951381079911625}
+  _waterDamageTimer: 0
 --- !u!114 &8175109417629320158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6611,7 +6611,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: b9134497e2139124581f4d28addd8e12, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6fe2db2840b406f4daa7087786ddc294, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

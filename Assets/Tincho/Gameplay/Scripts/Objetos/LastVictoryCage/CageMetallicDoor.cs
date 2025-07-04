@@ -1,23 +1,29 @@
+using TMPro;
 using UnityEngine;
 
 public class CageMetallicDoor : MonoBehaviour
 {
     private Animator _metallicDoorAnimation;
     private bool _puzzleWasSolved;
-    [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private AudioSource _openedDoorSFX;
     [SerializeField] private EnemySpawner _enemySpawner1;
     [SerializeField] private EnemySpawner _enemySpawner2;
     [SerializeField] private int _enemyQuantity;
     [SerializeField] private Animator _mainGate;
-    [SerializeField] private GameObject _doorBlocker;
+    [SerializeField] private GameObject _blockerDoor;
+    [SerializeField] private float _openMainDoorTimer;
+    [SerializeField] private bool _playerCrossedTrigger;
+    [SerializeField] private bool _timerFinished;
+    [SerializeField] private TextMeshProUGUI _timerOnScreenText;
+    [SerializeField] private GameObject _timerOnScreenCanvas;
 
     private void Start()
     {
         _metallicDoorAnimation = GetComponent<Animator>();
-        _boxCollider = GetComponent<BoxCollider>();
-        _boxCollider.enabled = false;
-        _doorBlocker.gameObject.SetActive(false);
+        _blockerDoor.SetActive(false);
+        _playerCrossedTrigger = false;
+        _timerOnScreenCanvas.SetActive(false);
+        _timerFinished = false;
     }
 
     public bool puzzleWasSolved
@@ -31,33 +37,53 @@ public class CageMetallicDoor : MonoBehaviour
         {
             OpenMetallicDoor();
         }
+
+        if (_playerCrossedTrigger)
+        {
+            ManageBattleTimer();
+        }
+
+        if (_timerFinished)
+        {
+            TimerFinished();
+        }
     }
 
     private void OpenMetallicDoor()
     {
         _openedDoorSFX.Play();
         _metallicDoorAnimation.SetTrigger("doorOpened");
-        _boxCollider.enabled = true;
         _puzzleWasSolved = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void FinalZoneBattle()
     {
-        if (other.CompareTag("Player"))
+        Debug.Log("Player entro");
+        _blockerDoor.SetActive(true);
+        _enemySpawner1.StartSpawning(_enemyQuantity);
+        _enemySpawner2.StartSpawning(_enemyQuantity);
+        _openedDoorSFX.Play();
+        _metallicDoorAnimation.SetTrigger("doorClosed");
+        _mainGate.SetTrigger("closeMainGate");
+        _playerCrossedTrigger = true;
+    }
+
+    private void ManageBattleTimer()
+    {
+        _timerOnScreenCanvas.SetActive(true);
+        _openMainDoorTimer -= Time.deltaTime;
+        _timerOnScreenText.SetText(((int)_openMainDoorTimer).ToString());
+
+        if (_openMainDoorTimer <= 0)
         {
-            Debug.Log("Player entro");
-            _doorBlocker.gameObject.SetActive(true);
-            _enemySpawner1.StartSpawning(_enemyQuantity);
-            _enemySpawner2.StartSpawning(_enemyQuantity);
-            _boxCollider.enabled = false;
-            _openedDoorSFX.Play();
-            _metallicDoorAnimation.SetTrigger("doorClosed");
-            _mainGate.SetTrigger("closeMainGate");
+            _timerFinished = true;
         }
     }
 
-    private void FinalVictory()
+    private void TimerFinished()
     {
-
+        _timerOnScreenCanvas.SetActive(false);
+        Debug.Log("Player logro escapar");
+        _mainGate.SetTrigger("mainGateOpened");
     }
 }

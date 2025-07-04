@@ -17,7 +17,6 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private EnemySpawner _spawner;
     [SerializeField] private int _spawnerAmount;
 
-
     private void Update()
     {
         if (_startVictoryTimer)

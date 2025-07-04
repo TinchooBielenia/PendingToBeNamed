@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // This class hanldes how the player moves in the world.
+
     private Movement _movementHandler;
 
     [Header("Movement")]
