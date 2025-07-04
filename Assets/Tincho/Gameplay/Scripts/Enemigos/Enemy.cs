@@ -35,13 +35,14 @@ public class Enemy : MonoBehaviour
 
         if (_lootList == null || _lootList.Count == 0) return;
 
-        foreach (GameObject loot in _lootList)
+        int randomIndex = Random.Range(0, _lootList.Count);
+        GameObject loot = _lootList[randomIndex];
+
+        if (loot != null)
         {
-            if (loot != null)
-            {
-                GameObject spawnedLoot = Instantiate(loot, _transform.position, Quaternion.identity);
-                Destroy(spawnedLoot, 10f);
-            }
+            Vector3 spawnPosition = _transform.position + Vector3.up * 1f;
+            GameObject spawnedLoot = Instantiate(loot, spawnPosition, Quaternion.identity);
+            Destroy(spawnedLoot, 10f);
         }
 
         _hasDroppedLoot = true;

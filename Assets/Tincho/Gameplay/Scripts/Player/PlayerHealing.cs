@@ -76,6 +76,12 @@ public class PlayerHealing : MonoBehaviour
             _animator.SetTrigger("isGettingDamage");
             _waterDamageTimer = 1f;
         }
+
+        if (_playerLife <= 0)
+        {
+            Destroy(_getDamagedSFX);
+            GetComponent<Player>().Die();
+        }
     }
 
     public void DrinkPotion()
