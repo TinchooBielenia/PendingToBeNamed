@@ -75,7 +75,7 @@ public class BombEnemy : Enemy, IDamageEnemy
         }
 
         Death();
-        Destroy(gameObject);
+        Destroy(gameObject, _explosionSFX.clip.length);
     }
 
     public void TakeHit(int damage)
@@ -88,6 +88,7 @@ public class BombEnemy : Enemy, IDamageEnemy
         {
             _agent.ResetPath();
             StartCoroutine(ExplodeAfterDelay());
+            if (_animator) _animator.SetBool("isRunning", false);
         }
     }
 

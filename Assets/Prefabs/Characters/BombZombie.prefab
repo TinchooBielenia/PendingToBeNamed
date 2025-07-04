@@ -152,7 +152,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: b9134497e2139124581f4d28addd8e12, type: 2}
   m_audioClip: {fileID: 8300000, guid: d9303115309dca244a85be9a13d180e4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 0.7
   Loop: 0
   Mute: 0
@@ -245,32 +245,60 @@ PrefabInstance:
     m_TransformParent: {fileID: 1369399472350808669}
     m_Modifications:
     - target: {fileID: 1852712972910814841, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852712972910814841, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1237
+    - target: {fileID: 1852712972910814841, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.1237
+    - target: {fileID: 1852712972910814841, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.1237
+    - target: {fileID: 1852712972910814841, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
+    - target: {fileID: 1852712972910814841, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
-      propertyPath: m_LocalPosition.y
+    - target: {fileID: 1852712972910814841, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 31804
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412479913556220242, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: m_SortMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2700245
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2700245
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2700245
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.116
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.579
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.189
       objectReference: {fileID: 0}
     - target: {fileID: 3927033112541399174, guid: 196f7c71da029bb43a0c1637723fdcda, type: 3}
       propertyPath: m_LocalRotation.w
@@ -386,6 +414,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 60eca39056e7b0d4982ffdfc01d25a4d, type: 3}
       propertyPath: m_Name
       value: BombZombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 60eca39056e7b0d4982ffdfc01d25a4d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9814136
+      objectReference: {fileID: 0}
+    - target: {fileID: 8209552431481025284, guid: 60eca39056e7b0d4982ffdfc01d25a4d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381984868952709122, guid: 60eca39056e7b0d4982ffdfc01d25a4d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
