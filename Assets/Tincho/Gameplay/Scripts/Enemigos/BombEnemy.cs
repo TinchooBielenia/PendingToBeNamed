@@ -13,7 +13,7 @@ public class BombEnemy : Enemy, IDamageEnemy
 
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Animator _animator;
-    [SerializeField] private GameObject _explosionEffect;
+    [SerializeField] private ParticleSystem _explosionParticles;
     [SerializeField] private AudioSource _explosionSFX;
     private bool _wasProvoked = false;
 
@@ -59,7 +59,7 @@ public class BombEnemy : Enemy, IDamageEnemy
 
         if (_explosionSFX) _explosionSFX.Play();
         
-        if (_explosionEffect) Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+        _explosionParticles.Play();
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _explosionRange);
         foreach (var hit in hitColliders)
@@ -75,7 +75,7 @@ public class BombEnemy : Enemy, IDamageEnemy
         }
 
         Death();
-        Destroy(gameObject, _explosionSFX.clip.length);
+        Destroy(gameObject);
     }
 
     public void TakeHit(int damage)

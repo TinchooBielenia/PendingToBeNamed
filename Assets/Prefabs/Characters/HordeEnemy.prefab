@@ -184,7 +184,7 @@ MonoBehaviour:
   - {fileID: 6589863202467826999, guid: 3c8902ce086853f4b80daef8601adb4c, type: 3}
   _stunDuration: 1
   _maxLife: 20
-  _player: {fileID: 0}
+  _player: {fileID: 352319026420430728, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
   _agent: {fileID: 3232789509957543382}
   _animator: {fileID: 2174848373695944984}
   _damageAmount: 8

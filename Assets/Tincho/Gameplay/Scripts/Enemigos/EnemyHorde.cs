@@ -23,7 +23,6 @@ public class EnemyHorde : Enemy , IDamageEnemy
     private void Start()
     {
         _currentLife = _maxLife;
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
         _lootList = _hordeEnemyLootList;
 
     }
