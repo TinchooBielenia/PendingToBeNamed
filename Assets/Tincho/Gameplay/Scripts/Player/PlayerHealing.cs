@@ -95,7 +95,7 @@ public class PlayerHealing : MonoBehaviour
         if (!_healingAudioSFX.isPlaying)
             _healingAudioSFX.Play();
 
-        Invoke(nameof(ReturnPlayerControl), 5f);
+        Invoke(nameof(ReturnPlayerControl), 3f);
     }
 
     private void ReturnPlayerControl()

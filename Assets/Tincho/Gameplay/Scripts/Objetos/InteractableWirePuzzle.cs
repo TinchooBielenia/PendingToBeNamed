@@ -38,10 +38,10 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
             ClosePuzzleOnDemand();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Victory();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Victory();
+        //}
     }
 
     public void TriggerInteraction()
