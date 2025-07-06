@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum LootType { Ammo, Medkit }
+public enum LootType { Ammo, Medkit, Gun }
 
 public class LootIdentifier : MonoBehaviour
 {

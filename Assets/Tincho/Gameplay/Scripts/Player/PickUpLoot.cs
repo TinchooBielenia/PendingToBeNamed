@@ -1,14 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpLoot : MonoBehaviour
 {
     [SerializeField] private AudioSource _ammoBoxSFX;
     [SerializeField] private AudioSource _medkitSFX;
+    [SerializeField] private AudioSource _pickUpGunSFX;
     [SerializeField] private float _medkitHeal;
-    [SerializeField] PlayerShootStats _playerAmmoStats;
-    [SerializeField] PlayerHealing _playerHealthStats;
+    private PlayerShootStats _playerAmmoStats;
+    private PlayerHealing _playerHealthStats;
+    private WeaponPickup _weaponPickUp;
+
+    private void Start()
+    {
+        _playerAmmoStats = GetComponent<PlayerShootStats>();
+        _playerHealthStats = GetComponent<PlayerHealing>();
+        _weaponPickUp = GetComponent<WeaponPickup>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -33,6 +40,16 @@ public class PickUpLoot : MonoBehaviour
                     _medkitSFX.Play(); 
                     Debug.Log("El jugador recogió un botiquín.");
                     _playerHealthStats.HealPlayer(_medkitHeal); 
+                    Destroy(other.gameObject);
+                }
+                break;
+
+            case LootType.Gun:
+                if (!_weaponPickUp.WeaponPickedUp)
+                {
+                    _weaponPickUp.WeaponPickedUp = true;
+                    Debug.Log("El jugador recogió un arma.");
+                    _pickUpGunSFX.Play();
                     Destroy(other.gameObject);
                 }
                 break;

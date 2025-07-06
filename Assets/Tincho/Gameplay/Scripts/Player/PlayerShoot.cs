@@ -15,10 +15,16 @@ public class PlayerShoot : MonoBehaviour
     private float _lastShootTime = -Mathf.Infinity;
     private bool _canShoot = false;
 
+    [SerializeField] private Camera _normalCamera;
+    [SerializeField] private Camera _aimingCamera;
+    private bool _isAiming = false;
+    //[SerializeField] private GameObject _shootParticles;
+
 
     private Animator _animator;
 
-    private PlayerShootStats _player;
+    private PlayerShootStats _playerShootingStats;
+    private Player _player;
 
     private bool _hasWeapon = false;
     public bool HasWeapon
@@ -34,44 +40,73 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
-        _player = GetComponentInParent<PlayerShootStats>();
+        _playerShootingStats = GetComponentInParent<PlayerShootStats>();
+        _player = GetComponentInParent<Player>();
         _animator = GetComponent<Animator>();
+
+        _normalCamera.enabled = true;
+        _aimingCamera.enabled = false;
     }
 
     void Update()
     {
         if (_playerHealing.GetPlayerLife() <= 0) return;
 
-        if (_hasWeapon && Input.GetMouseButtonDown(0))
-        {
-            if (Time.time - _lastShootTime >= _shootCooldown)
-            {
-                _lastShootTime = Time.time;
+        IsAiming();
 
-                if (_player.MagazineSize > 0)
+        if (_hasWeapon && _isAiming)
+        {
+            if(Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (Time.time - _lastShootTime >= _shootCooldown)
                 {
-                    _canShoot = true;
-                    _animator.SetTrigger("Shoot"); // dispara la animación
-                }
-                else
-                {
-                    _emptyGunSFX.Play(); // sin balas, sonido de arma vacía
+                    _lastShootTime = Time.time;
+
+                    if (_playerShootingStats.MagazineSize > 0)
+                    {
+                        _canShoot = true;
+                        Shoot();
+                    }
+                    else
+                    {
+                        _emptyGunSFX.Play(); // sin balas, sonido de arma vacía
+                    }
                 }
             }
+
+            
+        }
+    }
+
+    private void IsAiming()
+    {
+        if (Input.GetKey(KeyCode.Mouse1) && _hasWeapon)
+        {
+            _normalCamera.enabled = false;
+            _aimingCamera.enabled = true;
+            _isAiming = true;
+            _animator.SetBool("Aiming", true);
+        }
+        else
+        {
+            _normalCamera.enabled = true;
+            _aimingCamera.enabled = false;
+            _isAiming = false;
+            _animator.SetBool("Aiming", false);
         }
     }
 
     public void Shoot()
     {
-        if (!_canShoot || _player.MagazineSize <= 0)
+        if (!_canShoot || _playerShootingStats.MagazineSize <= 0)
         {
             _emptyGunSFX.Play();
             return;
         }
 
-            _canShoot = false;
+        _canShoot = false;
         _shootSFX.Play();
-        _player.MagazineSize--;
+        _playerShootingStats.MagazineSize--;
 
         Ray ray = new Ray(_camera.position, _camera.forward);
         Debug.DrawRay(ray.origin, ray.direction * _shootDistance, Color.blue, 1f);
@@ -86,7 +121,7 @@ public class PlayerShoot : MonoBehaviour
                 if (enemy != null)
                 {
                     Debug.Log("Player is damaging " + hit.collider.name);
-                    enemy.TakeHit(_player.GetEnemyDamage);
+                    enemy.TakeHit(_playerShootingStats.GetEnemyDamage);
                 }
             }
         }
