@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealing : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     [Header("Life")]
     [SerializeField] private float _playerLife;
@@ -57,6 +57,7 @@ public class PlayerHealing : MonoBehaviour
         _getDamagedSFX.Play();
         _playerLife -= amount;
         _playerLife = Mathf.Clamp(_playerLife, 0, _maxPlayerLife);
+        EffectsOnScreen.Instance.EffectOnScreenPulse();
         Debug.Log("Jugador recibió daño. Vida actual: " + _playerLife);
 
         if (_playerLife <= 0) {
@@ -73,6 +74,7 @@ public class PlayerHealing : MonoBehaviour
         if (_waterDamageTimer <= 0f)
         {
             _getDamagedSFX.Play();
+            EffectsOnScreen.Instance.EffectOnScreenPulse();
             _animator.SetTrigger("isGettingDamage");
             _waterDamageTimer = 1f;
         }
@@ -90,6 +92,7 @@ public class PlayerHealing : MonoBehaviour
         _player.FrozenPlayer();
         _drinkPotionSFX.Play();
         _potionDrunk = true;
+        PowerUpEffectsUI.Instance.ShowPowerUpSlots(1);
 
         _healingSFX.Play();
         if (!_healingAudioSFX.isPlaying)

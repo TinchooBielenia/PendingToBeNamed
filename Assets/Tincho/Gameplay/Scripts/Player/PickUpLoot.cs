@@ -7,13 +7,13 @@ public class PickUpLoot : MonoBehaviour
     [SerializeField] private AudioSource _pickUpGunSFX;
     [SerializeField] private float _medkitHeal;
     private PlayerShootStats _playerAmmoStats;
-    private PlayerHealing _playerHealthStats;
+    private PlayerHealth _playerHealthStats;
     private WeaponPickup _weaponPickUp;
 
     private void Start()
     {
         _playerAmmoStats = GetComponent<PlayerShootStats>();
-        _playerHealthStats = GetComponent<PlayerHealing>();
+        _playerHealthStats = GetComponent<PlayerHealth>();
         _weaponPickUp = GetComponent<WeaponPickup>();
     }
 

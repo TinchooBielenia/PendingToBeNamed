@@ -1,12 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class HordeWarningUI : MonoBehaviour
 {
     public static HordeWarningUI Instance { get; private set; }
 
-    [SerializeField] private GameObject _warningImage;  
+    [SerializeField] private TextMeshProUGUI _warningMessage;  
     [SerializeField] private float _duration = 3f;
+    [SerializeField] private AudioSource _dangerAlarm;
+    [SerializeField] private float _pulseSpeed = 2f;
+    private Vector3 _originalScale;
+    private bool _isPulsing;
 
     private void Awake()
     {
@@ -18,8 +23,16 @@ public class HordeWarningUI : MonoBehaviour
 
         Instance = this;
 
-        if (_warningImage != null)
-            _warningImage.SetActive(false);
+        if (_warningMessage != null)
+            _warningMessage.enabled = false;
+    }
+
+    private void Update()
+    {
+        if (_isPulsing)
+        {
+            _warningMessage.alpha = Mathf.PingPong(Time.unscaledTime * _pulseSpeed, 1f);
+        }
     }
 
     public void ShowWarning()
@@ -30,8 +43,13 @@ public class HordeWarningUI : MonoBehaviour
 
     private IEnumerator ShowWarningRoutine()
     {
-        _warningImage.SetActive(true);
+        _warningMessage.enabled = true;
+        _isPulsing = true;
+        _dangerAlarm.Play();
+
         yield return new WaitForSecondsRealtime(_duration);
-        _warningImage.SetActive(false);
+
+        _isPulsing = false;
+        _warningMessage.enabled = false;
     }
 }

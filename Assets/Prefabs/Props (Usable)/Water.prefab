@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2293327268579130753}
   - component: {fileID: 3084734594427111596}
   - component: {fileID: 7484759370139475550}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Water
   m_TagString: HealingWater
   m_Icon: {fileID: 0}
@@ -121,6 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scrollSpeedX: 0.02
   _scrollSpeedY: 0.02
+  _healingRate: 0
+  _waterDamageRate: 0
 --- !u!1 &6684190309587621466
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4491480016982082429}
   - component: {fileID: 856026209068336813}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: WaterLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

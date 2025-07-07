@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class SceneHanlder : MonoBehaviour
     [SerializeField] private GameObject _deathCanvas;
     [SerializeField] private GameObject _victoryCanvas;
     [SerializeField] private float _resetDelay;
+    [SerializeField] private TextMeshProUGUI _resetCounterText;
     private string _currentScene;
     [SerializeField] private string _mainMenuScene;
     [SerializeField] private Player _player;
@@ -47,7 +49,13 @@ public class SceneHanlder : MonoBehaviour
 
     private IEnumerator ResetScene(string desiredScene)
     {
-        yield return new WaitForSeconds(_resetDelay);
+        float timer = _resetDelay;
+        while (timer > 0)
+        {
+            _resetCounterText.SetText(((int)Mathf.Ceil(timer)).ToString());
+            timer -= Time.unscaledDeltaTime;
+            yield return null;
+        }
 
         SceneManager.LoadScene(desiredScene);
     }

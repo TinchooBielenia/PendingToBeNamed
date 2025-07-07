@@ -15,6 +15,7 @@ public class BombEnemy : Enemy, IDamageEnemy
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystem _explosionParticles;
     [SerializeField] private AudioSource _explosionSFX;
+    [SerializeField] private AudioSource _getDamagedSFX;
     private bool _wasProvoked = false;
 
     [SerializeField] private Transform _player;
@@ -67,7 +68,7 @@ public class BombEnemy : Enemy, IDamageEnemy
         {
             if (hit.CompareTag("Player"))
             {
-                PlayerHealing player = hit.GetComponent<PlayerHealing>();
+                PlayerHealth player = hit.GetComponent<PlayerHealth>();
                 if (player != null)
                 {
                     player.TakeDamage(_explosionDamage);
@@ -84,6 +85,9 @@ public class BombEnemy : Enemy, IDamageEnemy
         _wasProvoked = true;
 
         GetDamage(damage);
+        _getDamagedSFX.Play();
+        _damageParticles1.Play();
+        _damageParticles2.Play();
         _animator.SetTrigger("Hit");
 
         if (_enemyLife <= 0 && !_isExploding)

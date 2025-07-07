@@ -11,7 +11,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private float _shootCooldown = 0.5f;
     [SerializeField] private GameObject _tracerPrefab;
     [SerializeField] private Transform _muzzlePoint;
-    [SerializeField] private PlayerHealing _playerHealing;
+    private PlayerHealth _playerHealing;
     private float _lastShootTime = -Mathf.Infinity;
     private bool _canShoot = false;
 
@@ -43,6 +43,7 @@ public class PlayerShoot : MonoBehaviour
         _playerShootingStats = GetComponentInParent<PlayerShootStats>();
         _player = GetComponentInParent<Player>();
         _animator = GetComponent<Animator>();
+        _playerHealing = GetComponentInParent<PlayerHealth>();
 
         _normalCamera.enabled = true;
         _aimingCamera.enabled = false;

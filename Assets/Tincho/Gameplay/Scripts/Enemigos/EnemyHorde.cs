@@ -107,7 +107,8 @@ public class EnemyHorde : Enemy , IDamageEnemy
     {
         GetDamage(damage);
         _getDamagedSFX.Play();
-
+        _damageParticles1.Play();
+        _damageParticles2.Play();
         _isStunned = true;
         _stunTimer = _stunDuration;
 
@@ -137,7 +138,7 @@ public class EnemyHorde : Enemy , IDamageEnemy
     {
         if (other.CompareTag("Player") && Time.time >= _lastDamageTime + _damageCooldown)
         {
-            PlayerHealing player = other.GetComponent<PlayerHealing>();
+            PlayerHealth player = other.GetComponent<PlayerHealth>();
             if (player != null)
             {
                 player.TakeDamage(_damageAmount); 

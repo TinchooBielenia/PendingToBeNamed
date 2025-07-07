@@ -10,6 +10,7 @@ public class TankEnemy : Enemy, IDamageEnemy
     [SerializeField] private Transform _player;
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private AudioSource _getDamagedSFX;
+    //[SerializeField] private AudioSource _zombieAttackSFX;
     [SerializeField] private float _activationRange = 10f;
     [SerializeField] private float _moveStopDistance = 2f;
     private Animator _animator;
@@ -105,6 +106,8 @@ public class TankEnemy : Enemy, IDamageEnemy
         _wasProvoked = true;
         GetDamage(damage);
         _getDamagedSFX.Play();
+        _damageParticles1.Play();
+        _damageParticles2.Play();
         if (!_isDead && _animator != null)
         {
             _animator.SetTrigger("Hit");
@@ -134,6 +137,7 @@ public class TankEnemy : Enemy, IDamageEnemy
         {
             RotateTowardsPlayer();
             _animator.SetBool("isAttacking", true);
+            //_zombieAttackSFX.Play();
         }
         else if (!playerInDetectionRange && !playerInAttackRange)
         {

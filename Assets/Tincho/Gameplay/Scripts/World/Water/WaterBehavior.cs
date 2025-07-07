@@ -7,7 +7,7 @@ public class WaterBehavior : MonoBehaviour
     private Renderer _rend;
     [SerializeField] private float _healingRate;
     [SerializeField] private float _waterDamageRate;
-    private PlayerHealing _player;
+    private PlayerHealth _player;
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class WaterBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _player = other.GetComponent<PlayerHealing>();
+            _player = other.GetComponent<PlayerHealth>();
             if (_player == null) return;
 
             if (_player.PotionDrunk && _player.GetPlayerLife() < _player.MaxPlayerLife)

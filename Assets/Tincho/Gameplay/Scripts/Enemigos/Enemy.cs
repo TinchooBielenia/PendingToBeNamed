@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     protected bool _isDead;
     protected bool _hasDroppedLoot;
     [SerializeField] protected List<GameObject> _lootList;
+    [SerializeField] protected ParticleSystem _damageParticles1;
+    [SerializeField] protected ParticleSystem _damageParticles2;
 
 
     protected virtual void Awake()

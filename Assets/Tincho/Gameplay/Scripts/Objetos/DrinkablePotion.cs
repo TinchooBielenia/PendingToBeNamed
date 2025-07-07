@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DrinkablePotion : MonoBehaviour, IInteraction
 {
-    [SerializeField] private PlayerHealing _player;
+    [SerializeField] private PlayerHealth _player;
 
     public void TriggerInteraction()
     {
