@@ -13,10 +13,9 @@ public class MainDoorLightController : MonoBehaviour
 
     private void Update()
     {
-        _wirePuzzleClass = FindObjectOfType<WirePuzzleController>();
-        if (_wirePuzzleClass != null)
+        if (WirePuzzleController.Instance != null)
         {
-            _wirePuzzleClass.OnPuzzleCompleted += TurnOnLight;
+           WirePuzzleController.Instance.OnPuzzleCompleted += TurnOnLight;
         }
     }
     

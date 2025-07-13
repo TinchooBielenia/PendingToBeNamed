@@ -24,7 +24,7 @@ public class EnemyHorde : Enemy
 
     private void Update()
     {
-        if (_isDead) return;
+        if (IsDead) return;
         if (_isStunned)
         {
             StunEnemy();
@@ -94,7 +94,7 @@ public class EnemyHorde : Enemy
         }
 
 
-        if (_isDead)
+        if (IsDead)
         {
             _animator.SetTrigger("Die");
             _agent.isStopped = true;

@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioSource _getDamagedSFX;
     private Animator _animator;
 
-    public float GetPlayerLife() => _playerLife;
+    public float PlayerLife => _playerLife;
 
     void Start()
     {

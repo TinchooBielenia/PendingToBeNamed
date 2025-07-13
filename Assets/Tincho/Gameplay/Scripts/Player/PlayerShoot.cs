@@ -40,7 +40,7 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
-        if (_playerHealth.GetPlayerLife() <= 0) return;
+        if (_playerHealth.PlayerLife <= 0) return;
 
         if (_hasWeapon && _player.MagazineSize > 0 && Input.GetMouseButtonDown(0))
         {
@@ -86,12 +86,5 @@ public class PlayerShoot : MonoBehaviour
         line.SetPosition(0, _muzzlePoint.position);
         line.SetPosition(1, hitPoint);
         Destroy(tracer, 0.05f);
-    }
-}
-public static class LayerMaskExtensions
-{
-    public static bool Contains(this LayerMask mask, int layerIndex)
-    {
-        return ((1 << layerIndex) & mask.value) != 0;
     }
 }

@@ -2,16 +2,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //TP2 - Martin Bielenia
-public class Enemy : MonoBehaviour, IDamageEnemy
+public abstract class Enemy : MonoBehaviour, IDamageEnemy
 {
     [SerializeField] protected int _enemyLife;
     [SerializeField] protected int _maxEnemyLife = 100;
     protected Transform _transform;
-    protected bool _isDead;
+    private bool _isDead;
     [SerializeField] private AudioSource _getDamagedSFX;
     protected bool _hasDroppedLoot;
-    [SerializeField] protected List<GameObject> _lootList;
+    [SerializeField] private List<GameObject> _lootList;
 
+    public bool IsDead
+    {
+        get =>  _isDead; 
+        set => _isDead = value; 
+    }
     public virtual void TakeHit(int damage)
     {
         if(_isDead) return;

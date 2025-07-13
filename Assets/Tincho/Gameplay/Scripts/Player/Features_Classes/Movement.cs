@@ -67,29 +67,29 @@ public class Movement
         _animator.SetFloat("zMov", z);
 
         // Sprint
-        bool isSprinting = isSprinting = InputController.Instance.IsSprinting && _playerStats.GetCanSprint && hasInput;
+        bool isSprinting = isSprinting = InputController.Instance.IsSprinting && _playerStats.CanSprint && hasInput;
 
         if (isSprinting)
         {
             _animator.SetBool("isSprinting", true);
             _speed = _ogSpeed * _sprintMultiplier;
             _playerStats.UseStamina();
-            _playerStats.GetStaminaIsBeingConsumed = true;
+            _playerStats.StaminaIsBeingConsumed = true;
         }
         else
         {
             _animator.SetBool("isSprinting", false);
             _speed = _ogSpeed;
             _playerStats.RecoverStamina();
-            _playerStats.GetStaminaIsBeingConsumed = false;
+            _playerStats.StaminaIsBeingConsumed = false;
         }
 
         // Fatiga SFX
-        if (!_playerStats.GetCanSprint && !_heavyBreathingFX.isPlaying)
+        if (!_playerStats.CanSprint && !_heavyBreathingFX.isPlaying)
         {
             _heavyBreathingFX.enabled = true;
         }
-        if (_playerStats.GetCanSprint)
+        if (_playerStats.CanSprint)
         {
             _heavyBreathingFX.enabled = false;
         }

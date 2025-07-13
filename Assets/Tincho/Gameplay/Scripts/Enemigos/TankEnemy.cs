@@ -5,7 +5,7 @@ using UnityEngine;
 //TP2 - Juliana Dimeglio - Martin Bielenia
 public class TankEnemy : Enemy  
 {
-    public bool inRange;
+    private bool _inRange;
     [SerializeField] private Transform _player;
     [SerializeField] private int _speed;
     [SerializeField] private int _maxSpeed;
@@ -23,7 +23,7 @@ public class TankEnemy : Enemy
     private void Start()
     {
         _enemyLife = _maxEnemyLife;
-        inRange = false;
+        _inRange = false;
         _speed = _maxSpeed;
         _animator = GetComponentInChildren<Animator>();
         _enemyRb.isKinematic = false;
@@ -32,9 +32,9 @@ public class TankEnemy : Enemy
 
     private void Update()
     {
-        if (_isDead) return; 
+        if (IsDead) return; 
 
-        if (inRange && _player != null && !_playerInAttackRange)
+        if (_inRange && _player != null && !_playerInAttackRange)
         {
             DashAndStop(_player, _speed);
         }
@@ -44,17 +44,17 @@ public class TankEnemy : Enemy
             DetectPlayerInAttackRange();
         }
 
-        AnimationsManager(inRange, _playerInAttackRange);
+        AnimationsManager(_inRange, _playerInAttackRange);
     }
 
     public override void TakeHit(int damage)
     {
         base.TakeHit(damage);
-        if (!_isDead && _animator != null)
+        if (!IsDead && _animator != null)
         {
             _animator.SetTrigger("Hit");
         }
-        if (_isDead)
+        if (IsDead)
         {
             if (_animator != null)
             {
@@ -63,7 +63,7 @@ public class TankEnemy : Enemy
                 _animator.SetBool("isAttacking", false);
             }
 
-            inRange = false;
+            _inRange = false;
 
             Collider[] colliders = GetComponentsInChildren<Collider>();
             foreach (Collider col in colliders)
@@ -81,21 +81,19 @@ public class TankEnemy : Enemy
 
     private void OnTriggerStay(Collider other)
     {
-        Player player = other.GetComponent<Player>();
-        if (player != null)
+        if (other.TryGetComponent<Player>(out _))
         {
             Debug.Log("El jugador entró en la zona del enemigo.");
-            inRange = true;
+            _inRange = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Player player = other.GetComponent<Player>();
-        if (player != null)
+        if (other.TryGetComponent<Player>(out _))
         {
             Debug.Log("El jugador salió en la zona del enemigo.");
-            inRange = false;
+            _inRange = false;
         }
     }
 
@@ -118,7 +116,7 @@ public class TankEnemy : Enemy
 
     public void DetectPlayerInAttackRange()
     {
-        if (!_isDead)
+        if (!IsDead)
         {
             _enemyRb.velocity = Vector3.zero;
         }
@@ -126,7 +124,7 @@ public class TankEnemy : Enemy
 
     private void AnimationsManager(bool playerInDetectionRange, bool playerInAttackRange)
     {
-        if (_isDead) return;
+        if (IsDead) return;
 
         if (playerInDetectionRange && !playerInAttackRange)
         {

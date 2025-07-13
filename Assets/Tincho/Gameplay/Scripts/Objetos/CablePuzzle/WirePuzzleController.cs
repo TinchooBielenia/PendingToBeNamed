@@ -5,6 +5,8 @@ using UnityEngine;
 //TP2 - Martin Bielenia
 public class WirePuzzleController : MonoBehaviour
 {
+    public static WirePuzzleController Instance { get; private set; }
+
     [SerializeField] private int _currentConnections;
     [SerializeField] private GameObject _winningLight;
     [SerializeField] private AudioSource _connectionSFX;

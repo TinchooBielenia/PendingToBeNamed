@@ -7,6 +7,8 @@ public class CanvasManager : MonoBehaviour
 
     private BaseCanvas _currentPanel;
 
+    public bool IsAnyCanvasOpen() => _currentPanel != null;
+
     private void Awake()
     {
         if (Instance != null) Destroy(gameObject);
@@ -38,5 +40,4 @@ public class CanvasManager : MonoBehaviour
         }
     }
 
-    public bool IsAnyCanvasOpen() => _currentPanel != null;
 }
