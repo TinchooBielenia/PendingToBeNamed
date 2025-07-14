@@ -34,7 +34,7 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
             ShufflePhotos();
         }
 
-        if (_isCanvasVisible && InputController.Instance.EscapeKey)
+        if (_isCanvasVisible && InputController.Instance.IsEscape)
         {
             HideBook();
             _photosShuffled = false;

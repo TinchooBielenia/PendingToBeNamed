@@ -85,13 +85,13 @@ MonoBehaviour:
   _winningLight: {fileID: 5162911687440375304}
   _connectionSFX: {fileID: 2532277515760286413}
   _wrongSFX: {fileID: 3476745770199127423}
-  holes:
+  _holes:
   - {fileID: 7826593474207983576}
   - {fileID: 8765603346018788953}
   - {fileID: 6892628305978021666}
   - {fileID: 4480922036713914500}
-  correctOrder: 03000000010000000200000000000000
-  _wrongTries: 0
+  _correctOrder: 03000000010000000200000000000000
+  _wrongTries: 3
 --- !u!1 &842652028662380083
 GameObject:
   m_ObjectHideFlags: 0

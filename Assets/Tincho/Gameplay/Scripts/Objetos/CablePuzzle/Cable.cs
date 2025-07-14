@@ -85,24 +85,20 @@ public class Cable : MonoBehaviour
             {
                 transform.position = col.transform.position;
 
-                int expectedOrder = _puzzleController.correctOrder[cableIndex];
-                GameObject correctHole = _puzzleController.holes[expectedOrder];
+                int expectedOrder = _puzzleController.CorrectOrder[cableIndex];
+                GameObject correctHole = _puzzleController.Holes[expectedOrder];
 
                 if (col.gameObject == correctHole)
                 {
                     Connect();
                     Debug.Log("Conexión correcta");
-                    _puzzleController.ConnectionSFX.Play();
-                    _puzzleController.CurrentConnections++;
-                    _puzzleController.VerifyVictory();
                     _wasCorrect = true;
+                    _puzzleController.AddCorrect();
                 }
                 else
                 {
                     Debug.Log("Conexión incorrecta");
-                    _puzzleController.WrongSFX.Play();
-                    _puzzleController.WrongTries++;
-                    _puzzleController.VerifyLose();
+                    _puzzleController.AddIncorrect();
                     _wasCorrect = false;
                 }
             }

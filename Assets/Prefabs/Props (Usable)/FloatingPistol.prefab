@@ -77,7 +77,7 @@ PrefabInstance:
       addedObject: {fileID: 8598629752702248244}
     - targetCorrespondingSourceObject: {fileID: 3136533525469381503, guid: f2ff1efc2193386448df682a558fbce0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2394919464874447557}
+      addedObject: {fileID: 5625867815530905243}
   m_SourcePrefab: {fileID: 100100000, guid: f2ff1efc2193386448df682a558fbce0, type: 3}
 --- !u!1 &2764320911295713899 stripped
 GameObject:
@@ -105,7 +105,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.00025010927, y: 0.0023574245, z: 0.00154342}
   m_Center: {x: 8.310599e-18, y: -0.0007359427, z: 0.00020608843}
---- !u!114 &2394919464874447557
+--- !u!114 &5625867815530905243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,10 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2764320911295713899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14f1fc0c3b740b846b5e28ba0175dabc, type: 3}
+  m_Script: {fileID: 11500000, guid: e075817a2f0c27343b6727ff1296ac5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _handBone: {fileID: 0}
-  _gunSocket: {fileID: 0}
-  _weaponPrefab: {fileID: 3136533525469381503, guid: f2ff1efc2193386448df682a558fbce0, type: 3}
-  _pickUpSFX: {fileID: 0}
+  lootType: 2

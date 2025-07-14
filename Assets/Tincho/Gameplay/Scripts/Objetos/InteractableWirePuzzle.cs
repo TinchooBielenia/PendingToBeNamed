@@ -34,7 +34,7 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
             ClosePuzzleFailed();
         }
 
-        if (InputController.Instance.EscapeKey)
+        if (InputController.Instance.IsEscape)
         {
             ClosePuzzleOnDemand();
         }

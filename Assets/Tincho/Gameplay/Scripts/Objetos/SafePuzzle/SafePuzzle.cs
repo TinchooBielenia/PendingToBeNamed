@@ -51,7 +51,7 @@ public class SafePuzzle : MonoBehaviour, IInteraction
 
         }
 
-        if (_isCanvasVisible && InputController.Instance.EscapeKey)
+        if (_isCanvasVisible && InputController.Instance.IsEscape)
         {
             HideKeypad();
         }

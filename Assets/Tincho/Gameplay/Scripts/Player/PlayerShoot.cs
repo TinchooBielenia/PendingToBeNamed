@@ -1,6 +1,5 @@
 using UnityEngine;
-
-//TP2 - Juliana Dimeglio
+//TP2 - Martin Bielenia - Juliana Dimeglio
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private Transform _camera;
@@ -8,17 +7,23 @@ public class PlayerShoot : MonoBehaviour
 
     [SerializeField] private LayerMask _enemyLayers;
     [SerializeField] private AudioSource _shootSFX;
+    //[SerializeField] private AudioSource _emptyGunSFX;
     [SerializeField] private float _shootCooldown = 0.5f;
     [SerializeField] private GameObject _tracerPrefab;
     [SerializeField] private Transform _muzzlePoint;
-    [SerializeField] private PlayerHealth _playerHealth;
+    private PlayerHealth _playerHealing;
     private float _lastShootTime = -Mathf.Infinity;
     private bool _canShoot = false;
+
+    [SerializeField] private Camera _normalCamera;
+    [SerializeField] private Camera _aimingCamera;
+    private bool _isAiming = false;
 
 
     private Animator _animator;
 
-    private PlayerShootStats _player;
+    private PlayerShootStats _playerShootingStats;
+    private Player _player;
 
     private bool _hasWeapon = false;
     public bool HasWeapon
@@ -34,32 +39,76 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
-        _player = GetComponentInParent<PlayerShootStats>();
+        _playerShootingStats = GetComponentInParent<PlayerShootStats>();
+        _player = GetComponentInParent<Player>();
         _animator = GetComponent<Animator>();
+        _playerHealing = GetComponentInParent<PlayerHealth>();
+
+        _normalCamera.enabled = true;
+        _aimingCamera.enabled = false;
     }
 
     void Update()
     {
-        if (_playerHealth.PlayerLife <= 0) return;
+        if (_playerHealing.PlayerLife <= 0) return;
 
-        if (_hasWeapon && _player.MagazineSize > 0 && Input.GetMouseButtonDown(0))
+        IsAiming();
+
+        if (_hasWeapon && _isAiming)
         {
-            if (Time.time - _lastShootTime >= _shootCooldown)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                _lastShootTime = Time.time;
-                _canShoot = true;
-                _animator.SetTrigger("Shoot");
+                if (Time.time - _lastShootTime >= _shootCooldown)
+                {
+                    _lastShootTime = Time.time;
+
+                    if (_playerShootingStats.MagazineSize > 0)
+                    {
+                        _canShoot = true;
+                        Shoot();
+                    }
+                    else
+                    {
+                        //_emptyGunSFX.Play(); // sin balas, sonido de arma vacía
+                        Debug.Log("No bullets!");
+                    }
+                }
             }
+
+
+        }
+    }
+
+    private void IsAiming()
+    {
+        if (Input.GetKey(KeyCode.Mouse1) && _hasWeapon)
+        {
+            _normalCamera.enabled = false;
+            _aimingCamera.enabled = true;
+            _isAiming = true;
+            _animator.SetBool("Aiming", true);
+        }
+        else
+        {
+            _normalCamera.enabled = true;
+            _aimingCamera.enabled = false;
+            _isAiming = false;
+            _animator.SetBool("Aiming", false);
         }
     }
 
     public void Shoot()
     {
-        if (!_canShoot || _player.MagazineSize <= 0) return;
+        if (!_canShoot || _playerShootingStats.MagazineSize <= 0)
+        {
+            //_emptyGunSFX.Play();
+            Debug.Log("No bullets!");
+            return;
+        }
 
         _canShoot = false;
         _shootSFX.Play();
-        _player.MagazineSize--;
+        _playerShootingStats.TryShoot();
 
         Ray ray = new Ray(_camera.position, _camera.forward);
         Debug.DrawRay(ray.origin, ray.direction * _shootDistance, Color.blue, 1f);
@@ -68,12 +117,13 @@ public class PlayerShoot : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _shootDistance))
         {
             endPoint = hit.point;
-            if (_enemyLayers.Contains(hit.collider.gameObject.layer)) { 
+            if (((1 << hit.collider.gameObject.layer) & _enemyLayers) != 0)
+            {
                 IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
                 if (enemy != null)
                 {
                     Debug.Log("Player is damaging " + hit.collider.name);
-                    enemy.TakeHit(_player.GetEnemyDamage);
+                    enemy.TakeHit(_playerShootingStats.GetEnemyDamage);
                 }
             }
         }
@@ -87,4 +137,5 @@ public class PlayerShoot : MonoBehaviour
         line.SetPosition(1, hitPoint);
         Destroy(tracer, 0.05f);
     }
+
 }

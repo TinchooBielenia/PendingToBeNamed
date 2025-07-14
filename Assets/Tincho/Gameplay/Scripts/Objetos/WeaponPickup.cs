@@ -1,36 +1,58 @@
 using UnityEngine;
 
-//TP2 - Juliana Dimeglio
+//TP2 - Martin Bielenia - Juliana Dimeglio
+
 public class WeaponPickup : MonoBehaviour
 {
-    [SerializeField] private Transform _handBone;
-    [SerializeField] private Transform _gunSocket;
     [SerializeField] private GameObject _weaponPrefab;
-    [SerializeField] private AudioSource _pickUpSFX;
+    [SerializeField] private bool _isPickup = false;
+    private Player _player;
 
-    private void OnTriggerEnter(Collider other)
+    public bool IsPickUp => _isPickup;
+
+    public bool GunPickedUp()
     {
-        if (other.CompareTag("Player") && _pickUpSFX != null)
+        _isPickup = true;
+        return true;
+    }
+
+    private void Start()
+    {
+        _player = GetComponent<Player>();
+    }
+
+    private void Update()
+    {
+        if (_isPickup)
         {
-            Player _player = other.GetComponent<Player>();
+            PlaceGunOnHand();
+        }
+    }
 
-            _pickUpSFX.Play();
-            GameObject newWeapon = Instantiate(_weaponPrefab, _handBone);
-            Transform transform1 = newWeapon.transform;
-            transform1.SetParent(_gunSocket);
-            transform1.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+    private void PlaceGunOnHand()
+    {
+        // GunSocket desde el avatar activo
+        PlayerAvatarConfiguration avatarConfig = _player.GetComponentInChildren<PlayerAvatarConfiguration>();
+        if (avatarConfig == null || avatarConfig.GunSocket == null) return;
 
-            Transform muzzlePoint = newWeapon.transform.Find("muzzlePoint");
+        // Instanciar el arma en el GunSocket correcto
+        GameObject newWeapon = Instantiate(_weaponPrefab, avatarConfig.GunSocket);
+        newWeapon.transform.localPosition = Vector3.zero;
+        newWeapon.transform.localRotation = Quaternion.identity;
+        _isPickup = false;
 
-            PlayerShoot _playerShoot = _player.gameObject.GetComponent<PlayerShoot>();
+        // Buscar el muzzlePoint
+        Transform muzzlePoint = avatarConfig.GunSocket;
+
+        PlayerShoot _playerShoot = _player.GetComponent<PlayerShoot>();
+        if (_playerShoot != null)
+        {
             _playerShoot.HasWeapon = true;
-            if (_playerShoot != null && muzzlePoint != null)
+            if (muzzlePoint != null)
             {
                 _playerShoot.SetMuzzlePoint(muzzlePoint);
             }
-            Destroy(gameObject);
         }
-
     }
 }
 

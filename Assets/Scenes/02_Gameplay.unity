@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.39040333, g: 0.40523604, b: 0.3957286, a: 1}
+  m_IndirectSpecularColor: {r: 0.39040348, g: 0.40523636, b: 0.39572895, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2850,6 +2850,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37a07452361cd0e4d9c3b0f44accc24f, type: 3}
+--- !u!4 &1892789881 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6605299392194743990, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
+  m_PrefabInstance: {fileID: 457137883981090449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1901031403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3829,6 +3834,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8140076858776726074, guid: 9a2f70deb7612244d8a731e6a2a2d1b7, type: 3}
+      propertyPath: _correctOrder.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140076858776726074, guid: 9a2f70deb7612244d8a731e6a2a2d1b7, type: 3}
+      propertyPath: _correctOrder.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140076858776726074, guid: 9a2f70deb7612244d8a731e6a2a2d1b7, type: 3}
+      propertyPath: _correctOrder.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140076858776726074, guid: 9a2f70deb7612244d8a731e6a2a2d1b7, type: 3}
+      propertyPath: _correctOrder.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606197464954694332, guid: 9a2f70deb7612244d8a731e6a2a2d1b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8992807186670111771, guid: 9a2f70deb7612244d8a731e6a2a2d1b7, type: 3}
       propertyPath: _mainGateAnimator
       value: 
@@ -3866,6 +3891,10 @@ PrefabInstance:
       propertyPath: _pickUpSFX
       value: 
       objectReference: {fileID: 135608201}
+    - target: {fileID: 1721014994450950412, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
+      propertyPath: _weaponMuzzlePoint
+      value: 
+      objectReference: {fileID: 1892789881}
     - target: {fileID: 7589933521180719401, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 67.12005

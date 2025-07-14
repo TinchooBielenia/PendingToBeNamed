@@ -67,7 +67,7 @@ public class Movement
         _animator.SetFloat("zMov", z);
 
         // Sprint
-        bool isSprinting = isSprinting = InputController.Instance.IsSprinting && _playerStats.CanSprint && hasInput;
+        bool isSprinting = InputController.Instance.IsSprinting && _playerStats.CanSprint && hasInput;
 
         if (isSprinting)
         {

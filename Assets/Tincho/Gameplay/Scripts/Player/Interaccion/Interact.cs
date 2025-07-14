@@ -27,11 +27,11 @@ public class Interact : MonoBehaviour
     // Player interacts with objects using Mouse 0.
     private void PlayerInteract()
     {
-        if (!InputController.Instance.InteractPressed || Time.time < _lastInteractAttempt) return;
+        if (!InputController.Instance.IsInteracting || Time.time < _lastInteractAttempt) return;
 
         _lastInteractAttempt = Time.time + _interactCooldown;
 
-        if (InputController.Instance.InteractPressed)
+        if (InputController.Instance.IsInteracting)
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
             RaycastHit hit;

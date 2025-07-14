@@ -11,30 +11,13 @@ public class WirePuzzleController : MonoBehaviour
     [SerializeField] private GameObject _winningLight;
     [SerializeField] private AudioSource _connectionSFX;
     [SerializeField] private AudioSource _wrongSFX;
-    public List<GameObject> holes;
-    public List<int> correctOrder;
+    [SerializeField] private List<GameObject> _holes;
+    [SerializeField] private List<int> _correctOrder;
     [SerializeField] private int _wrongTries;
 
-    public int WrongTries
-    {
-        get { return _wrongTries; }
-        set { _wrongTries = value; }
-    }
-    public int CurrentConnections
-    {
-        get { return _currentConnections; }
-        set { _currentConnections = value; }
-    }
-    public AudioSource ConnectionSFX
-    {
-        get { return _connectionSFX; }
-        set { _connectionSFX = value; }
-    }
-    public AudioSource WrongSFX
-    {
-        get { return _wrongSFX; }
-        set { _wrongSFX = value; }
-    }
+    public List<GameObject> Holes => _holes;
+    public List<int> CorrectOrder => _correctOrder;
+
     private void Start()
     {
         _wrongTries = 0;
@@ -42,7 +25,14 @@ public class WirePuzzleController : MonoBehaviour
 
     public event Action OnPuzzleFailed;
 
-    public void VerifyLose()
+    public void AddIncorrect()
+    {
+        _wrongSFX.Play();
+        _wrongTries++;
+        VerifyLose();
+    }
+
+    private void VerifyLose()
     {
         if (_wrongTries >= 3)
         {
@@ -54,7 +44,14 @@ public class WirePuzzleController : MonoBehaviour
 
     public event Action OnPuzzleCompleted;
 
-    public void VerifyVictory()
+    public void AddCorrect()
+    {
+        _connectionSFX.Play();
+        _currentConnections++;
+        VerifyVictory();
+    }
+
+    private void VerifyVictory()
     {
         if (_currentConnections == 4)
         {

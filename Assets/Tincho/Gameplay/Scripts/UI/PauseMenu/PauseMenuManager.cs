@@ -54,7 +54,7 @@ public class PauseMenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (InputController.Instance.EscapeKey)
+        if (InputController.Instance.IsEscape)
         {
             TogglePause();
         }

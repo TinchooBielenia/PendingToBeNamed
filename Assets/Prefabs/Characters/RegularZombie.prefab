@@ -85,14 +85,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyLife: 0
   _maxEnemyLife: 50
+  _getDamagedSFX: {fileID: 1697317885035457369}
   _lootList:
   - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
-  inRange: 0
   _player: {fileID: 0}
   _speed: 0
   _maxSpeed: 4
   _enemyRb: {fileID: 2420923724914762045}
-  _getDamagedSFX: {fileID: 1697317885035457369}
   _damageArea: {fileID: 9126103326827982447}
 --- !u!95 &7653059217454973648
 Animator:
@@ -152,7 +151,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5678442173421325504}
   - component: {fileID: 1082179888732844490}
-  - component: {fileID: 726209011004966474}
   m_Layer: 9
   m_Name: AttackCollider
   m_TagString: AttackCollider
@@ -196,20 +194,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &726209011004966474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904356239087803664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2688536b85f703b479d3058ae1789034, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tankEnemy: {fileID: 0}
-  _attackSFX: {fileID: 0}
 --- !u!1 &2430094006163764762
 GameObject:
   m_ObjectHideFlags: 0
