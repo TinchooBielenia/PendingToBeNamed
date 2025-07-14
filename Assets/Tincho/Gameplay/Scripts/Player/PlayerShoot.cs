@@ -23,14 +23,15 @@ public class PlayerShoot : MonoBehaviour
     private Animator _animator;
 
     private PlayerShootStats _playerShootingStats;
-    private Player _player;
 
     private bool _hasWeapon = false;
-    public bool HasWeapon
+
+    public bool HasWeapon()
     {
-        get { return _hasWeapon; }
-        set { _hasWeapon = value; }
+        _hasWeapon = true;
+        return _hasWeapon;
     }
+
     public void SetMuzzlePoint(Transform muzzle)
     {
         _muzzlePoint = muzzle;
@@ -40,7 +41,6 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         _playerShootingStats = GetComponentInParent<PlayerShootStats>();
-        _player = GetComponentInParent<Player>();
         _animator = GetComponent<Animator>();
         _playerHealing = GetComponentInParent<PlayerHealth>();
 
@@ -123,7 +123,7 @@ public class PlayerShoot : MonoBehaviour
                 if (enemy != null)
                 {
                     Debug.Log("Player is damaging " + hit.collider.name);
-                    enemy.TakeHit(_playerShootingStats.GetEnemyDamage);
+                    enemy.TakeHit(_playerShootingStats.EnemyDamage);
                 }
             }
         }

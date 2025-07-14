@@ -15,7 +15,7 @@ public class PlayerShootStats : MonoBehaviour
     public int MagazineSize => _magazineSize;
     public int FullMagazineSize => _fullMagazineSize;
 
-    public int GetEnemyDamage => _enemyDamage;
+    public int EnemyDamage => _enemyDamage;
     void Start()
     {
         _enemyDamage = 10;

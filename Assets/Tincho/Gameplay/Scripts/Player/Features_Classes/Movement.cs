@@ -17,9 +17,6 @@ public class Movement
     private PlayerStaminaStats _playerStats;
     private bool _canMove = true;
 
-
-    public bool IsMoving { get; private set; }
-
     public Movement(
         Animator animator,
         Rigidbody rb,

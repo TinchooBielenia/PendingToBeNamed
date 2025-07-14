@@ -57,9 +57,4 @@ public class SceneHanlder : MonoBehaviour
     {
         SceneManager.LoadScene(_mainMenuScene);
     }
-
-    public void TravelToTestRoom(string scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
 }

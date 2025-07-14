@@ -13,14 +13,11 @@ public class Player : MonoBehaviour
     private float _speed;
     [SerializeField]
     private float _sprintMultiplier = 1.5f;
-    private float _xAxis, _zAxis, _yAxis;
+    private float _xAxis, _zAxis;
     private Rigidbody _rb;
-    private bool _isMoving;
     private PlayerStaminaStats _playerStats;
     private Animator _animator;
-    public int zAxisDirection = 1;
-    public bool isMoving => _isMoving;
-    public bool isSprinting;
+
     [SerializeField] private MouseCamera _mouseCamera;
 
     [Header("SFX")]
@@ -34,8 +31,6 @@ public class Player : MonoBehaviour
         _speed = _ogSpeed;
 
         _playerStats = GetComponent<PlayerStaminaStats>();
-
-        isSprinting = false;
 
         _animator = GetComponentInChildren<Animator>(); 
 
@@ -63,23 +58,11 @@ public class Player : MonoBehaviour
         // Inputs.
         Vector2 input = InputController.Instance.MoveInput;
         _xAxis = input.x;
-        _zAxis = input.y * zAxisDirection;
+        _zAxis = input.y;
 
         _movementHandler.MoveAndSprint(_xAxis, _zAxis);
     }
 
-    // This method inverts the zAxis at the moment player interacts with the InverterObject.
-    public void InvertZAxis(bool state)
-    {
-        if (state)
-        {
-            zAxisDirection *= -1;
-        }
-        else
-        {
-            zAxisDirection *= -1;
-        }
-    }
     public void Die()
     {
         FrozenPlayer();

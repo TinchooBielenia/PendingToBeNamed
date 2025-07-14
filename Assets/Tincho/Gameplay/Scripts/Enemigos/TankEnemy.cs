@@ -12,7 +12,6 @@ public class TankEnemy : Enemy
     [SerializeField] private Rigidbody _enemyRb;
     private Animator _animator;
     private bool _playerInAttackRange = false;
-    [SerializeField] private GameObject _damageArea;
 
     public bool PlayerInAttackRange
     {
@@ -141,14 +140,5 @@ public class TankEnemy : Enemy
             _animator.SetBool("isAttacking", false);
         }
 
-    }
-    public void EnableDamageCollider()
-    {
-        _damageArea.SetActive(true);
-    }
-
-    public void DisableDamageCollider()
-    {
-        _damageArea.SetActive(false);
     }
 }

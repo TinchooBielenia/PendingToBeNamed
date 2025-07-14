@@ -3,19 +3,19 @@
 //TP2 - Martin Bielenia
 public class Cable : MonoBehaviour
 {
-    public SpriteRenderer cableBody;
+    [SerializeField] private SpriteRenderer _cableBody;
 
     private Vector2 _ogPosition;
     private Vector2 _ogSize;
     private WirePuzzleController _puzzleController;
     private Quaternion _ogRotation;
-    public int cableIndex;
+    [SerializeField] private int _cableIndex;
     private bool _wasCorrect;
 
     void Start()
     {
         _ogPosition = transform.position;
-        _ogSize = cableBody.size;
+        _ogSize = _cableBody.size;
         _puzzleController = GetComponentInParent<WirePuzzleController>();
         _ogRotation = transform.rotation;
 
@@ -65,14 +65,14 @@ public class Cable : MonoBehaviour
 
         float distance = Vector2.Distance(currentPosition, ogPoint);
 
-        cableBody.size = new Vector2(distance, cableBody.size.y);
+        _cableBody.size = new Vector2(distance, _cableBody.size.y);
     }
 
     private void Reset()
     {
         transform.position = _ogPosition;
         transform.rotation = _ogRotation;
-        cableBody.size = _ogSize;
+        _cableBody.size = _ogSize;
     }
 
     private void CheckConnection()
@@ -85,7 +85,7 @@ public class Cable : MonoBehaviour
             {
                 transform.position = col.transform.position;
 
-                int expectedOrder = _puzzleController.CorrectOrder[cableIndex];
+                int expectedOrder = _puzzleController.CorrectOrder[_cableIndex];
                 GameObject correctHole = _puzzleController.Holes[expectedOrder];
 
                 if (col.gameObject == correctHole)

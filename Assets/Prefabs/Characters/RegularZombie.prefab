@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3527822917224166281}
   - component: {fileID: 7512098632045186336}
   - component: {fileID: 6288832242963776980}
+  - component: {fileID: 9197521214590761661}
   - component: {fileID: 7653059217454973648}
   - component: {fileID: 2420923724914762045}
   m_Layer: 9
@@ -92,6 +93,18 @@ MonoBehaviour:
   _speed: 0
   _maxSpeed: 4
   _enemyRb: {fileID: 2420923724914762045}
+--- !u!114 &9197521214590761661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928283103767135088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1eb455001dce249b836a9a51db1d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _damageArea: {fileID: 9126103326827982447}
 --- !u!95 &7653059217454973648
 Animator:
@@ -392,7 +405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9182496847193097401
 Transform:
   m_ObjectHideFlags: 0

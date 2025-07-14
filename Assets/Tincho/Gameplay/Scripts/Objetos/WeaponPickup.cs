@@ -47,7 +47,7 @@ public class WeaponPickup : MonoBehaviour
         PlayerShoot _playerShoot = _player.GetComponent<PlayerShoot>();
         if (_playerShoot != null)
         {
-            _playerShoot.HasWeapon = true;
+            _playerShoot.HasWeapon();
             if (muzzlePoint != null)
             {
                 _playerShoot.SetMuzzlePoint(muzzlePoint);

@@ -21,17 +21,10 @@ public class PlayerStaminaStats : MonoBehaviour
     private bool _staminaIsBeingConsumed;
     private bool _canSprint = true;
 
-    public bool CanSprint
-    {
-        get => _canSprint;
-        set => _canSprint = value;
-    }
 
-    public bool StaminaIsBeingConsumed
-    {
-        get => _staminaIsBeingConsumed;
-        set => _staminaIsBeingConsumed = value;
-    }
+    public bool CanSprint => _canSprint;
+
+    public bool StaminaIsBeingConsumed { set => _staminaIsBeingConsumed = value;}
 
     void Start()
     {
