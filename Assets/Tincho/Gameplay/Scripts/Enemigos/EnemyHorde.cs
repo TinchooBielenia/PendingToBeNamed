@@ -19,7 +19,7 @@ public class EnemyHorde : Enemy
 
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _player = Player.Instance.transform;
     }
 
     private void Update()

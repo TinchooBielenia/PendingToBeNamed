@@ -11,15 +11,17 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy
     [SerializeField] private AudioSource _getDamagedSFX;
     protected bool _hasDroppedLoot;
     [SerializeField] private List<GameObject> _lootList;
+    [SerializeField] private EnemyType _enemyType;
+    public EnemyType Type => _enemyType;
 
     public bool IsDead
     {
-        get =>  _isDead; 
-        set => _isDead = value; 
+        get => _isDead;
+        set => _isDead = value;
     }
     public virtual void TakeHit(int damage)
     {
-        if(_isDead) return;
+        if (_isDead) return;
         _enemyLife -= damage;
         _getDamagedSFX.Play();
         if (_enemyLife < 0)
@@ -38,18 +40,43 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy
     {
         if (_hasDroppedLoot) return;
 
-        if (_lootList == null || _lootList.Count == 0) return;
-
-        foreach (GameObject loot in _lootList)
+        switch (_enemyType)
         {
-            if (loot != null)
-            {
-                Instantiate(loot, _transform.position, Quaternion.identity);
-            }
+            case EnemyType.Horde:
+                DropHordeLoot();
+                break;
+
+            case EnemyType.Tank:
+                DropTankLoot();
+                break;
         }
 
         _hasDroppedLoot = true;
     }
 
+    private void DropHordeLoot()
+    {
+        if (_lootList == null || _lootList.Count == 0) return;
 
+        int randomIndex = Random.Range(0, _lootList.Count);
+        GameObject loot = _lootList[randomIndex];
+
+        if (loot != null)
+        {
+            Instantiate(loot, _transform.position, Quaternion.identity);
+        }
+    }
+
+    private void DropTankLoot()
+    {
+        if (_lootList == null || _lootList.Count == 0) return;
+
+        foreach (GameObject loot in _lootList)
+        {
+            if (loot != null && Random.value <= 0.5f)
+            {
+                Instantiate(loot, _transform.position, Quaternion.identity);
+            }
+        }
+    }
 }

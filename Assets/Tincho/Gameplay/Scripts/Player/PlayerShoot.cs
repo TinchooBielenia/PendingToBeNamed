@@ -120,7 +120,7 @@ public class PlayerShoot : MonoBehaviour
             if (((1 << hit.collider.gameObject.layer) & _enemyLayers) != 0)
             {
                 IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
-                if (enemy != null)
+                if (_enemyLayers.Contains(hit.collider.gameObject.layer))
                 {
                     Debug.Log("Player is damaging " + hit.collider.name);
                     enemy.TakeHit(_playerShootingStats.EnemyDamage);

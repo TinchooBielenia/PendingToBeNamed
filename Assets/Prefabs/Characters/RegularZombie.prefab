@@ -89,6 +89,7 @@ MonoBehaviour:
   _getDamagedSFX: {fileID: 1697317885035457369}
   _lootList:
   - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
+  _enemyType: 1
   _player: {fileID: 0}
   _speed: 0
   _maxSpeed: 4
