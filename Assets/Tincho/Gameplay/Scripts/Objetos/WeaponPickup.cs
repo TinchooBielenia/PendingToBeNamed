@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] private GameObject _weaponPrefab;
+    [SerializeField] private AudioSource _pickUpGunSFX;
     [SerializeField] private bool _isPickup = false;
     private Player _player;
 
@@ -13,7 +14,8 @@ public class WeaponPickup : MonoBehaviour
     public bool GunPickedUp()
     {
         _isPickup = true;
-        return true;
+        _pickUpGunSFX.Play();
+        return _isPickup;
     }
 
     private void Start()

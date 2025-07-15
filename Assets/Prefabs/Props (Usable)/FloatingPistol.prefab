@@ -74,38 +74,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3136533525469381503, guid: f2ff1efc2193386448df682a558fbce0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8598629752702248244}
-    - targetCorrespondingSourceObject: {fileID: 3136533525469381503, guid: f2ff1efc2193386448df682a558fbce0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5625867815530905243}
+      addedObject: {fileID: 4247818205953574282}
   m_SourcePrefab: {fileID: 100100000, guid: f2ff1efc2193386448df682a558fbce0, type: 3}
 --- !u!1 &2764320911295713899 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3136533525469381503, guid: f2ff1efc2193386448df682a558fbce0, type: 3}
   m_PrefabInstance: {fileID: 998642047068131604}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &8598629752702248244
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2764320911295713899}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.00025010927, y: 0.0023574245, z: 0.00154342}
-  m_Center: {x: 8.310599e-18, y: -0.0007359427, z: 0.00020608843}
---- !u!114 &5625867815530905243
+--- !u!114 &4247818205953574282
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2764320911295713899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e075817a2f0c27343b6727ff1296ac5c, type: 3}
+  m_Script: {fileID: 11500000, guid: df93be13d5c7c1048af761cfe7866707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootType: 2
+  _pickUpGunSFX: {fileID: 6824548892927111542, guid: 6f359d0c7268c9843a6b2c64f0516eed, type: 3}

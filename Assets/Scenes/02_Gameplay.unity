@@ -420,11 +420,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7090876170311784670, guid: 37a07452361cd0e4d9c3b0f44accc24f, type: 3}
   m_PrefabInstance: {fileID: 1399912812}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &135608201 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3799811626238001207, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
-  m_PrefabInstance: {fileID: 780547828}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &138966537 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5821117141517509784, guid: 0f0e9499b57e71a47932984c8e4acba4, type: 3}
@@ -557,7 +552,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 2.9392982e+29, y: 1.7751393e+28, z: 1.7024265e+25, w: 7.0253636e+28}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -821,7 +816,7 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: Settings.lighting
   serializedVersion: 6
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
@@ -1131,7 +1126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 352319026420430728, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 87.3
+      value: 156.44
       objectReference: {fileID: 0}
     - target: {fileID: 352319026420430728, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1151,7 +1146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 352319026420430728, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 145.5
+      value: 96.5
       objectReference: {fileID: 0}
     - target: {fileID: 352319026420430728, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1169,6 +1164,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4126965735863660723, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
+      propertyPath: _ammoBoxSFX
+      value: 
+      objectReference: {fileID: 1602511891}
     - target: {fileID: 4571759225951384835, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1187,8 +1186,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8175109417629320158, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8315507660561855766, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
+      propertyPath: _pickUpGunSFX
+      value: 
+      objectReference: {fileID: 1482305548}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2157,31 +2160,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2032059663533755595, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1.02e-43
+      value: 6e-45
       objectReference: {fileID: 0}
     - target: {fileID: 2032059663533755595, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1e-45
+      value: 1.3e-44
       objectReference: {fileID: 0}
     - target: {fileID: 2032059663533755595, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 3.3875e-41
+      value: 1.1754945e-38
       objectReference: {fileID: 0}
     - target: {fileID: 5474958304541886816, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
       propertyPath: m_Name
       value: ShedSetup
       objectReference: {fileID: 0}
     - target: {fileID: 6909399619939493468, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 1.469458e-39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6909399619939493468, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1.02e-43
+      value: -Infinity
       objectReference: {fileID: 0}
     - target: {fileID: 6909399619939493468, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1e-45
+      value: 3.9443043e-31
       objectReference: {fileID: 0}
     - target: {fileID: 6909399619939493468, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 3.9469e-41
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7371403439820853689, guid: 0ef63adfb64a19e41a929345dfee6801, type: 3}
       propertyPath: _spawner
@@ -2200,6 +2207,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8085267649613679324, guid: a4b705b9db30a5b4da3552c91e737803, type: 3}
   m_PrefabInstance: {fileID: 6555683222887943149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1482305548 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1934346836240286011, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
+  m_PrefabInstance: {fileID: 780547828}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1482485412
 PrefabInstance:
@@ -2472,6 +2484,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 791b3e3c7bdc4964a891e08309644e90, type: 3}
+--- !u!82 &1602511891 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2778108328239518459, guid: cdfcfc2e9ab49464c93cfa50a1cc42c3, type: 3}
+  m_PrefabInstance: {fileID: 780547828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1629266225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7090876170311784670, guid: 37a07452361cd0e4d9c3b0f44accc24f, type: 3}
@@ -3939,7 +3956,7 @@ PrefabInstance:
     - target: {fileID: 1721014994450950412, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
       propertyPath: _pickUpSFX
       value: 
-      objectReference: {fileID: 135608201}
+      objectReference: {fileID: 0}
     - target: {fileID: 1721014994450950412, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
       propertyPath: _weaponMuzzlePoint
       value: 
@@ -3955,7 +3972,7 @@ PrefabInstance:
     - target: {fileID: 7523016288483712061, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
       propertyPath: _pickUpSFX
       value: 
-      objectReference: {fileID: 135608201}
+      objectReference: {fileID: 0}
     - target: {fileID: 7589933521180719401, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 67.12005
@@ -4002,6 +4019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7523016288483712061, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
+    - {fileID: 6503937641922857349, guid: 6bb22f0644d9b2b43a2802cd7b36ece4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

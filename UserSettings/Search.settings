@@ -11,6 +11,9 @@ scopes = {
 	"last_search.310DEAF1" = ""
 	"OpenInspectorPreview.310DEAF1" = "0"
 	"currentGroup.310DEAF1" = "all"
+	"last_search.110DEAF1" = "p: t:MonoScript a:Assets"
+	"OpenInspectorPreview.110DEAF1" = "0"
+	"currentGroup.110DEAF1" = "asset"
 }
 providers = {
 	adb = {
@@ -62,15 +65,19 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"p: t:MonoScript a:Assets"
+	"p: t:MonoScript"
+	"p: t:texture"
+	""
 ]
 searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
-showSavedSearchPanel = false
+showSavedSearchPanel = true
 hideTabs = false
 expandedQueries = [
 ]
-queryBuilder = false
+queryBuilder = true
 ignoredProperties = "id;name;classname;imagecontentshash"
 helperWidgetCurrentArea = "all"
 disabledIndexers = ""

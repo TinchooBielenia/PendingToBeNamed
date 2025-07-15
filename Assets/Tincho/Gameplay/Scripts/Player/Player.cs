@@ -3,8 +3,18 @@ using UnityEngine;
 //TP2 - Martin Bielenia - Juliana Dimeglio
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
     // This class hanldes how the player moves in the world.
     private Movement _movementHandler;
+
+    [Header("References")]
+    private PlayerHealth _playerHealth;
+    private PlayerShootStats _playerShootStats;
+    private WeaponPickup _weaponPickup;
+
+    public bool PlayerHealth => _playerHealth;
+    public bool PlayerShootStats => _playerShootStats;
+    public bool WeaponPickup => _weaponPickup;
 
     [Header("Movement")]
     [SerializeField]
@@ -17,7 +27,6 @@ public class Player : MonoBehaviour
     private Rigidbody _rb;
     private PlayerStaminaStats _playerStats;
     private Animator _animator;
-
     [SerializeField] private MouseCamera _mouseCamera;
 
     [Header("SFX")]
@@ -25,6 +34,18 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource _footstepsSprintFX;
     [SerializeField] private AudioSource _heavyBreathingFX;
     [SerializeField] private AudioSource _deathSFX;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     private void Start()
     {
