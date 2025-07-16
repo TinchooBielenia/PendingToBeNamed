@@ -1,54 +1,86 @@
-﻿
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 //TP2 - Juliana Dimeglio - Martin Bielenia
 public class TankEnemy : Enemy  
 {
-    private bool _inRange;
     [SerializeField] private Transform _player;
-    [SerializeField] private int _speed;
-    [SerializeField] private int _maxSpeed;
-    [SerializeField] private Rigidbody _enemyRb;
+    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private float _activationRange = 10f;
+    [SerializeField] private float _moveStopDistance = 2f;
+    [SerializeField] private float _speed;
     private Animator _animator;
     private bool _playerInAttackRange = false;
-
-    public bool PlayerInAttackRange
-    {
-        get { return _playerInAttackRange; }
-        set { _playerInAttackRange = value; }
-    }
+    private bool _wasProvoked;
+    public bool PlayerInAttackRange { set => _playerInAttackRange = value;}
 
     private void Start()
     {
         _enemyLife = _maxEnemyLife;
-        _inRange = false;
-        _speed = _maxSpeed;
         _animator = GetComponentInChildren<Animator>();
-        _enemyRb.isKinematic = false;
-
+        _agent.isStopped = true;
+        _player = Player.Instance.transform;
+        _agent.speed = _speed;
     }
 
     private void Update()
     {
-        if (IsDead) return; 
+        if (IsDead || _player == null) return;
+        float distance = Vector3.Distance(transform.position, _player.position);
+        UpdateAttackRange(distance);
+        HandleDetectionAndMovement(distance);
+        UpdateAnimationStates(distance);
+    }
 
-        if (_inRange && _player != null && !_playerInAttackRange)
+
+    private void UpdateAttackRange(float distance)
+    {
+        _playerInAttackRange = distance <= _moveStopDistance;
+    }
+
+    private void HandleDetectionAndMovement(float distance)
+    {
+        bool isInDetectionRange = distance <= _activationRange;
+
+        if ((isInDetectionRange || _wasProvoked) && !_playerInAttackRange)
         {
-            DashAndStop(_player, _speed);
-        }
+            _agent.isStopped = false;
 
-        if (_player != null && _playerInAttackRange)
+            Vector3 direction = (_player.position - transform.position).normalized;
+            Vector3 target = _player.position - direction * _moveStopDistance;
+            _agent.SetDestination(target);
+            RotateTowardsPlayer();
+        }
+        else
         {
-            DetectPlayerInAttackRange();
+            _agent.isStopped = true;
         }
+    }
 
-        AnimationsManager(_inRange, _playerInAttackRange);
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _activationRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _moveStopDistance);
+    }
+    private void RotateTowardsPlayer()
+    {
+        Vector3 direction = (_player.position - transform.position).normalized;
+        direction.y = 0f;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
     }
 
     public override void TakeHit(int damage)
     {
         base.TakeHit(damage);
+        _wasProvoked = true;
         if (!IsDead && _animator != null)
         {
             _animator.SetTrigger("Hit");
@@ -62,15 +94,11 @@ public class TankEnemy : Enemy
                 _animator.SetBool("isAttacking", false);
             }
 
-            _inRange = false;
-
             Collider[] colliders = GetComponentsInChildren<Collider>();
             foreach (Collider col in colliders)
             {
                 col.enabled = false;
             }
-
-            _enemyRb.isKinematic = true;
 
             LootOnDeath();
 
@@ -78,47 +106,17 @@ public class TankEnemy : Enemy
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.TryGetComponent<Player>(out _))
-        {
-            Debug.Log("El jugador entró en la zona del enemigo.");
-            _inRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent<Player>(out _))
-        {
-            Debug.Log("El jugador salió en la zona del enemigo.");
-            _inRange = false;
-        }
-    }
-
-    private void DashAndStop(Transform player, int speed)
-    {
-        //Basic movement
-        Vector3 dir = (player.position - _transform.position).normalized;
-
-        Vector3 currentVelocity = _enemyRb.velocity;
-        _enemyRb.velocity = new Vector3(dir.x * speed, currentVelocity.y, dir.z * speed);
-
-        // Rotación hacia el jugador
-        if (dir != Vector3.zero)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(dir);
-            _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.deltaTime * 5f);
-        }
-
-    }
-
     public void DetectPlayerInAttackRange()
     {
-        if (!IsDead)
-        {
-            _enemyRb.velocity = Vector3.zero;
-        }
+        _agent.isStopped = true;
+        RotateTowardsPlayer();
+    }
+
+    private void UpdateAnimationStates(float distance)
+    {
+        bool isInDetectionRange = distance <= _activationRange;
+
+        AnimationsManager(isInDetectionRange || _wasProvoked, _playerInAttackRange);
     }
 
     private void AnimationsManager(bool playerInDetectionRange, bool playerInAttackRange)
@@ -132,6 +130,7 @@ public class TankEnemy : Enemy
         }
         else if (playerInDetectionRange && playerInAttackRange)
         {
+            RotateTowardsPlayer();
             _animator.SetBool("isAttacking", true);
         }
         else if (!playerInDetectionRange && !playerInAttackRange)

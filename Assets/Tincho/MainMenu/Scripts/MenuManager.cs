@@ -30,15 +30,6 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1f;
-        /*// Singleton
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);*/
     }
 
     private void Start()

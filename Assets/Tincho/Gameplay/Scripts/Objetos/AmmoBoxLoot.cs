@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public class AmmoBoxLoot : BaseLoot
 {
     private PlayerShootStats _playerStats;

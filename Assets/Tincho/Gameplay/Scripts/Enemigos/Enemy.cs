@@ -66,6 +66,7 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy
         {
             Instantiate(loot, _transform.position, Quaternion.identity);
         }
+        Destroy(gameObject, 10f);
     }
 
     private void DropTankLoot()
@@ -79,5 +80,6 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy
                 Instantiate(loot, _transform.position, Quaternion.identity);
             }
         }
+        Destroy(gameObject, 10f);
     }
 }

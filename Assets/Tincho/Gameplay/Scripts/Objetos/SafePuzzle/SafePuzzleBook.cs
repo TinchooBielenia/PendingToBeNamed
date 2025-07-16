@@ -76,19 +76,19 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
                 _photosList[randomIndex] = temp;
             }
 
-            // Refleja el orden en la jerarquía del canvas
+            // Reflects the order in the hierarchy of the canvas
             for (int i = 0; i < _photosList.Count; i++)
             {
                 _photosList[i].photo.transform.SetSiblingIndex(i);
             }
 
-            //Armar el string del código correcto
+            //Assemble the correct code string
             foreach (Card card in _photosList)
             {
                 _currentCorrectCode += card.value.ToString();
             }
 
-            //Pasarlo al SafePuzzle
+            //Send it to the SafePuzzle
             if (_safePuzzleCorrectCode != null)
             {
                 _safePuzzleCorrectCode.UpdateCorrectCode(_currentCorrectCode);

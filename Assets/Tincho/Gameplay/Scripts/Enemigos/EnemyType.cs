@@ -1,3 +1,5 @@
+
+//TP2 - Martin Bielenia
 public enum EnemyType
 {
     Horde,

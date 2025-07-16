@@ -1,7 +1,6 @@
 using UnityEngine;
 
 //TP2 - Martin Bielenia - Juliana Dimeglio
-
 public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] private GameObject _weaponPrefab;
@@ -33,17 +32,17 @@ public class WeaponPickup : MonoBehaviour
 
     private void PlaceGunOnHand()
     {
-        // GunSocket desde el avatar activo
+        // GunSocket from the active avatar
         PlayerAvatarConfiguration avatarConfig = _player.GetComponentInChildren<PlayerAvatarConfiguration>();
         if (avatarConfig == null || avatarConfig.GunSocket == null) return;
 
-        // Instanciar el arma en el GunSocket correcto
+        // Instantiate the weapon in the right GunSocket
         GameObject newWeapon = Instantiate(_weaponPrefab, avatarConfig.GunSocket);
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localRotation = Quaternion.identity;
         _isPickup = false;
 
-        // Buscar el muzzlePoint
+        // Find the muzzlePoint
         Transform muzzlePoint = avatarConfig.GunSocket;
 
         PlayerShoot _playerShoot = _player.GetComponent<PlayerShoot>();

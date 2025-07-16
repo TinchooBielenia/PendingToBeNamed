@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TP2 - Bielenia Martin - Juliana Dimeglio
 public class TextContainer : MonoBehaviour
 {
     public static TextContainer Instance { get; private set; }

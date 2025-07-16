@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Juliana Dimeglio
 public static class LayerMaskExtensions
 {
     public static bool Contains(this LayerMask mask, int layerIndex)

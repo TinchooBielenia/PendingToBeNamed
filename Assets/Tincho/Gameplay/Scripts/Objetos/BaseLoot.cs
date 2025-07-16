@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TP2 - Martin Bielenia
 public abstract class BaseLoot : MonoBehaviour
 {
     protected abstract void OnLootTrigger(GameObject player);

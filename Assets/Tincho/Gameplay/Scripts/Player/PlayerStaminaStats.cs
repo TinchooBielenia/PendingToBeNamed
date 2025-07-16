@@ -49,21 +49,21 @@ public class PlayerStaminaStats : MonoBehaviour
 
     private void HandleStaminaTimers()
     {
-        // Si no hay stamina, comienza delay
+        // If there's no stamina starts the delay
         if (_currentStamina <= 0f)
         {
             _timerRecoverDelay -= Time.deltaTime;
             _canSprint = false;
         }
 
-        // Si está completamente recuperado, resetea delay
+        // If fully recovered, reset delay
         if (_currentStamina >= _maxStamina)
         {
             _timerRecoverDelay = _timerRecoverBase;
             _canSprint = true;
         }
 
-        // Si se puede recuperar antes
+        // If can recover sooner
         if (!_staminaIsBeingConsumed && _currentStamina > 0f && _currentStamina < _maxStamina)
         {
             _timerEarlyRecover -= Time.deltaTime;

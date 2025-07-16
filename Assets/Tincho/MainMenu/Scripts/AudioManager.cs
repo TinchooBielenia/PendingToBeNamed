@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
 
     private void SetVolume(float sliderValue)
     {
-        // Convertimos de [0,1] (lineal) a decibeles
+        // We turn from [0,1] (linear) to decibels.
         float dB = Mathf.Log10(Mathf.Clamp(sliderValue, 0.0001f, 1f)) * 20f;
         _mainGameAudioMixer.SetFloat(_volumeParameter, dB);
     }

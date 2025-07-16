@@ -44,10 +44,10 @@ public class Movement
     {
         if (!_canMove) return;
 
-        // Verifica si hay input de movimiento ANTES de todo.
+        // Check for motion input BEFORE everything.
         bool hasInput = x != 0 || z != 0;
 
-        // Dirección y movimiento.
+        // Direction and movement.
         Vector3 dir = (_transform.right * x + _transform.forward * z).normalized;
 
         if (hasInput)
@@ -81,7 +81,7 @@ public class Movement
             _playerStats.StaminaIsBeingConsumed = false;
         }
 
-        // Fatiga SFX
+        // Fatigue SFX
         if (!_playerStats.CanSprint && !_heavyBreathingFX.isPlaying)
         {
             _heavyBreathingFX.enabled = true;
@@ -91,7 +91,7 @@ public class Movement
             _heavyBreathingFX.enabled = false;
         }
 
-        // Pasos SFX - animaciones.
+        // Steps SFX - animations.
         if (isSprinting)
         {
             _animator.SetBool("isMoving", true);

@@ -7,7 +7,6 @@ public class PlayerShoot : MonoBehaviour
 
     [SerializeField] private LayerMask _enemyLayers;
     [SerializeField] private AudioSource _shootSFX;
-    //[SerializeField] private AudioSource _emptyGunSFX;
     [SerializeField] private float _shootCooldown = 0.5f;
     [SerializeField] private GameObject _tracerPrefab;
     [SerializeField] private Transform _muzzlePoint;
@@ -26,11 +25,7 @@ public class PlayerShoot : MonoBehaviour
 
     private bool _hasWeapon = false;
 
-    public bool HasWeapon()
-    {
-        _hasWeapon = true;
-        return _hasWeapon;
-    }
+    public bool HasWeapon() => _hasWeapon = true;
 
     public void SetMuzzlePoint(Transform muzzle)
     {
@@ -69,7 +64,6 @@ public class PlayerShoot : MonoBehaviour
                     }
                     else
                     {
-                        //_emptyGunSFX.Play(); // sin balas, sonido de arma vacía
                         Debug.Log("No bullets!");
                     }
                 }

@@ -28,9 +28,9 @@ public class LightManager : MonoBehaviour
     {
         foreach (var light in _lights)
         {
-            //devuelve la distancia entre la posicion del player y la de la luz 
+            //returns the distance between the player position and the light.
             float dist = Vector3.Distance(player.position, light.transform.position);
-            //si la distancia entre el player y la luz es menor que activationDistance se prende la luz 
+            //if the distance between the player and the light is less than activationDistance the light turns on.
             light.enabled = dist < activationDistance;
         }
     }
