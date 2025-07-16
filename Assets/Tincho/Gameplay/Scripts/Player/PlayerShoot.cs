@@ -95,7 +95,6 @@ public class PlayerShoot : MonoBehaviour
     {
         if (!_canShoot || _playerShootingStats.MagazineSize <= 0)
         {
-            //_emptyGunSFX.Play();
             Debug.Log("No bullets!");
             return;
         }
@@ -113,15 +112,20 @@ public class PlayerShoot : MonoBehaviour
             endPoint = hit.point;
             if (((1 << hit.collider.gameObject.layer) & _enemyLayers) != 0)
             {
-                IDamageEnemy enemy = hit.collider.GetComponentInParent<IDamageEnemy>();
                 if (_enemyLayers.Contains(hit.collider.gameObject.layer))
                 {
-                    Debug.Log("Player is damaging " + hit.collider.name);
-                    enemy.TakeHit(_playerShootingStats.EnemyDamage);
+                    TryApplyDamage(hit.collider, new DamageData(_playerShootingStats.EnemyDamage, DamageType.Bullet));
                 }
             }
         }
         SpawnTracer(endPoint);
+    }
+
+    private void TryApplyDamage<T>(Collider collider, T damage)
+    {
+        var target = collider.GetComponentInParent<IDamageEnemy<T>>();
+        if (target != null)
+            target.TakeHit(damage);
     }
     private void SpawnTracer(Vector3 hitPoint)
     {

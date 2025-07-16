@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9197521214590761661}
   - component: {fileID: 7653059217454973648}
   - component: {fileID: 4816503946483800740}
+  - component: {fileID: 3632093496548101887}
   m_Layer: 9
   m_Name: RegularZombie
   m_TagString: Untagged
@@ -88,6 +89,9 @@ MonoBehaviour:
   _lootList:
   - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
   _enemyType: 1
+  _trapDamageMultiplier: 2
+  _rb: {fileID: 0}
+  _player: {fileID: 0}
   _agent: {fileID: 4816503946483800740}
   _activationRange: 4
   _moveStopDistance: 1.3
@@ -148,6 +152,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &3632093496548101887
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928283103767135088}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5338520488541058226
 GameObject:
   m_ObjectHideFlags: 0

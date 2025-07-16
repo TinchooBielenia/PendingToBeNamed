@@ -3,7 +3,7 @@ using UnityEngine;
 
 //TP2 - Martin Bielenia
 //Consigna: Abstract class
-public abstract class Enemy : MonoBehaviour, IDamageEnemy
+public abstract class Enemy : MonoBehaviour, IDamageEnemy<DamageData>
 {
     [SerializeField] protected int _enemyLife;
     [SerializeField] protected int _maxEnemyLife = 100;
@@ -13,6 +13,8 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy
     protected bool _hasDroppedLoot;
     [SerializeField] private List<GameObject> _lootList;
     [SerializeField] private EnemyType _enemyType;
+    [SerializeField] protected int _trapDamageMultiplier;
+    [SerializeField] protected Rigidbody _rb;
     public EnemyType Type => _enemyType;
 
     public bool IsDead
@@ -20,21 +22,42 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy
         get => _isDead;
         set => _isDead = value;
     }
-    public virtual void TakeHit(int damage)
+
+    public virtual void TakeHit(DamageData data)
     {
-        if (_isDead) return;
-        _enemyLife -= damage;
+        if (IsDead) return;
         _getDamagedSFX.Play();
-        if (_enemyLife < 0)
+        if (_enemyLife <= 0)
         {
-            _isDead = true;
+            IsDead = true;
+            _rb.isKinematic = false;
         }
+
+        if (IsDead)
+        {
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
+
+            LootOnDeath();
+
+            Destroy(gameObject, 5f);
+        }
+    }
+
+    protected virtual void TakeDamage(int damage)
+    {
+        if(IsDead) return;
+        _enemyLife -= damage;
     }
 
 
     protected virtual void Awake()
     {
         _transform = transform;
+        _rb = GetComponent<Rigidbody>();
     }
 
     protected void LootOnDeath()

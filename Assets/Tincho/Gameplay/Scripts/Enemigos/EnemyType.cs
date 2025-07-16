@@ -1,5 +1,6 @@
 
 //TP2 - Martin Bielenia
+//Consigna: Enum
 public enum EnemyType
 {
     Horde,

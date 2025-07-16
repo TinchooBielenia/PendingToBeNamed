@@ -1,7 +1,8 @@
 //TP2 - Martin Bielenia
 
 // This class is the interface used for player to damage enemies with objects under the layer "Enemies".
-public interface IDamageEnemy
+//Consigna: Generic
+public interface IDamageEnemy<T>
 {
-    void TakeHit(int damage);
+    void TakeHit(T damage);
 }

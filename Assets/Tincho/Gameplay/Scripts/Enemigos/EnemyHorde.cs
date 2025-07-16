@@ -81,9 +81,20 @@ public class EnemyHorde : Enemy
             _animator.SetBool("isRunning", false);
     }
 
-    public override void TakeHit(int damage)
+    public override void TakeHit(DamageData data)
     {
-        base.TakeHit(damage);
+        base.TakeHit(data);
+
+
+        if (data.Type == DamageType.Fire)
+        {
+            TakeDamage(data.Amount * base._trapDamageMultiplier);
+        }
+        else
+        {
+            TakeDamage(data.Amount);
+        }
+
         _isStunned = true;
         _stunTimer = _stunDuration;
 
@@ -92,22 +103,14 @@ public class EnemyHorde : Enemy
             _animator.SetTrigger("Hit");
             _animator.SetBool("isRunning", false);
         }
-
-
         if (IsDead)
         {
             _animator.SetTrigger("Die");
             _agent.isStopped = true;
-            LootOnDeath();
-            Collider col = GetComponent<Collider>();
-            if (col != null)
-            {
-                col.enabled = false;
-            }
-            Destroy(gameObject, 5f);
         }
 
     }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && Time.time >= _lastDamageTime + _damageCooldown)

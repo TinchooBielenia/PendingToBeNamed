@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 2174848373695944984}
   - component: {fileID: 3232789509957543382}
   - component: {fileID: 3031103034356056389}
+  - component: {fileID: 3615183877628786920}
   m_Layer: 9
   m_Name: HordeEnemy
   m_TagString: Untagged
@@ -182,15 +183,14 @@ MonoBehaviour:
   _getDamagedSFX: {fileID: 7046587007652342006}
   _lootList:
   - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
+  _enemyType: 0
+  _trapDamageMultiplier: 1
   _stunDuration: 1
-  _maxLife: 20
   _player: {fileID: 0}
   _agent: {fileID: 3232789509957543382}
   _animator: {fileID: 2174848373695944984}
   _damageAmount: 8
   _damageCooldown: 1
-  _hordeEnemyLootList:
-  - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
 --- !u!95 &2174848373695944984
 Animator:
   serializedVersion: 5
@@ -255,6 +255,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.44295502, y: 1, z: 0.8304596}
   m_Center: {x: -0.01001358, y: 1.24, z: 0.27591705}
+--- !u!54 &3615183877628786920
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964549401214706764}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &529187364436762303
 PrefabInstance:
   m_ObjectHideFlags: 0

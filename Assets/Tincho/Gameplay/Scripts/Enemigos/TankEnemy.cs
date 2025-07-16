@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 
 //TP2 - Juliana Dimeglio - Martin Bielenia
-public class TankEnemy : Enemy  
+public class TankEnemy : Enemy
 {
     [SerializeField] private Transform _player;
     [SerializeField] private NavMeshAgent _agent;
@@ -12,7 +12,7 @@ public class TankEnemy : Enemy
     private Animator _animator;
     private bool _playerInAttackRange = false;
     private bool _wasProvoked;
-    public bool PlayerInAttackRange { set => _playerInAttackRange = value;}
+    public bool PlayerInAttackRange { set => _playerInAttackRange = value; }
 
     private void Start()
     {
@@ -77,12 +77,22 @@ public class TankEnemy : Enemy
         }
     }
 
-    public override void TakeHit(int damage)
+    public override void TakeHit(DamageData data)
     {
-        base.TakeHit(damage);
+        base.TakeHit(data);
+
         _wasProvoked = true;
         if (!IsDead && _animator != null)
         {
+            if (data.Type == DamageType.Fire)
+            {
+                TakeDamage(data.Amount * base._trapDamageMultiplier);
+            }
+            else
+            {
+                TakeDamage(data.Amount);
+            }
+
             _animator.SetTrigger("Hit");
         }
         if (IsDead)
@@ -93,16 +103,6 @@ public class TankEnemy : Enemy
                 _animator.SetTrigger("Dead");
                 _animator.SetBool("isAttacking", false);
             }
-
-            Collider[] colliders = GetComponentsInChildren<Collider>();
-            foreach (Collider col in colliders)
-            {
-                col.enabled = false;
-            }
-
-            LootOnDeath();
-
-            Destroy(gameObject, 5f);
         }
     }
 
