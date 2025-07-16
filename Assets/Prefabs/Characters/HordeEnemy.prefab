@@ -185,6 +185,7 @@ MonoBehaviour:
   - {fileID: 212538420612478396, guid: 9d4bd9337b9f2e9449a7fd0724cdf8fa, type: 3}
   _enemyType: 0
   _trapDamageMultiplier: 1
+  _rb: {fileID: 0}
   _stunDuration: 1
   _player: {fileID: 0}
   _agent: {fileID: 3232789509957543382}

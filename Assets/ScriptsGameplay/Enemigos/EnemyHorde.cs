@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -83,17 +82,16 @@ public class EnemyHorde : Enemy
 
     public override void TakeHit(DamageData data)
     {
-        base.TakeHit(data);
-
-
         if (data.Type == DamageType.Fire)
         {
-            TakeDamage(data.Amount * base._trapDamageMultiplier);
+            TakeDamage(data.Amount * _trapDamageMultiplier);
         }
         else
         {
             TakeDamage(data.Amount);
         }
+
+        base.TakeHit(data);
 
         _isStunned = true;
         _stunTimer = _stunDuration;
@@ -103,12 +101,12 @@ public class EnemyHorde : Enemy
             _animator.SetTrigger("Hit");
             _animator.SetBool("isRunning", false);
         }
+
         if (IsDead)
         {
             _animator.SetTrigger("Die");
             _agent.isStopped = true;
         }
-
     }
 
     private void OnTriggerStay(Collider other)
@@ -122,5 +120,22 @@ public class EnemyHorde : Enemy
                 _lastDamageTime = Time.time;
             }
         }
+    }
+
+    protected override void LootOnDeath()
+    {
+        base.LootOnDeath();
+
+        if (_lootList == null || _lootList.Count == 0) return;
+
+        int randomIndex = Random.Range(0, _lootList.Count);
+        GameObject loot = _lootList[randomIndex];
+
+        if (loot != null)
+        {
+            GameObject lootInstance = Instantiate(loot, _transform.position, Quaternion.identity);
+            Destroy(lootInstance, 10f);
+        }
+        
     }
 }

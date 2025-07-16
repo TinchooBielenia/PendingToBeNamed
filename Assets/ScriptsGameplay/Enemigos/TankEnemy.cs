@@ -79,14 +79,13 @@ public class TankEnemy : Enemy
 
     public override void TakeHit(DamageData data)
     {
-        base.TakeHit(data);
-
         _wasProvoked = true;
         if (!IsDead && _animator != null)
         {
+            // Defines how much damage according to the damage type.
             if (data.Type == DamageType.Fire)
             {
-                TakeDamage(data.Amount * base._trapDamageMultiplier);
+                TakeDamage(data.Amount * _trapDamageMultiplier);
             }
             else
             {
@@ -95,6 +94,10 @@ public class TankEnemy : Enemy
 
             _animator.SetTrigger("Hit");
         }
+
+        base.TakeHit(data);
+
+
         if (IsDead)
         {
             if (_animator != null)
@@ -102,6 +105,22 @@ public class TankEnemy : Enemy
                 _animator.applyRootMotion = true;
                 _animator.SetTrigger("Dead");
                 _animator.SetBool("isAttacking", false);
+            }
+        }
+    }
+
+    protected override void LootOnDeath()
+    {
+        base.LootOnDeath();
+
+        if (_lootList == null || _lootList.Count == 0) return;
+
+        foreach (GameObject loot in _lootList)
+        {
+            if (loot != null && Random.value <= 0.5f)
+            {
+                GameObject lootInstance = Instantiate(loot, _transform.position, Quaternion.identity);
+                Destroy(lootInstance, 10f);
             }
         }
     }

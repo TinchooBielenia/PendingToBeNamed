@@ -10,7 +10,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private float _shootCooldown = 0.5f;
     [SerializeField] private GameObject _tracerPrefab;
     [SerializeField] private Transform _muzzlePoint;
-    private PlayerHealth _playerHealing;
+    private PlayerHealth _playerHealth;
     private float _lastShootTime = -Mathf.Infinity;
     private bool _canShoot = false;
 
@@ -37,7 +37,7 @@ public class PlayerShoot : MonoBehaviour
     {
         _playerShootingStats = GetComponentInParent<PlayerShootStats>();
         _animator = GetComponent<Animator>();
-        _playerHealing = GetComponentInParent<PlayerHealth>();
+        _playerHealth = GetComponentInParent<PlayerHealth>();
 
         _normalCamera.enabled = true;
         _aimingCamera.enabled = false;
@@ -45,7 +45,7 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
-        if (_playerHealing.PlayerLife <= 0) return;
+        if (_playerHealth.PlayerLife <= 0) return;
 
         IsAiming();
 
@@ -110,17 +110,16 @@ public class PlayerShoot : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _shootDistance))
         {
             endPoint = hit.point;
-            if (((1 << hit.collider.gameObject.layer) & _enemyLayers) != 0)
+
+            if (_enemyLayers.Contains(hit.collider.gameObject.layer))
             {
-                if (_enemyLayers.Contains(hit.collider.gameObject.layer))
-                {
-                    TryApplyDamage(hit.collider, new DamageData(_playerShootingStats.EnemyDamage, DamageType.Bullet));
-                }
+                TryApplyDamage(hit.collider, new DamageData(_playerShootingStats.EnemyDamage, DamageType.Bullet));
             }
         }
         SpawnTracer(endPoint);
     }
 
+    // Generic method to apply damage of any kind.
     private void TryApplyDamage<T>(Collider collider, T damage)
     {
         var target = collider.GetComponentInParent<IDamageEnemy<T>>();

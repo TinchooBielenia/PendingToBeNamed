@@ -3,15 +3,14 @@ using UnityEngine;
 
 public class FireTrap : MonoBehaviour
 {
-    [SerializeField] private int fireDamage = 5;
-    [SerializeField] private float duration = 4f;
+    [SerializeField] private int _fireDamage = 5;
+    [SerializeField] private float _duration = 4f;
     private float _trapTimer;
     private float _trapDamageTimer;
     [SerializeField] private float _fullTrapDamageTimer;
-    private bool _isTrapped = false;
     private bool _isActive = false;
     private BoxCollider _collider;
-    private Enemy _enemy;
+    private List<Enemy> _enemiesInside = new List<Enemy>();
     [SerializeField] List<ParticleSystem> _particles;
     private bool _turnOnParticles = false;
 
@@ -27,11 +26,11 @@ public class FireTrap : MonoBehaviour
         TrapButton.OnButtonPressed += HandleTrapActivation;
     }
 
-    public void Activate()
+    private void Activate()
     {
         Debug.Log("Se activo la trampa");
         _isActive = true;
-        _trapTimer = duration;
+        _trapTimer = _duration;
         _collider.enabled = true;
         _turnOnParticles = true;
         TurnOnParticles();
@@ -48,19 +47,28 @@ public class FireTrap : MonoBehaviour
             Debug.Log("Se desactivo la trampa");
             _isActive = false;
             _collider.enabled = false;
-            _isTrapped = false;
             _trapDamageTimer = _fullTrapDamageTimer;
             _turnOnParticles = false;
             TurnOnParticles();
         }
 
-        if (_isTrapped)
+        if (_enemiesInside.Count > 0)
         {
             _trapDamageTimer -= Time.deltaTime;
 
             if (_trapDamageTimer <= 0f)
             {
-                TryApplyDamage(_enemy, new DamageData(fireDamage, DamageType.Fire));
+                foreach (Enemy enemy in _enemiesInside.ToArray())
+                {
+                    if (enemy == null || enemy.IsDead)
+                    {
+                        _enemiesInside.Remove(enemy);
+                        continue;
+                    }
+
+                    TryApplyDamage(enemy, new DamageData(_fireDamage, DamageType.Fire));
+                }
+
                 _trapDamageTimer = _fullTrapDamageTimer;
             }
         }
@@ -68,25 +76,28 @@ public class FireTrap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != null)
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy != null && !_enemiesInside.Contains(enemy))
         {
-            _enemy = other.GetComponentInParent<Enemy>();
-            _isTrapped = true;
+            _enemiesInside.Add(enemy);
         }
     }
 
-    private void TryApplyDamage<T>(Enemy col, T damage)
+    private void OnTriggerExit(Collider other)
     {
-        var target = col.GetComponentInParent<IDamageEnemy<T>>();
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy != null && _enemiesInside.Contains(enemy))
+        {
+            _enemiesInside.Remove(enemy);
+        }
+    }
+
+    private void TryApplyDamage<T>(Enemy enemy, T damage)
+    {
+        var target = enemy.GetComponentInParent<IDamageEnemy<T>>();
         if (target != null)
         {
             target.TakeHit(damage);
-
-            if (col.IsDead)
-            {
-                _enemy = null;
-                _isTrapped = false;
-            }
         }
     }
 

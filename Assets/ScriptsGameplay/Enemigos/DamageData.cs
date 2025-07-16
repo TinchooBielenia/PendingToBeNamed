@@ -2,13 +2,16 @@
 //Consigna: Enum
 public class DamageData
 {
-    public int Amount;
-    public DamageType Type;
+    private int _amount;
+    private DamageType _type;
+
+    public int Amount => _amount;
+    public DamageType Type => _type;
 
     public DamageData(int amount, DamageType type)
     {
-        Amount = amount;
-        Type = type;
+        _amount = amount;
+        _type = type;
     }
 }
 public enum DamageType

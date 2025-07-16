@@ -11,11 +11,9 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy<DamageData>
     private bool _isDead;
     [SerializeField] private AudioSource _getDamagedSFX;
     protected bool _hasDroppedLoot;
-    [SerializeField] private List<GameObject> _lootList;
-    [SerializeField] private EnemyType _enemyType;
+    [SerializeField] protected List<GameObject> _lootList;
     [SerializeField] protected int _trapDamageMultiplier;
     [SerializeField] protected Rigidbody _rb;
-    public EnemyType Type => _enemyType;
 
     public bool IsDead
     {
@@ -49,7 +47,7 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy<DamageData>
 
     protected virtual void TakeDamage(int damage)
     {
-        if(IsDead) return;
+        if (IsDead) return;
         _enemyLife -= damage;
     }
 
@@ -60,49 +58,10 @@ public abstract class Enemy : MonoBehaviour, IDamageEnemy<DamageData>
         _rb = GetComponent<Rigidbody>();
     }
 
-    protected void LootOnDeath()
+    protected virtual void LootOnDeath()
     {
         if (_hasDroppedLoot) return;
 
-        switch (_enemyType)
-        {
-            case EnemyType.Horde:
-                DropHordeLoot();
-                break;
-
-            case EnemyType.Tank:
-                DropTankLoot();
-                break;
-        }
-
         _hasDroppedLoot = true;
-    }
-
-    private void DropHordeLoot()
-    {
-        if (_lootList == null || _lootList.Count == 0) return;
-
-        int randomIndex = Random.Range(0, _lootList.Count);
-        GameObject loot = _lootList[randomIndex];
-
-        if (loot != null)
-        {
-            Instantiate(loot, _transform.position, Quaternion.identity);
-        }
-        Destroy(gameObject, 10f);
-    }
-
-    private void DropTankLoot()
-    {
-        if (_lootList == null || _lootList.Count == 0) return;
-
-        foreach (GameObject loot in _lootList)
-        {
-            if (loot != null && Random.value <= 0.5f)
-            {
-                Instantiate(loot, _transform.position, Quaternion.identity);
-            }
-        }
-        Destroy(gameObject, 10f);
     }
 }

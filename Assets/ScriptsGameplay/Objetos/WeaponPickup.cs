@@ -34,16 +34,16 @@ public class WeaponPickup : MonoBehaviour
     {
         // GunSocket from the active avatar
         PlayerAvatarConfiguration avatarConfig = _player.GetComponentInChildren<PlayerAvatarConfiguration>();
-        if (avatarConfig == null || avatarConfig.GunSocket == null) return;
+        if (avatarConfig == null || avatarConfig.gunSocket == null) return;
 
         // Instantiate the weapon in the right GunSocket
-        GameObject newWeapon = Instantiate(_weaponPrefab, avatarConfig.GunSocket);
+        GameObject newWeapon = Instantiate(_weaponPrefab, avatarConfig.gunSocket);
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localRotation = Quaternion.identity;
         _isPickup = false;
 
         // Find the muzzlePoint
-        Transform muzzlePoint = avatarConfig.GunSocket;
+        Transform muzzlePoint = avatarConfig.gunSocket;
 
         PlayerShoot _playerShoot = _player.GetComponent<PlayerShoot>();
         if (_playerShoot != null)
