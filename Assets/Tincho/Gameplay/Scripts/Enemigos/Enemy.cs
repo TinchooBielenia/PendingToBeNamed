@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //TP2 - Martin Bielenia
+//Consigna: Abstract class
 public abstract class Enemy : MonoBehaviour, IDamageEnemy
 {
     [SerializeField] protected int _enemyLife;

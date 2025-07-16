@@ -40,7 +40,7 @@ public class NoteController : MonoBehaviour, IInteraction
         _canvas.SetActive(true);
         Time.timeScale = 0f;
         _isInteracting = false;
-        _noteValue.text = TextContainer.TextSwitch(_noteID);
+        _noteValue.text = TextContainer.GetTextByID(_noteID);
     }
 
     private void HideNote()

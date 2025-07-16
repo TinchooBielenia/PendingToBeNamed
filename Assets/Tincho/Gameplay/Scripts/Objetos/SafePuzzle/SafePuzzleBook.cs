@@ -20,6 +20,7 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
         _photosShuffled = false;
     }
 
+    //Consigna: Struct
     [Serializable] private struct Card
     {
         public int value; 

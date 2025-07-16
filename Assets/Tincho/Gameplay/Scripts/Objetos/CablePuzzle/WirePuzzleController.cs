@@ -23,6 +23,7 @@ public class WirePuzzleController : MonoBehaviour
         _wrongTries = 0;
     }
 
+    //Consigna: Evento
     public event Action OnPuzzleFailed;
 
     public void AddIncorrect()
@@ -42,6 +43,7 @@ public class WirePuzzleController : MonoBehaviour
         }
     }
 
+    //Consigna: Evento
     public event Action OnPuzzleCompleted;
 
     public void AddCorrect()
