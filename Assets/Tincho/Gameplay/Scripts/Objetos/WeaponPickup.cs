@@ -3,13 +3,17 @@ using UnityEngine;
 public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] private GameObject _weaponPrefab;
+    [SerializeField] private AudioSource _pickUpGunSFX;
     [SerializeField] private bool _isPickup = false;
-    [SerializeField] private Player _player;
+    private Player _player;
 
-    public bool WeaponPickedUp
+    public bool IsPickUp => _isPickup;
+
+    public bool GunPickedUp()
     {
-        get { return _isPickup; }
-        set { _isPickup = value; }
+        _isPickup = true;
+        _pickUpGunSFX.Play();
+        return _isPickup;
     }
 
     private void Update()

@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class SceneHanlder : MonoBehaviour
@@ -13,6 +14,7 @@ public class SceneHanlder : MonoBehaviour
     private string _currentScene;
     [SerializeField] private string _mainMenuScene;
     [SerializeField] private Player _player;
+    [SerializeField] private AudioSource _finishGameSongSFX;
 
     private void Awake()
     {
@@ -45,6 +47,7 @@ public class SceneHanlder : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         _player.FrozenPlayer();
+        _finishGameSongSFX.Play();
     }
 
     private IEnumerator ResetScene(string desiredScene)

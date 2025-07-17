@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -12,12 +13,16 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Image _lifeBar;
     [SerializeField] private AudioSource _getDamagedSFX;
     [SerializeField] private AudioSource _drinkPotionSFX;
+    [SerializeField] private AudioSource _medkitSFX;
     private Animator _animator;
     private Player _player;
     private bool _potionDrunk;
+    private bool _playerIsDead = false;
     [SerializeField] private float _waterDamageTimer;
 
-    public float GetPlayerLife() => _playerLife;
+    public float PlayerLife() => _playerLife;
+
+    public bool PlayerDeath() => _playerIsDead;
 
     void Start()
     {
@@ -25,7 +30,6 @@ public class PlayerHealth : MonoBehaviour
         _player = GetComponent<Player>();
         _potionDrunk = false;
         _waterDamageTimer = 0;
-
     }
 
     public bool PotionDrunk
@@ -63,6 +67,7 @@ public class PlayerHealth : MonoBehaviour
         if (_playerLife <= 0) {
             Destroy(_getDamagedSFX);
             GetComponent<Player>().Die();
+            _playerIsDead = true;
         }
     }
 
@@ -113,16 +118,19 @@ public class PlayerHealth : MonoBehaviour
     public void HealPlayer(float amount)
     {
         _playerLife += amount;
+        _medkitSFX.Play();
     }
 
     public void HealPlayerFromWater(float amount)
     {
         _playerLife += Time.deltaTime * amount;
         _playerLife = Mathf.Clamp(_playerLife, 0, _maxPlayerLife);
+    }
 
+    public void StartWaterEffects()
+    {
         _healingSFX.Play();
-        if (!_healingAudioSFX.isPlaying)
-            _healingAudioSFX.Play();
+        _healingAudioSFX.Play();
     }
 
     public void StopWaterEffects()

@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class DrinkablePotion : MonoBehaviour, IInteraction
+public class DrinkablePotion : BaseInteractableObject, IInteraction
 {
-    [SerializeField] private PlayerHealth _player;
+    [SerializeField] private PlayerHealth _playerHealth;
 
     public void TriggerInteraction()
     {
-        _player.DrinkPotion();
+        _playerHealth.DrinkPotion();
         Destroy(gameObject);
     }
 }

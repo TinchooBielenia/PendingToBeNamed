@@ -51,7 +51,7 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
-        if (_playerHealing.GetPlayerLife() <= 0) return;
+        if (_playerHealing.PlayerLife() <= 0) return;
 
         IsAiming();
 
@@ -107,7 +107,7 @@ public class PlayerShoot : MonoBehaviour
 
         _canShoot = false;
         _shootSFX.Play();
-        _playerShootingStats.MagazineSize--;
+        _playerShootingStats.TryShoot();
 
         Ray ray = new Ray(_camera.position, _camera.forward);
         Debug.DrawRay(ray.origin, ray.direction * _shootDistance, Color.blue, 1f);
@@ -122,7 +122,7 @@ public class PlayerShoot : MonoBehaviour
                 if (enemy != null)
                 {
                     Debug.Log("Player is damaging " + hit.collider.name);
-                    enemy.TakeHit(_playerShootingStats.GetEnemyDamage);
+                    enemy.TakeHit(_playerShootingStats.EnemyDamage);
                 }
             }
         }

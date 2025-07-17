@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+//TP2 - Juliana Dimeglio
 public class NoteController : MonoBehaviour, IInteraction
 {
     [SerializeField] private GameObject _canvas;
@@ -19,7 +20,7 @@ public class NoteController : MonoBehaviour, IInteraction
         if (_isInteracting && !_isCanvasVisible)
         {
             ShowNote();
-            
+
         }
 
         if (_isCanvasVisible && InputController.Instance.EscapeKey)
@@ -39,7 +40,7 @@ public class NoteController : MonoBehaviour, IInteraction
         _canvas.SetActive(true);
         Time.timeScale = 0f;
         _isInteracting = false;
-        _noteValue.text = TextContainer.TextSwitch(_noteID);
+        _noteValue.text = NotesTextContainer.GetTextByID(_noteID);
     }
 
     private void HideNote()

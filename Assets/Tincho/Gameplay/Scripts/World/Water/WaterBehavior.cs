@@ -26,6 +26,21 @@ public class WaterBehavior : MonoBehaviour
         _rend.material.mainTextureOffset = new Vector2(offsetX, offsetY);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _player = other.GetComponent<PlayerHealth>();
+            if (_player == null) return;
+
+            if (_player.PotionDrunk && _player.PlayerLife() < _player.MaxPlayerLife)
+            {
+                Debug.Log("Player entered the water");
+                _player.StartWaterEffects();
+            }
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -33,9 +48,13 @@ public class WaterBehavior : MonoBehaviour
             _player = other.GetComponent<PlayerHealth>();
             if (_player == null) return;
 
-            if (_player.PotionDrunk && _player.GetPlayerLife() < _player.MaxPlayerLife)
+            if (_player.PotionDrunk && _player.PlayerLife() < _player.MaxPlayerLife)
             {
                 _player.HealPlayerFromWater(_healingRate);
+                if (_player.PlayerLife() == _player.MaxPlayerLife)
+                {
+                    _player.StopWaterEffects();
+                }
             }
             else if (!_player.PotionDrunk)
             {
