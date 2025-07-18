@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1df982aa05aca0f4aada1f6145bff585, type: 3}
       propertyPath: m_Name
-      value: Hospital Bed Variant
+      value: Hospital Bed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -71,8 +71,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1df982aa05aca0f4aada1f6145bff585, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8098993161879060303}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1df982aa05aca0f4aada1f6145bff585, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7401390835304995893}
   m_SourcePrefab: {fileID: 100100000, guid: 1df982aa05aca0f4aada1f6145bff585, type: 3}
---- !u!1 &8981319565033292318 stripped
+--- !u!1 &417373536064699069 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1df982aa05aca0f4aada1f6145bff585, type: 3}
   m_PrefabInstance: {fileID: 651798004571162604}
@@ -83,7 +86,7 @@ MeshCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8981319565033292318}
+  m_GameObject: {fileID: 417373536064699069}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -99,3 +102,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6052040398253233293, guid: 1df982aa05aca0f4aada1f6145bff585, type: 3}
+--- !u!114 &7401390835304995893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417373536064699069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: -0.5}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

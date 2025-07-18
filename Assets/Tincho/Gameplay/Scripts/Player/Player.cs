@@ -10,10 +10,16 @@ public class Player : MonoBehaviour
     private PlayerHealth _playerHealth;
     private PlayerShootStats _playerShootStats;
     private WeaponPickup _weaponPickup;
+    private PotionsEffectController _potionEffectController;
+    private Camera _mainCamera;
+    [SerializeField] GameObject _hud;
 
     public bool PlayerHealth => _playerHealth;
     public bool PlayerShootStats => _playerShootStats;
     public bool WeaponPickup => _weaponPickup;
+    public bool MainCamera => _mainCamera;
+    public bool PotionEffectController => _potionEffectController;
+    public GameObject HUD => _hud;
 
     [Header("Movement")]
     [SerializeField]

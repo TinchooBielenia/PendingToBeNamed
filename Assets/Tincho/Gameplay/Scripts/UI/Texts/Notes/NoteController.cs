@@ -9,6 +9,7 @@ public class NoteController : MonoBehaviour, IInteraction
     private bool _isCanvasVisible = false;
     [SerializeField] private TextMeshProUGUI _noteValue;
     [SerializeField] private int _noteID;
+    [SerializeField] private AudioSource _openCloseNoteSFX;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class NoteController : MonoBehaviour, IInteraction
         if (_isCanvasVisible && InputController.Instance.EscapeKey)
         {
             HideNote();
+            _openCloseNoteSFX.Play();
         }
     }
 
@@ -41,6 +43,7 @@ public class NoteController : MonoBehaviour, IInteraction
         Time.timeScale = 0f;
         _isInteracting = false;
         _noteValue.text = NotesTextContainer.GetTextByID(_noteID);
+        _openCloseNoteSFX.Play();
     }
 
     private void HideNote()

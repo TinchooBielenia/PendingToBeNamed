@@ -8,7 +8,7 @@ public class EffectsOnScreen : MonoBehaviour
 
     [SerializeField] private float _pulseSpeed = 2f;
     [SerializeField] private float _pulseDuration = 1f;
-    [SerializeField] private Image effectOnScreen;
+    private Image _effectOnScreen;
     [SerializeField][Range(0f, 1f)] private float _maxAlpha = 0.4f;
 
     private void Awake()
@@ -21,13 +21,15 @@ public class EffectsOnScreen : MonoBehaviour
 
         Instance = this;
 
-        if (effectOnScreen != null)
-            effectOnScreen.enabled = false;
+        if (_effectOnScreen != null)
+            _effectOnScreen.enabled = false;
     }
 
-    public void EffectOnScreenPulse()
+    public void EffectOnScreenPulse(Image imageEffect)
     {
         if (!gameObject.activeInHierarchy) return;
+
+        _effectOnScreen = imageEffect;
 
         StopAllCoroutines(); // evita superposición si se llama varias veces seguidas
         StartCoroutine(PulseEffectRoutine());
@@ -35,22 +37,22 @@ public class EffectsOnScreen : MonoBehaviour
 
     private IEnumerator PulseEffectRoutine()
     {
-        effectOnScreen.enabled = true;
+        _effectOnScreen.enabled = true;
 
         float time = 0f;
-        Color originalColor = effectOnScreen.color;
+        Color originalColor = _effectOnScreen.color;
 
         while (time < _pulseDuration)
         {
             float alpha = Mathf.PingPong(Time.unscaledTime * _pulseSpeed, _maxAlpha);
-            effectOnScreen.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            _effectOnScreen.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
             time += Time.unscaledDeltaTime;
             yield return null;
         }
 
         // Ocultar al terminar
-        effectOnScreen.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
-        effectOnScreen.enabled = false;
+        _effectOnScreen.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+        _effectOnScreen.enabled = false;
     }
 
 }

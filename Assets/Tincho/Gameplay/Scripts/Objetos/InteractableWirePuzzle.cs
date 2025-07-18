@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class InteractableWirePuzzle : MonoBehaviour, IInteraction
 {
@@ -6,8 +7,8 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private GameObject _wirePuzzlePrefab;
     private GameObject _wirePuzzleInstance;
     [SerializeField] private WirePuzzleController _wirePuzzleClass;
-    [SerializeField] private GameObject _player;
-    [SerializeField] private GameObject _hud;
+    private GameObject _player;
+    private GameObject _hud;
     private bool _startVictoryTimer = false;
     [SerializeField] private float _victoryTimer;
     [SerializeField] private AudioSource _electricGeneratorSFX;
@@ -16,6 +17,12 @@ public class InteractableWirePuzzle : MonoBehaviour, IInteraction
     [SerializeField] private CageMetallicDoor _cageMetallicDoor;
     [SerializeField] private EnemySpawner _spawner;
     [SerializeField] private int _spawnerAmount;
+
+    private void Start()
+    {
+        _player = Player.Instance.gameObject;
+        _hud = Player.Instance.HUD;
+    }
 
     private void Update()
     {

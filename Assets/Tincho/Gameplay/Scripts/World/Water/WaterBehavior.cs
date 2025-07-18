@@ -36,7 +36,7 @@ public class WaterBehavior : MonoBehaviour
             if (_player.PotionDrunk && _player.PlayerLife() < _player.MaxPlayerLife)
             {
                 Debug.Log("Player entered the water");
-                _player.StartWaterEffects();
+                _player.StartHealingEffects();
             }
         }
     }
@@ -53,7 +53,7 @@ public class WaterBehavior : MonoBehaviour
                 _player.HealPlayerFromWater(_healingRate);
                 if (_player.PlayerLife() == _player.MaxPlayerLife)
                 {
-                    _player.StopWaterEffects();
+                    _player.StopHealingEffects();
                 }
             }
             else if (!_player.PotionDrunk)
@@ -69,7 +69,7 @@ public class WaterBehavior : MonoBehaviour
         {
             if (_player != null)
             {
-                _player.StopWaterEffects();
+                _player.StopHealingEffects();
             }
 
             _player = null;

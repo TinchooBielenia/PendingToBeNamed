@@ -1,5 +1,6 @@
+using OpenCover.Framework.Model;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioSource _getDamagedSFX;
     [SerializeField] private AudioSource _drinkPotionSFX;
     [SerializeField] private AudioSource _medkitSFX;
+    [SerializeField] private Image _imageEffect;
     private Animator _animator;
     private Player _player;
     private bool _potionDrunk;
@@ -61,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
         _getDamagedSFX.Play();
         _playerLife -= amount;
         _playerLife = Mathf.Clamp(_playerLife, 0, _maxPlayerLife);
-        EffectsOnScreen.Instance.EffectOnScreenPulse();
+        EffectsOnScreen.Instance.EffectOnScreenPulse(_imageEffect);
         Debug.Log("Jugador recibió daño. Vida actual: " + _playerLife);
 
         if (_playerLife <= 0) {
@@ -79,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
         if (_waterDamageTimer <= 0f)
         {
             _getDamagedSFX.Play();
-            EffectsOnScreen.Instance.EffectOnScreenPulse();
+            EffectsOnScreen.Instance.EffectOnScreenPulse(_imageEffect);
             _animator.SetTrigger("isGettingDamage");
             _waterDamageTimer = 1f;
         }
@@ -94,25 +96,11 @@ public class PlayerHealth : MonoBehaviour
     public void DrinkPotion()
     {
         _animator.SetTrigger("isDrinkingPotion");
-        _player.FrozenPlayer();
         _drinkPotionSFX.Play();
-        _potionDrunk = true;
-        PowerUpEffectsUI.Instance.ShowPowerUpSlots(1);
 
-        _healingSFX.Play();
-        if (!_healingAudioSFX.isPlaying)
-            _healingAudioSFX.Play();
+        StartHealingEffects();
 
-        Invoke(nameof(ReturnPlayerControl), 3f);
-    }
-
-    private void ReturnPlayerControl()
-    {
-        _player.UnfreezePlayer();
-
-        _healingSFX.Stop();
-        if (_healingAudioSFX.isPlaying)
-            _healingAudioSFX.Stop();
+        Invoke(nameof(StopHealingEffects), 4f);
     }
 
     public void HealPlayer(float amount)
@@ -127,21 +115,35 @@ public class PlayerHealth : MonoBehaviour
         _playerLife = Mathf.Clamp(_playerLife, 0, _maxPlayerLife);
     }
 
-    public void StartWaterEffects()
+    public void StartHealingEffects()
     {
         _healingSFX.Play();
         _healingAudioSFX.Play();
     }
 
-    public void StopWaterEffects()
+    public void StopHealingEffects()
     {
         if (_healingSFX.isPlaying)
             _healingSFX.Stop();
 
         if (_healingAudioSFX.isPlaying)
-            _healingAudioSFX.Stop();
+            StartCoroutine(FadeOutSound(_healingAudioSFX, 1f));
 
         _animator.ResetTrigger("isGettingDamage");
+    }
+
+    private IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0f)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume; // Restaurar volumen original por si se vuelve a usar
     }
 
 }

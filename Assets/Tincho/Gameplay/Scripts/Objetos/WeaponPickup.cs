@@ -9,6 +9,11 @@ public class WeaponPickup : MonoBehaviour
 
     public bool IsPickUp => _isPickup;
 
+    private void Start()
+    {
+        _player = Player.Instance;
+    }
+
     public bool GunPickedUp()
     {
         _isPickup = true;

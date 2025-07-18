@@ -1,12 +1,28 @@
 using UnityEngine;
 
-public class DrinkablePotion : BaseInteractableObject, IInteraction
+public class DrinkablePotion : MonoBehaviour, IInteraction
 {
-    [SerializeField] private PlayerHealth _playerHealth;
+    private PotionsEffectController _potionEffect;
+    private bool _isInteracting = false;
+    [SerializeField] private float _destructionTimer;
+
+    private void Start()
+    {
+        _potionEffect = Player.Instance.GetComponent<PotionsEffectController>();
+    }
 
     public void TriggerInteraction()
     {
-        _playerHealth.DrinkPotion();
-        Destroy(gameObject);
+        _isInteracting = true;
+    }
+
+    private void Update()
+    {
+        if (_isInteracting)
+        {
+            _potionEffect.ActivatePotionEffect();
+            Destroy(gameObject);
+        }
+        else Destroy(gameObject, _destructionTimer);
     }
 }

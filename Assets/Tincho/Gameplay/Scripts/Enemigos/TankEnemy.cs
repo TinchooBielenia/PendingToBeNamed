@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class TankEnemy : Enemy, IDamageEnemy   
+public class TankEnemy : Enemy, IDamageEnemy
 {
-    public bool inRange;
     [SerializeField] private Transform _player;
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private AudioSource _getDamagedSFX;
@@ -24,7 +23,6 @@ public class TankEnemy : Enemy, IDamageEnemy
     private void Start()
     {
         _enemyLife = _maxEnemyLife;
-        inRange = false;
         _agent.isStopped = true;
         _animator = GetComponentInChildren<Animator>();
     }
@@ -85,16 +83,15 @@ public class TankEnemy : Enemy, IDamageEnemy
                 _animator.SetBool("isAttacking", false);
             }
 
-            inRange = false;
 
             Collider[] colliders = GetComponentsInChildren<Collider>();
             foreach (Collider col in colliders)
             {
                 col.enabled = false;
             }
-            LootOnDeath(); 
+            LootOnDeath();
 
-            Destroy(gameObject, 5f); 
+            Destroy(gameObject, 5f);
         }
     }
 
@@ -159,12 +156,12 @@ public class TankEnemy : Enemy, IDamageEnemy
         Gizmos.DrawWireSphere(transform.position, _activationRange);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _moveStopDistance); 
+        Gizmos.DrawWireSphere(transform.position, _moveStopDistance);
     }
     private void RotateTowardsPlayer()
     {
         Vector3 direction = (_player.position - transform.position).normalized;
-        direction.y = 0f; 
+        direction.y = 0f;
 
         if (direction != Vector3.zero)
         {

@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PowerUpEffectsUI : MonoBehaviour
 {
@@ -41,23 +39,44 @@ public class PowerUpEffectsUI : MonoBehaviour
 
         Image targetSlot = _slots[value - 1];
         targetSlot.enabled = true;
+
+        // Setear alpha visible antes del pulso
+        Color color = targetSlot.color;
+        color.a = _maxAlpha;
+        targetSlot.color = color;
+
         StartCoroutine(PulseEffectRoutine(targetSlot));
     }
 
     private IEnumerator PulseEffectRoutine(Image effectImage)
     {
         float time = 0f;
-        Color originalColor = effectImage.color;
+        Color baseColor = effectImage.color;
+        baseColor.a = _maxAlpha;
 
         while (time < _pulseDuration)
         {
             float alpha = Mathf.PingPong(Time.unscaledTime * _pulseSpeed, _maxAlpha);
-            effectImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            effectImage.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
             time += Time.unscaledDeltaTime;
             yield return null;
         }
 
-        // Restaurar alpha original
-        effectImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, originalColor.a);
+        // Al terminar, dejar alpha visible
+        effectImage.color = new Color(baseColor.r, baseColor.g, baseColor.b, _maxAlpha);
     }
+
+    public void HidePowerUpSlots(int value)
+    {
+        if (value <= 0 || value > _slots.Count)
+        {
+            Debug.LogWarning("Índice fuera de rango en HidePowerUpSlots");
+            return;
+        }
+
+        Image targetSlot = _slots[value - 1];
+        // Apagar directo sin corrutina
+        targetSlot.enabled = false;
+    }
+
 }
