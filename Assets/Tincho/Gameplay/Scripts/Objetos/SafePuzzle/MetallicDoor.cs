@@ -14,15 +14,7 @@ public class MetallicDoor : MonoBehaviour, IInteraction
 
     public void TriggerInteraction()
     {
-        if (Inventory.instance.HasItem("Generator Key"))
-        {
-            _isInteracting = true;
-        }
-        else
-        {
-            _isInteracting= false;
-        }
-        
+        _isInteracting = true;
     }
 
     private void Update()
@@ -30,6 +22,11 @@ public class MetallicDoor : MonoBehaviour, IInteraction
         if (_isInteracting && Inventory.instance.HasItem("Generator Key"))
         {
             OpenMetallicDoor();
+        }
+        else if (_isInteracting && !Inventory.instance.HasItem("Generator Key"))
+        {
+            DialogsTextsUI.Instance.ShowDialogTexts(2);
+            _isInteracting = false;
         }
     }
 

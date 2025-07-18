@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,15 +11,24 @@ public class NotesTextContainer : MonoBehaviour
     public class NoteEntry
     {
         public int noteID;
+        public NoteType textType;
         [TextArea(3, 10)]
         public string text;
     }
 
+    public enum NoteType
+    {
+        Note,
+        Hint,
+    }
+
     [SerializeField]
     private List<NoteEntry> _notesByID = new();
+    [SerializeField]
+    private List<NoteEntry> _hintsByID = new();
 
     //Consigna: Diccionario
-    private Dictionary<int, string> _noteDictionary = new();
+    private Dictionary<(int, NoteType), string> _noteDictionary = new();
 
     private void Awake()
     {
@@ -33,28 +43,43 @@ public class NotesTextContainer : MonoBehaviour
 
         foreach (var note in _notesByID)
         {
-            if (!_noteDictionary.ContainsKey(note.noteID))
+            var key = (note.noteID, note.textType);
+            if (!_noteDictionary.ContainsKey(key))
             {
-                _noteDictionary.Add(note.noteID, note.text);
+                _noteDictionary.Add(key, note.text);
             }
             else
             {
-                Debug.LogWarning($"Nota con ID duplicado: {note.noteID}");
+                Debug.LogWarning($"Nota duplicada con ID: {note.noteID} y tipo: {note.textType}");
+            }
+        }
+
+        foreach (var note in _hintsByID)
+        {
+            var key = (note.noteID, note.textType);
+            if (!_noteDictionary.ContainsKey(key))
+            {
+                _noteDictionary.Add(key, note.text);
+            }
+            else
+            {
+                Debug.LogWarning($"Nota duplicada con ID: {note.noteID} y tipo: {note.textType}");
             }
         }
     }
 
-    public static string GetTextByID(int noteID)
+    public static string GetTextByID(int noteID, NoteType textType)
     {
         if (Instance == null)
         {
-            Debug.LogWarning("No hay instancia de TextContainer en la escena.");
+            Debug.LogWarning("No hay instancia de NotesTextContainer en la escena.");
             return "Texto no encontrado.";
         }
 
-        if (!Instance._noteDictionary.TryGetValue(noteID, out var text))
+        var key = (noteID, textType);
+        if (!Instance._noteDictionary.TryGetValue(key, out var text))
         {
-            return "Nota no encontrada.";
+            return $"Texto no encontrado para ID: {noteID} y tipo: {textType}.";
         }
 
         return text;

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -9,7 +10,11 @@ public class NoteController : MonoBehaviour, IInteraction
     private bool _isCanvasVisible = false;
     [SerializeField] private TextMeshProUGUI _noteValue;
     [SerializeField] private int _noteID;
+    [SerializeField] private NotesTextContainer.NoteType _textType;
     [SerializeField] private AudioSource _openCloseNoteSFX;
+
+    public delegate void OnNoteOpened(int noteID);
+    public static event OnNoteOpened NoteOpened;
 
     private void Start()
     {
@@ -42,8 +47,9 @@ public class NoteController : MonoBehaviour, IInteraction
         _canvas.SetActive(true);
         Time.timeScale = 0f;
         _isInteracting = false;
-        _noteValue.text = NotesTextContainer.GetTextByID(_noteID);
+        _noteValue.text = NotesTextContainer.GetTextByID(_noteID, _textType);
         _openCloseNoteSFX.Play();
+        NoteOpened?.Invoke(_noteID);
     }
 
     private void HideNote()
