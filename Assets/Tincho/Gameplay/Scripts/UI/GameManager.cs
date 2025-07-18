@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public int SelectedCharacterID { get; private set; } = 0;
 
+    [SerializeField] private int _hintID = -1;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,10 +34,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(5);
         _firstHint = HintController.Instance;
 
-        if (_firstHint != null)
-            _firstHint.ShowHint();
-        else
-            Debug.LogWarning("HintController no encontrado.");
+        if (_hintID >= 0)
+        {
+            HintController.Instance.ShowHint(_hintID, NotesTextContainer.NoteType.Hint);
+        }
     }
 
     public void SetSelectedCharacter(int id)

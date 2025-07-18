@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected int _enemyLife;
-    [SerializeField] protected int _maxEnemyLife = 100;
+    [SerializeField] protected float _enemyLife;
+    [SerializeField] protected float _maxEnemyLife = 100;
     protected Transform _transform;
     protected bool _isDead;
     protected bool _hasDroppedLoot;

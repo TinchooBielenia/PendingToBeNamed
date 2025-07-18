@@ -13,6 +13,10 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
     [SerializeField] private string _currentCorrectCode;
     [SerializeField] private AudioSource _openBookSFX;
 
+    [SerializeField] private int _hintID = -1;
+    [SerializeField] private bool _triggerHintOnOpen = true;
+    private bool _wasNoteShown = false;
+
     private void Start()
     {
         _canvas.SetActive(false);
@@ -47,6 +51,8 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
         _openBookSFX.Play();
         Time.timeScale = 0f;
         _isInteracting = false;
+
+        _wasNoteShown = true;
     }
 
     private void HideBook()
@@ -54,6 +60,12 @@ public class SafePuzzleBook : MonoBehaviour, IInteraction
         _canvas.SetActive(false);
         Time.timeScale = 1f;
         _isCanvasVisible = false;
+
+        if (_wasNoteShown && _triggerHintOnOpen && _hintID >= 0)
+        {
+            HintController.Instance.ShowHint(_hintID, NotesTextContainer.NoteType.Hint);
+            _wasNoteShown = false; // Evitar mostrarlo de nuevo por error
+        }
     }
 
     public void TriggerInteraction()

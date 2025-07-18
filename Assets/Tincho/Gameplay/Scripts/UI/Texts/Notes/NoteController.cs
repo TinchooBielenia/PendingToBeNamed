@@ -13,6 +13,11 @@ public class NoteController : MonoBehaviour, IInteraction
     [SerializeField] private NotesTextContainer.NoteType _textType;
     [SerializeField] private AudioSource _openCloseNoteSFX;
 
+    [SerializeField] private int _hintID = -1;
+    [SerializeField] private bool _triggerHintOnOpen = true;
+
+    private bool _wasNoteShown = false;
+
     public delegate void OnNoteOpened(int noteID);
     public static event OnNoteOpened NoteOpened;
 
@@ -26,7 +31,6 @@ public class NoteController : MonoBehaviour, IInteraction
         if (_isInteracting && !_isCanvasVisible)
         {
             ShowNote();
-
         }
 
         if (_isCanvasVisible && InputController.Instance.EscapeKey)
@@ -50,6 +54,9 @@ public class NoteController : MonoBehaviour, IInteraction
         _noteValue.text = NotesTextContainer.GetTextByID(_noteID, _textType);
         _openCloseNoteSFX.Play();
         NoteOpened?.Invoke(_noteID);
+
+        // Marcar que la nota fue abierta, para luego mostrar el hint
+        _wasNoteShown = true;
     }
 
     private void HideNote()
@@ -57,5 +64,11 @@ public class NoteController : MonoBehaviour, IInteraction
         _canvas.SetActive(false);
         Time.timeScale = 1f;
         _isCanvasVisible = false;
+
+        if (_wasNoteShown && _triggerHintOnOpen && _hintID >= 0)
+        {
+            HintController.Instance.ShowHint(_hintID, NotesTextContainer.NoteType.Hint);
+            _wasNoteShown = false; // Evitar mostrarlo de nuevo por error
+        }
     }
 }

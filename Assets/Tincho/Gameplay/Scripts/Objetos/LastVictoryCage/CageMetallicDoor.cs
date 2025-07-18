@@ -16,6 +16,8 @@ public class CageMetallicDoor : MonoBehaviour
     [SerializeField] private bool _timerFinished;
     //[SerializeField] private TextMeshProUGUI _timerOnScreenText;
     //[SerializeField] private GameObject _timerOnScreenCanvas;
+    [SerializeField] private GameObject _boss;
+    [SerializeField] private Boss _bossBool;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class CageMetallicDoor : MonoBehaviour
         //_playerCrossedTrigger = false;
         //_timerOnScreenCanvas.SetActive(false);
         _timerFinished = false;
+        //_boss.SetActive(false);
     }
 
     public bool puzzleWasSolved
@@ -43,10 +46,10 @@ public class CageMetallicDoor : MonoBehaviour
         //    ManageBattleTimer();
         //}
 
-        if (_timerFinished)
-        {
-            TimerFinished();
-        }
+        //if (_timerFinished)
+        //{
+        //    TimerFinished();
+        //}
     }
 
     private void OpenMetallicDoor()
@@ -60,12 +63,20 @@ public class CageMetallicDoor : MonoBehaviour
     {
         Debug.Log("Player entro");
         _blockerDoor.SetActive(true);
+        _boss.SetActive(true);
         //_enemySpawner1.StartSpawning(_enemyQuantity);
         //_enemySpawner2.StartSpawning(_enemyQuantity);
         _openedDoorSFX.Play();
         _metallicDoorAnimation.SetTrigger("doorClosed");
-        _mainGate.SetTrigger("closeMainGate");
+        _mainGate.SetBool("closeDoor", true);
         //_playerCrossedTrigger = true;
+    }
+
+    public void OpenMainGate()
+    {
+        Debug.Log("Player logro escapar");
+        _mainGate.SetBool("closeDoor", false); // <- Esto resetea el bool
+        _mainGate.SetTrigger("mainGateOpened");
     }
 
     //private void ManageBattleTimer()
@@ -80,10 +91,10 @@ public class CageMetallicDoor : MonoBehaviour
     //    }
     //}
 
-    private void TimerFinished()
-    {
-        //_timerOnScreenCanvas.SetActive(false);
-        Debug.Log("Player logro escapar");
-        _mainGate.SetTrigger("mainGateOpened");
-    }
+    //public void TimerFinished()
+    //{
+    //    //_timerOnScreenCanvas.SetActive(false);
+    //    Debug.Log("Player logro escapar");
+    //    _mainGate.SetTrigger("mainGateOpened");
+    //}
 }

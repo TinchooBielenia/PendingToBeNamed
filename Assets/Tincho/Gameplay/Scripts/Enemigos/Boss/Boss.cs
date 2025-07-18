@@ -43,6 +43,7 @@ public class Boss : Enemy, IDamageEnemy
     [SerializeField] private int _zombieAmount;
     public BombSpawner bombSpawner;
 
+    public CageMetallicDoor cage;
 
 
     private void Start()
@@ -60,12 +61,12 @@ public class Boss : Enemy, IDamageEnemy
         if (Time.time - _lastStateChangeTime < _stateChangeCooldown)
             return;
 
-        // Estado Melee
-        if (_enemyLife <= _maxEnemyLife * 0.3f)
-        {
-            StartCoroutine(SpawnHorde(_zombieAmount));
-            return;
-        }
+        //// Estado Melee
+        //if (_enemyLife <= _maxEnemyLife * 0.3f)
+        //{
+        //    StartCoroutine(SpawnHorde(_zombieAmount));
+        //    return;
+        //}
 
         // Invocación
         if (_enemyLife <= _maxEnemyLife * 0.6f && !_hasSummonedZombies)
@@ -112,6 +113,7 @@ public class Boss : Enemy, IDamageEnemy
 
         if (_enemyLife <= 0)
         {
+            cage.OpenMainGate();
             animator.SetTrigger("Dead");
             _isDead = true;
             Collider[] colliders = GetComponentsInChildren<Collider>();
