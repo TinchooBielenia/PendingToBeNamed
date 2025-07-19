@@ -13,7 +13,7 @@ public class CageMetallicDoor : MonoBehaviour
     [SerializeField] private GameObject _blockerDoor;
     [SerializeField] private float _openMainDoorTimer;
     //[SerializeField] private bool _playerCrossedTrigger;
-    [SerializeField] private bool _timerFinished;
+    //[SerializeField] private bool _timerFinished;
     //[SerializeField] private TextMeshProUGUI _timerOnScreenText;
     //[SerializeField] private GameObject _timerOnScreenCanvas;
     [SerializeField] private GameObject _boss;
@@ -25,7 +25,7 @@ public class CageMetallicDoor : MonoBehaviour
         _blockerDoor.SetActive(false);
         //_playerCrossedTrigger = false;
         //_timerOnScreenCanvas.SetActive(false);
-        _timerFinished = false;
+        //_timerFinished = false;
         //_boss.SetActive(false);
     }
 
