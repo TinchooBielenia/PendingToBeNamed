@@ -55,6 +55,8 @@ public class Boss : Enemy, IDamageEnemy
 
     private void Update()
     {
+        if (_isDead) return;
+
         currentState?.Tick();
 
         // Si no pasó suficiente tiempo desde el último cambio de estado, salimos
@@ -113,9 +115,15 @@ public class Boss : Enemy, IDamageEnemy
 
         if (_enemyLife <= 0)
         {
+            _isDead = true;
             cage.OpenMainGate();
             animator.SetTrigger("Dead");
-            _isDead = true;
+
+            currentState = null; // Desactivar el comportamiento del boss
+            StopAllCoroutines(); // Detener cualquier acción pendiente
+            isShooting = false;  // Detener flags que puedan activar animaciones
+            animator.SetBool("IsShooting", false);
+
             Collider[] colliders = GetComponentsInChildren<Collider>();
             foreach (Collider col in colliders)
             {
@@ -129,6 +137,7 @@ public class Boss : Enemy, IDamageEnemy
 
     public void TakeHit(int damage)
     {
+        if (_isDead) return ;
         if (_isInvulnerable) return;
         if (isPunching)
         {
