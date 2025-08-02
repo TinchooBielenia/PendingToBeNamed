@@ -46,11 +46,4 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("IsWalking", false);
         }
     }
-    //void lateupdate()
-    //{
-    //    vector3 euler = transform.eulerangles;
-    //    euler.x = 0;
-    //    euler.z = 0;
-    //    transform.eulerangles = euler;
-    //}
 }

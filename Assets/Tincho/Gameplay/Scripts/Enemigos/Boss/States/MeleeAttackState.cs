@@ -1,44 +1,71 @@
-//using UnityEngine;
-//using UnityEngine.AI;
+using UnityEngine;
 
-//public class MeleeAttackState : BossState
-//{
+public class MeleeAtackState : BossState
+{
+    private float _stoppingDistance = 1.8f;
+    private float _attackCooldown = 2f;
+    private float _lastAttackTime;
 
-//    public MeleeAttackState(Boss boss) : base(boss) { }
+    public MeleeAtackState(Boss boss) : base(boss) { }
 
-//    public override void Enter()
-//    {
-//        Debug.Log("Entró en estado de ataque cuerpo a cuerpo");
+    public override void Enter()
+    {
+        boss._enemyAI.allowAIControl = false;
+        boss._enemyAI.agent.isStopped = false;
+        boss.SetWeaponActive(false);
 
-//        boss._enemyAI.allowAIControl = false; 
-//        boss._enemyAI.agent.isStopped = false;
-//        boss._enemyAI.agent.SetDestination(boss.player.position);
+        boss.animator.SetBool("IsShooting", false);
 
-//        boss.animator.SetTrigger("MeleHit");
-//        boss.EnableHandColliders(true);
-//        boss.SetWeaponActive(false);
+        _lastAttackTime = Time.time;
+    }
 
-//    }
+    public override void Tick()
+    {
+        if (boss.player == null) return;
+
+        float distance = Vector3.Distance(boss.transform.position, boss.player.position);
+
+        if (distance > _stoppingDistance)
+        {
+            boss._enemyAI.agent.isStopped = false;
+            boss._enemyAI.agent.SetDestination(boss.player.position);
+            boss.animator.SetBool("IsWalking", true);
+            boss.animator.SetBool("PunchingIdle", true);
+            boss.animator.SetBool("IsPunching", false);
+        }
+        else
+        {
+            boss._enemyAI.agent.isStopped = true;
+            RotateTowardsPlayer();
+
+            if (Time.time - _lastAttackTime >= _attackCooldown)
+            {
+                _lastAttackTime = Time.time;
+                boss.animator.SetBool("PunchingIdle", false);
+                boss.animator.SetBool("IsWalking", false);
+                boss.animator.SetBool("IsPunching", true);
+                boss.animator.SetTrigger("MeleeHit");
+              
+            }
+        }
+    }
 
 
-//    public override void Tick()
-//    {
+    public override void Exit()
+    {
+        boss._enemyAI.allowAIControl = true;
+        boss.SetWeaponActive(true);
+    }
 
-//        if (boss.player != null)
-//            boss._enemyAI.agent.SetDestination(boss.player.position);
+    private void RotateTowardsPlayer()
+    {
+        Vector3 direction = (boss.player.position - boss.transform.position).normalized;
+        direction.y = 0f;
 
-//       /* if (meleeTimer >= meleeDuration)
-//        {
-//            boss._enemyAI.agent.isStopped = true;
-//            boss.EnableHandColliders(false);
-//            boss.ChangeState(new RangedAttackState(boss));
-//        }*/
-//    }
-
-//    public override void Exit()
-//    {
-//        boss._enemyAI.allowAIControl = true; 
-//        boss.EnableHandColliders(false);
-//        boss.SetWeaponActive(true);
-//    }
-//}
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            boss.transform.rotation = Quaternion.Slerp(boss.transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+    }
+}
