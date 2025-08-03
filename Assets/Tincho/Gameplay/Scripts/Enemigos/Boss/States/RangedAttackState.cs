@@ -40,6 +40,5 @@ public class RangedAttackState : BossState
         base.Exit();
         boss.isShooting = false;
         boss.animator.SetBool("IsShooting", false);
-        boss.transform.rotation = Quaternion.identity;
     }
 }
