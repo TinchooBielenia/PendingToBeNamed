@@ -102,6 +102,7 @@ public class Boss : Enemy, IDamageEnemy
         currentState = newState;
         currentState.Enter();
         _lastStateChangeTime = Time.time;
+        BecomeTemporarilyInvulnerable(_stateChangeCooldown);
     }
 
     protected override void Death()
@@ -168,5 +169,17 @@ public class Boss : Enemy, IDamageEnemy
     public void DisableDamageCollider()
     {
         _meleeDamageArea.SetActive(false);
+    }
+    public void BecomeTemporarilyInvulnerable(float duration)
+    {
+        if (!_isInvulnerable)
+            StartCoroutine(InvulnerabilityCoroutine(duration));
+    }
+
+    private IEnumerator InvulnerabilityCoroutine(float duration)
+    {
+        _isInvulnerable = true;
+        yield return new WaitForSeconds(duration);
+        _isInvulnerable = false;
     }
 }

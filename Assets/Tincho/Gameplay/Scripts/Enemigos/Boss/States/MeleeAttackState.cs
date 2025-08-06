@@ -38,15 +38,9 @@ public class MeleeAtackState : BossState
             boss._enemyAI.agent.isStopped = true;
             RotateTowardsPlayer();
 
-            if (Time.time - _lastAttackTime >= _attackCooldown)
-            {
-                _lastAttackTime = Time.time;
-                boss.animator.SetBool("PunchingIdle", false);
-                boss.animator.SetBool("IsWalking", false);
-                boss.animator.SetBool("IsPunching", true);
-                boss.animator.SetTrigger("MeleeHit");
-              
-            }
+            boss.animator.SetBool("PunchingIdle", false);
+            boss.animator.SetBool("IsWalking", false);
+            boss.animator.SetBool("IsPunching", true);
         }
     }
 

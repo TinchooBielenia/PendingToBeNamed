@@ -571,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 778221006}
     - target: {fileID: 6118924991800423130, guid: 78496fb9bb054644281f31dbb9ff7a8a, type: 3}
       propertyPath: zombiesToSpawn
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7831105853276567437, guid: 78496fb9bb054644281f31dbb9ff7a8a, type: 3}
       propertyPath: m_LocalPosition.x
