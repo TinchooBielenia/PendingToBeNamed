@@ -5,7 +5,12 @@ using UnityEngine;
 public class SpawnPosition : MonoBehaviour
 {
     [SerializeField] private Vector3 _spawnPoint = new Vector3();
-    [SerializeField] private Transform _player;
+    private Transform _player;
+
+    private void Awake()
+    {
+        _player = GetComponent<Transform>();
+    }
 
     private void Start()
     {

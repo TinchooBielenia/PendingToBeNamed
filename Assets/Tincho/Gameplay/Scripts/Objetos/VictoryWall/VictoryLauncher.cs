@@ -12,6 +12,6 @@ public class VictoryLauncher : MonoBehaviour
 
     private void LaunchVictory()
     {
-        SceneHanlder.Instance.OnPlayerVictory();
+        SceneHanlder.Instance.ActivateEndScene();
     }
 }

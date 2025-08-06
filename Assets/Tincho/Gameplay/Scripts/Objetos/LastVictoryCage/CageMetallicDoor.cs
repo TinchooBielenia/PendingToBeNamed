@@ -64,6 +64,7 @@ public class CageMetallicDoor : MonoBehaviour
         Debug.Log("Player entro");
         _blockerDoor.SetActive(true);
         _boss.SetActive(true);
+        SceneHanlder.Instance.StartPreloadEndScene();
         //_enemySpawner1.StartSpawning(_enemyQuantity);
         //_enemySpawner2.StartSpawning(_enemyQuantity);
         _openedDoorSFX.Play();

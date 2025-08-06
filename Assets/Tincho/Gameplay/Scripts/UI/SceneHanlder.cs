@@ -1,20 +1,21 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class SceneHanlder : MonoBehaviour
 {
     public static SceneHanlder Instance;
     [SerializeField] private GameObject _deathCanvas;
-    [SerializeField] private GameObject _victoryCanvas;
+    [SerializeField] private GameObject _endSceneCanvas;
     [SerializeField] private float _resetDelay;
     [SerializeField] private TextMeshProUGUI _resetCounterText;
     private string _currentScene;
     [SerializeField] private string _mainMenuScene;
+    [SerializeField] private string _endScene = "04_EndScene";
     [SerializeField] private Player _player;
-    [SerializeField] private AudioSource _finishGameSongSFX;
+
+    private AsyncOperation _loadOp;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class SceneHanlder : MonoBehaviour
     private void Start()
     {
         _currentScene = SceneManager.GetActiveScene().name;
-        _victoryCanvas.SetActive(false);
+        _endSceneCanvas.SetActive(false);
     }
 
     public void OnPlayerDeath()
@@ -40,15 +41,25 @@ public class SceneHanlder : MonoBehaviour
         StartCoroutine(ResetScene(_currentScene));
     }
 
-    public void OnPlayerVictory()
+    public void StartPreloadEndScene()
     {
-        _victoryCanvas.SetActive(true);
-        Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
-        _player.FrozenPlayer();
-        _finishGameSongSFX.Play();
+        _loadOp = SceneManager.LoadSceneAsync(_endScene);
+        _loadOp.allowSceneActivation = false;
     }
+
+    public void ActivateEndScene()
+    {
+        StartCoroutine(ActivateEndSceneDelay());
+    }
+
+    private IEnumerator ActivateEndSceneDelay()
+    {
+        _endSceneCanvas.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        _loadOp.allowSceneActivation = true;
+    }
+
+
 
     private IEnumerator ResetScene(string desiredScene)
     {
