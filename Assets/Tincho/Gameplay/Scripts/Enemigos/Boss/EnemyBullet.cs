@@ -29,9 +29,5 @@ public class EnemyBullet : MonoBehaviour
             other.GetComponent<PlayerHealth>()?.TakeDamage(damage);
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Wall") || other.CompareTag("Obstacle"))
-        {
-            Destroy(gameObject);
-        }
     }
 }

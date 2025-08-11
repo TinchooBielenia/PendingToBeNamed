@@ -6,43 +6,41 @@ public class Boss : Enemy, IDamageEnemy
 {
 
     private BossState currentState;
-
-    [Header("Referencias")]
     public Transform player;
     public Animator animator;
     public AudioSource damageSFX;
     public AudioSource rifleSFX;
-    [Header("Configuración de invocación")]
+
+    [Header("HordeSpawn")]
     public EnemySpawner enemySpawner;
-    public int zombiesToSpawn = 5;
+    public EnemySpawner enemySpawner1;
+    public int zombieAmountSpawner1;
+    public int zombieAmountSpawner2;
     private bool _hasSummonedZombies = false;
+
+    [Header("Boss Stats")]
     public Image _lifeBar;
     public GameObject _lifeBarPrefab;
     public EnemyAI _enemyAI;
     public PlayerHealth _playerHealth;
-    [Header("Arma")]
-    public GameObject weaponObject;
 
-    [Header("Ataques")]
+    [Header("Weapon")]
+    public GameObject weaponObject;
     public GameObject bulletPrefab;
     public Transform firePoint;
     public bool isShooting = false;
     public bool isPunching = false;
 
-    [Header("Ataque cuerpo a cuerpo")]
+    [Header("MeleeAttack")]
     public float meleeRange = 1.5f;
     public int meleeDamage = 10;
     public float meleeCooldown = 1.5f;
     [HideInInspector] public float lastMeleeTime = -10f;
-    private float _stateChangeCooldown = 2f; 
+    private float _stateChangeCooldown = 2f;
     private float _lastStateChangeTime = -Mathf.Infinity;
     private bool _isInvulnerable = false;
-    [Header("Bomb Spawner")]
-    [SerializeField] private GameObject _zombiePrefab;
-    [SerializeField] private float _spawnDelay = 0.3f;
-    [SerializeField] private int _zombieAmount;
-    public BombSpawner bombSpawner;
-
+    [SerializeField] private GameObject _meleeDamageArea;
+    private bool _inMelee = false;
     public CageMetallicDoor cage;
 
 
@@ -59,18 +57,15 @@ public class Boss : Enemy, IDamageEnemy
 
         currentState?.Tick();
 
-        // Si no pasó suficiente tiempo desde el último cambio de estado, salimos
         if (Time.time - _lastStateChangeTime < _stateChangeCooldown)
             return;
 
-        //// Estado Melee
-        //if (_enemyLife <= _maxEnemyLife * 0.3f)
-        //{
-        //    StartCoroutine(SpawnHorde(_zombieAmount));
-        //    return;
-        //}
+        if (_enemyLife <= _maxEnemyLife * 0.3f && !(currentState is MeleeAtackState))
+        {
+            ChangeState(new MeleeAtackState(this));
+            _inMelee = true;
+        }
 
-        // Invocación
         if (_enemyLife <= _maxEnemyLife * 0.6f && !_hasSummonedZombies)
         {
             _hasSummonedZombies = true;
@@ -105,8 +100,7 @@ public class Boss : Enemy, IDamageEnemy
         currentState = newState;
         currentState.Enter();
         _lastStateChangeTime = Time.time;
-
-        BecomeTemporarilyInvulnerable(_stateChangeCooldown); 
+        BecomeTemporarilyInvulnerable(_stateChangeCooldown);
     }
 
     protected override void Death()
@@ -119,9 +113,9 @@ public class Boss : Enemy, IDamageEnemy
             cage.OpenMainGate();
             animator.SetTrigger("Dead");
 
-            currentState = null; // Desactivar el comportamiento del boss
-            StopAllCoroutines(); // Detener cualquier acción pendiente
-            isShooting = false;  // Detener flags que puedan activar animaciones
+            currentState = null; 
+            StopAllCoroutines(); 
+            isShooting = false;  
             animator.SetBool("IsShooting", false);
 
             Collider[] colliders = GetComponentsInChildren<Collider>();
@@ -139,23 +133,40 @@ public class Boss : Enemy, IDamageEnemy
     {
         if (_isDead) return ;
         if (_isInvulnerable) return;
-        if (isPunching)
+        if (_inMelee)
         {
-            animator.SetBool("IsShooting", false);
+            animator.SetBool("IsPunching", false);
             animator.SetTrigger("MeleHit");
-        }else if (isShooting)
+        }
+        if (isShooting)
         {
             animator.SetBool("IsShooting", false);
             animator.SetTrigger("RangeHit");
         }
         GetDamage(damage);
         damageSFX.Play();
+        _damageParticles1.Play();
+        _damageParticles2.Play();
         ManageLifeBar();
         Death();
     }
     public void ManageLifeBar()
     {
         _lifeBar.fillAmount = _enemyLife / _maxEnemyLife;
+    }
+    public void SetWeaponActive(bool isActive)
+    {
+        if (weaponObject != null)
+            weaponObject.SetActive(isActive);
+    }
+    public void EnableDamageCollider()
+    {
+        _meleeDamageArea.SetActive(true); 
+    }
+
+    public void DisableDamageCollider()
+    {
+        _meleeDamageArea.SetActive(false);
     }
     public void BecomeTemporarilyInvulnerable(float duration)
     {
@@ -168,22 +179,5 @@ public class Boss : Enemy, IDamageEnemy
         _isInvulnerable = true;
         yield return new WaitForSeconds(duration);
         _isInvulnerable = false;
-    }
-    public void SetWeaponActive(bool isActive)
-    {
-        if (weaponObject != null)
-            weaponObject.SetActive(isActive);
-    }
-    private IEnumerator SpawnHorde(int zombieQuantity)
-    {
-
-        for (int i = 0; i < zombieQuantity; i++)
-        {
-            Vector3 offset = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
-            Vector3 spawnPos = transform.position + offset + Vector3.up * 1f;
-            Instantiate(_zombiePrefab, spawnPos, Quaternion.identity);
-            yield return new WaitForSeconds(_spawnDelay);
-        }
-       
     }
 }

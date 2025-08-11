@@ -453,6 +453,6 @@ Shader "Particles/Blood Effect"
 				ENDCG 
 			}
 		}	
-		CustomEditor "SpecularToggleEditor"
+		// CustomEditor "SpecularToggleEditor"
 	}
 }

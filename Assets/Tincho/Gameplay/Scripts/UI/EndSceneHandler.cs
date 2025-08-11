@@ -11,6 +11,9 @@ public class EndSceneHandler : MonoBehaviour
     {
         if (_mainMenuButton != null)
             _mainMenuButton.onClick.AddListener(MainMenuButton);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void MainMenuButton()

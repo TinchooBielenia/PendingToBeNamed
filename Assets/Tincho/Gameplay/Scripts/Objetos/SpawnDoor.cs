@@ -6,7 +6,8 @@ public class SpawnDoor : MonoBehaviour, IInteraction
     //[SerializeField] private AudioSource _openedDoorSFX;
     [SerializeField] private float _closeTimer;
     private bool _isOpen = false;
-    private bool _doorInteracted = false;   
+    private bool _doorInteracted = false;
+    [SerializeField] private MeshCollider _collider;
 
     private void Start()
     {
@@ -44,16 +45,18 @@ public class SpawnDoor : MonoBehaviour, IInteraction
     {
         _isOpen = true;
         _spawnDoorAnimation.SetBool("openDoor", true);
-        // Si querés que se cierre sola después de un tiempo:
-        //if (_closeTimer > 0)
-        //{
-        //    Invoke(nameof(CloseSpawnDoor), _closeTimer);
-        //}
+        _collider.enabled = false;
+
+        if (_closeTimer > 0)
+        {
+            Invoke(nameof(CloseSpawnDoor), _closeTimer);
+        }
     }
 
     private void CloseSpawnDoor()
     {
         _isOpen = false;
         _spawnDoorAnimation.SetBool("openDoor", false);
+        _collider.enabled = true;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -6,27 +7,15 @@ public class CageMetallicDoor : MonoBehaviour
     private Animator _metallicDoorAnimation;
     private bool _puzzleWasSolved;
     [SerializeField] private AudioSource _openedDoorSFX;
-    //[SerializeField] private EnemySpawner _enemySpawner1;
-    //[SerializeField] private EnemySpawner _enemySpawner2;
-    //[SerializeField] private int _enemyQuantity;
+    [SerializeField] private AudioSource _epicBattleMusicSFX;
     [SerializeField] private Animator _mainGate;
     [SerializeField] private GameObject _blockerDoor;
-    [SerializeField] private float _openMainDoorTimer;
-    //[SerializeField] private bool _playerCrossedTrigger;
-    //[SerializeField] private bool _timerFinished;
-    //[SerializeField] private TextMeshProUGUI _timerOnScreenText;
-    //[SerializeField] private GameObject _timerOnScreenCanvas;
     [SerializeField] private GameObject _boss;
-    [SerializeField] private Boss _bossBool;
 
     private void Start()
     {
         _metallicDoorAnimation = GetComponent<Animator>();
         _blockerDoor.SetActive(false);
-        //_playerCrossedTrigger = false;
-        //_timerOnScreenCanvas.SetActive(false);
-        //_timerFinished = false;
-        //_boss.SetActive(false);
     }
 
     public bool puzzleWasSolved
@@ -40,16 +29,6 @@ public class CageMetallicDoor : MonoBehaviour
         {
             OpenMetallicDoor();
         }
-
-        //if (_playerCrossedTrigger)
-        //{
-        //    ManageBattleTimer();
-        //}
-
-        //if (_timerFinished)
-        //{
-        //    TimerFinished();
-        //}
     }
 
     private void OpenMetallicDoor()
@@ -59,43 +38,51 @@ public class CageMetallicDoor : MonoBehaviour
         _puzzleWasSolved = false;
     }
 
+    //This is triggered when crossing the collider.
     public void FinalZoneBattle()
     {
         Debug.Log("Player entro");
         _blockerDoor.SetActive(true);
         _boss.SetActive(true);
         SceneHanlder.Instance.StartPreloadEndScene();
-        //_enemySpawner1.StartSpawning(_enemyQuantity);
-        //_enemySpawner2.StartSpawning(_enemyQuantity);
         _openedDoorSFX.Play();
+        StartCoroutine(DelayStartMusic());
         _metallicDoorAnimation.SetTrigger("doorClosed");
         _mainGate.SetBool("closeDoor", true);
-        //_playerCrossedTrigger = true;
     }
 
     public void OpenMainGate()
     {
         Debug.Log("Player logro escapar");
-        _mainGate.SetBool("closeDoor", false); // <- Esto resetea el bool
+        _mainGate.SetBool("closeDoor", false);
         _mainGate.SetTrigger("mainGateOpened");
+        StopEpicMusic();
     }
 
-    //private void ManageBattleTimer()
-    //{
-    //    _timerOnScreenCanvas.SetActive(true);
-    //    _openMainDoorTimer -= Time.deltaTime;
-    //    _timerOnScreenText.SetText(((int)_openMainDoorTimer).ToString());
+    private IEnumerator DelayStartMusic()
+    {
+        yield return new WaitForSeconds(3);
+        _epicBattleMusicSFX.Play();
+    }
 
-    //    if (_openMainDoorTimer <= 0)
-    //    {
-    //        _timerFinished = true;
-    //    }
-    //}
+    public void StopEpicMusic()
+    {
+        if (_epicBattleMusicSFX.isPlaying)
+            StartCoroutine(FadeOutSound(_epicBattleMusicSFX, 3f));
+    }
 
-    //public void TimerFinished()
-    //{
-    //    //_timerOnScreenCanvas.SetActive(false);
-    //    Debug.Log("Player logro escapar");
-    //    _mainGate.SetTrigger("mainGateOpened");
-    //}
+    private IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0f)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume; // Restaurar volumen original por si se vuelve a usar
+    }
+
 }

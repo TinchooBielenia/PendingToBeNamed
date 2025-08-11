@@ -91,7 +91,7 @@ MonoBehaviour:
   - {fileID: 6892628305978021666}
   - {fileID: 4480922036713914500}
   correctOrder: 03000000010000000200000000000000
-  _wrongTries: 0
+  _wrongTries: 3
 --- !u!1 &842652028662380083
 GameObject:
   m_ObjectHideFlags: 0

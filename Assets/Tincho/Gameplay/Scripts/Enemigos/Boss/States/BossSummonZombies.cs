@@ -11,7 +11,8 @@ public class BossSummonZombies : BossState
     {
         if (!hasSummoned && boss.enemySpawner != null)
         {
-            boss.enemySpawner.StartSpawning(boss.zombiesToSpawn);
+            boss.enemySpawner.StartSpawning(boss.zombieAmountSpawner1);
+            boss.enemySpawner1.StartSpawning(boss.zombieAmountSpawner2);
             hasSummoned = true;
         }
 

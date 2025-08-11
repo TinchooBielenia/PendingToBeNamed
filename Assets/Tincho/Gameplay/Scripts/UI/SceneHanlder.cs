@@ -15,6 +15,9 @@ public class SceneHanlder : MonoBehaviour
     [SerializeField] private string _endScene = "04_EndScene";
     [SerializeField] private Player _player;
 
+    private HintController _firstHint;
+    [SerializeField] private int _hintID = 100;
+
     private AsyncOperation _loadOp;
 
     private void Awake()
@@ -33,6 +36,8 @@ public class SceneHanlder : MonoBehaviour
     {
         _currentScene = SceneManager.GetActiveScene().name;
         _endSceneCanvas.SetActive(false);
+
+        StartCoroutine(InitFirstHint());
     }
 
     public void OnPlayerDeath()
@@ -82,5 +87,16 @@ public class SceneHanlder : MonoBehaviour
     public void TravelToTestRoom(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    private IEnumerator InitFirstHint()
+    {
+        yield return new WaitForSecondsRealtime(5);
+        _firstHint = HintController.Instance;
+
+        if (_hintID >= 0)
+        {
+            HintController.Instance.ShowHint(_hintID, NotesTextContainer.NoteType.Hint);
+        }
     }
 }
